@@ -1,0 +1,51 @@
+{% extends 'front/base_front.html' %}
+
+{% block title %} 
+<title>Servicios</title>
+{% endblock %} 
+
+{% block head %}
+<script src="{{ url_for('static', path='/scripts/scripts_front.js') }}"></script>
+{% endblock %}
+
+
+
+{% block content %} 
+<section id="content_blog">
+    <div id="content_title">
+        <div id="title_model">
+            <h1>Servicios de Climatización</h1>
+        </div>
+        <div id="image_model">
+            <img src="{{ url_for('static', path='img/front/horus.png') }}" alt="serie_temporal">
+        </div>
+    </div>
+    <div id="title_proyects">
+        <h2>Servicios ofrecidos</h2>
+    </div>
+
+    {% for service in services %}
+        <div class ="content_model">
+            <div class="title_proyect">
+                <h3>{{service['title']}}</h3>
+            </div>
+
+            <div class="content_service">
+                <div class="img_proyect">
+                    <img src="{{ url_for('static', path=service['path_img_service']) }}" alt="img_services">
+                </div>
+                <div class="content_text_button">
+                    <div class="content_text">
+                        <p>{{service['content']}}</p>
+                    </div>
+                    <div class="button_proyect">
+                        <a href="/service/plan"><button>Saber más</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>    
+
+    {% endfor %}
+
+</section>
+{% endblock %} 
