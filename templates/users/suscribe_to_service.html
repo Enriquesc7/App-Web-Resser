@@ -1,0 +1,50 @@
+{% extends "users/base_user.html" %} 
+
+{% block title %} 
+<title>Perfil</title>
+{% endblock %}
+
+
+{% block content %} 
+
+
+<section id="section_info_user">
+
+    <div id="title_info_user">
+        <h3>Información personal</h3>
+    </div>
+
+    <div id="container_data_user">
+        <div class="data_user">
+            <p>Nombre: {{user['first_name']}}</p>
+            <p>Apellido: {{user['last_name']}}</p>
+            <p>Correo: {{user['email']}}</p>
+        </div>
+        <div class="data_user">
+            <p>Rut: {{'' if user['rut'] == None else user['rut']}}</p>
+            <p>Edad: {{'' if user['birthday'] == None else user['birthday']}}</p>
+            <p>Dirección: {{'' if user['address'] == None else user['address']}}</p>
+        </div>
+        <div class="data_user">
+            <p>Comuna: {{'' if user['commune'] == None else user['commune']}}</p>
+            <p>Región: {{'' if user['region'] == None else user['region']}}</p>
+            <p>Pais: {{'' if user['country'] == None else user['country']}}</p>
+        </div>
+        <div class="container_button">
+            <button type="button" class="button_update">
+                <a href="/profile/{{user['username']}}/update">Actualizar</a>
+            </button>
+        </div>
+    </div>
+</section>
+
+<section id="presentation_users" style="margin-top: 10px;">
+    <h2>Proceso para que el usuario se convierta en cliente</h2>
+    <br>
+    <p>Fomulario de validación de datos. ¿Serán los datos del perfil o de una empresa para la facturación?</p>
+    <br>
+    <p>Proceso de pago y demaces...</p>
+</section>
+
+
+{% endblock %}

@@ -1,0 +1,231 @@
+:root{
+    --width_nav: 180px;
+}
+
+
+*{  padding: 0;
+    margin: 0;
+    -webkit-box-sizing:border-box ;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#container{
+    display: grid;
+    grid-template-rows: auto auto auto;
+    width: 90%;
+    height: 100%;
+    margin: auto;  
+    
+}
+
+h1,h2,h3,h4,h5,p{
+    color:black
+}
+
+
+
+/*==================================== NAV ============================================================*/
+
+
+nav{   
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 52px;
+    background-color: #222;
+    overflow: hidden;
+    position: fixed;
+    left: 0;
+    top: 0;
+    
+    transition: width 0.3s ease-in-out;
+}
+
+nav:hover{
+    width: var(--width_nav);
+}
+
+    nav .logo{
+        background-color: black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 5px;
+    }
+        nav .logo img{
+            width: 32px;
+            border-radius: 50%;
+        }
+
+    nav .user{
+        color: white;
+        text-align: center;
+        padding: 30px 0;
+        font-size: 16px;
+        height: 180px;
+        transform: translateX(-200px);
+        opacity: 0;
+        width: var(--width_nav);
+        transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+        nav .user img{
+            width: 70px;
+            margin: 0 auto;
+            border-radius: 50%;
+        }
+
+        nav .button_edit{
+            text-decoration: none;
+            padding-top: 10px;
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            
+            
+        }
+            nav .button_edit button{
+                width: 50%;
+                color: white;
+                background-color: black;
+                padding: 5px;
+                border-radius: 5px;
+                transition:all ease-in 0.1s;
+            }
+            nav .button_edit button:hover{
+                transform:scale(1.05);
+                border: 1px solid white;
+            }
+
+
+        nav:hover .user{
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        nav .links a{
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            width: var(--width_nav);
+            overflow: hidden;
+        }
+        nav .links a:hover{
+            background-color: rgb(31, 135, 205);
+            color: white;
+        }
+            nav .links a .icon{
+                padding: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+        #container_logout a{
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            width: var(--width_nav);
+            overflow: hidden;
+        }
+        #container_logout a:hover{
+            background-color: rgb(31, 135, 205);
+            color: white;
+        }
+
+            #container_logout a .icon{
+                padding: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+        
+
+        
+
+/*==================================== PROFILE.HTML ============================================================*/
+
+#section_info_user{
+    margin: 30px 0 30px 30px;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+}
+    #title_info_user{
+        margin-left: 20px;
+    }
+
+    #container_data_user{
+        border: 1px solid black;
+        border-radius: 10px;
+        padding: 20px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;    
+    }
+        .data_user{
+            display: flex;
+            flex-direction: column;  
+        }
+
+        .container_button{
+            height: 40px;
+            width: 200px;
+        }
+            .button_update{
+                width: 100%;
+                height: 100%;
+                background-color:rgba(7, 41, 41, 0.9);
+                border-radius: 7px;
+            }
+                .button_update a{
+                    text-decoration: none;
+                    color: white;
+                    font-family:Verdana, Geneva, Tahoma, sans-serif;
+                    font-size: 1.2em;
+                }
+                .button_update:hover{
+                    background-color:rgb(7, 41, 41, 1);
+                    border: 1px solid black;
+                }
+
+
+/*=================================== UPDATE_DATA_USER.HTML ===============================================================*/
+
+/* Form */
+
+#form_update_data_user{
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}  
+
+    .container_data_user{
+        display: flex;
+        column-gap: 20px;
+    }
+
+            .elements_form_user input{
+                font-size: 1.2rem;
+                padding-left: 5px;
+            }
+            .text_data_input{
+                font-size: 1.2rem;
+            }
+
+
+            .name_field{
+                text-align: end;
+            }

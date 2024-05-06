@@ -1,0 +1,42 @@
+{% extends "admin/base_admin.html" %} 
+
+{% block title %} 
+<title>Nuevo Servicio</title>
+{% endblock %} 
+
+
+{% block content %} 
+
+    <section id="presentation_users">
+
+        <section>
+            <div id="titulo_users">
+                <h1 class="articulos_ne"><strong>Nuevo Servicio</strong></h1>
+            </div>
+            <div class="container_form">
+                <form method="POST" action="/admin/{{admin['username']}}/new-service" enctype="multipart/form-data">              
+                    <div class="elements_form">
+                        <input type="text" placeholder="Titulo Servicio" name="title" required="true">
+                    </div>
+                    <div class="elements_form">
+                        <input type="text" placeholder="Descripción" name="description" required="true">
+                    </div>
+                    <div class="elements_form">
+                        <input type="text" placeholder="Categoría" name="category" required="true">
+                    </div>
+                    <div>
+                        <input type="file"  name="img_service" required="true">
+                    </div>
+                    <div>
+                        <textarea name="content" rows="40" cols="80" required="true"></textarea>
+                    </div>
+                    <div class="elements_form">
+                        <button type="submit">Crear Servicio</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+        
+    </section>
+
+{% endblock %}

@@ -1,0 +1,129 @@
+/*======================================================================================================================
+==================================LOGIN.HTML====================================================================
+=========================================================================================================================*/
+
+
+.section_form{
+    height: 100%;
+    width:100%;
+    background-color: #FFFF; 
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+    #container_img_form_login{
+        height: 20%;
+        display: flex;
+        justify-content: center;
+        position: relative;
+    }
+        #container_img_form_login img{
+            height: 100px;
+            padding: 15px;
+            border-radius: 60%;
+            position: absolute;
+            bottom: -25px;
+        }
+
+    .container_form{
+        height: 100%;
+        width: 420px;
+        margin: auto;
+    }   
+        .container_form form{
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+            #error_register{
+                height: 20px;
+                position: relative
+            }
+                #error_register p{
+                    height: 100%;
+                    position: absolute;
+                    top: -8px;
+                }
+
+            .elements_form{
+                width: 400px;
+                height: 40px;
+                padding: 5px;
+                padding-right: 10px;
+                flex-grow: 1;
+                overflow: hidden;
+            }
+
+            .elements_form input{
+                height: 40px;
+                width: 400px;
+                border-radius: 7px;
+                background-color: white;
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+            }
+            
+            .elements_form input{
+                color: black;
+                padding-left: 7px;
+                border: 0.5px solid black;
+            }
+
+            .elements_form button{
+                height: 40px;
+                width: 410px;
+                border-radius: 7px;
+                color: white;
+                background-color:#228B22;
+                border: 1px solid #003366;
+                font-family: 'Segoe UI', 'Open Sans', 'Helvetica Neue', sans-serif;
+                font-size: 1.1em;
+                
+            }
+            .elements_form button:hover{
+                transition: 100ms;
+                background-color: #38a138;
+                border: 1.5px solid #003366;
+            }
+
+            .elements_form button a{
+                color: white;
+                text-decoration: none;
+            }
+     
+
+
+/*======================================================================================================================
+====================================SIGNUP.HTML====================================================================
+=========================================================================================================================*/
+
+/* Sign up */
+
+#container_img_form_signup{
+    height: 300px;
+    margin: auto;
+    
+}
+    #container_img_form_signup img{
+        padding-top: 30px;
+        height: 270px;
+        margin: auto;
+    } 
+        .container_form_login form{
+            margin-top: 50px;
+            width: 400px;
+            height: 70%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .elements_form p{
+            width: inherit;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            text-align: center;
+            font-size: 1.10rem;
+        }
+

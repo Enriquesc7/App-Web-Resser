@@ -1,0 +1,58 @@
+{% extends "admin/base_admin.html" %} 
+
+{% block title %} 
+<title>Actualizar Usuario</title>
+{% endblock %}
+
+
+{% block content %} 
+
+    <section id="presentation_users" style="margin-top: 100px;">
+                
+        <div id="titulo_users">
+            <h2 class="articulos_ne" style="color: black;">
+                <strong>Estamos en el nuevo Update</strong>
+            </h2>
+            <br>
+            <h3>Aquí se tendrá información tanto personal como laboral del administrador que podrá ser revisada y modificada</h3>
+        </div>
+        <br>
+        <section id="section_info_user">
+
+            <div id="title_info_user">
+                <h3>Información personal</h3>
+            </div>
+
+            <div id="container_form_user">
+                <form method="POST" action="/admin/{{admin['first_name']}}-{{admin['last_name']}}/update" enctype="multipart/form-data" id="form_update_data_user">
+                    <div class="container_data_user">              
+                        <div class="elements_form_user">
+                            <span class="text_data_input">Nombre:</span> 
+                            <input type="text" value="{{admin['first_name']}}" name="first_name" required = True>
+                        </div>
+                        <div class="elements_form_user">
+                            <span class="text_data_input">Apellido:</span> 
+                            <input type="text" value="{{admin['last_name']}}" name="last_name" required = True>
+                        </div>
+                        <div class="elements_form_user">
+                            <span class="text_data_input">Email:</span> 
+                            <input type="email" value="{{admin['email']}}" name="email" required = True disabled="True">
+                        </div>
+                        <div> 
+                            <input type="file"  name="img_profile">
+                        </div>  
+                    </div>
+                    <div class="container_data_user">
+                        <div class="elements_form_user">
+                            <button type="submit" style="color: black;">Actualizar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        
+    </section>
+
+
+{% endblock %}

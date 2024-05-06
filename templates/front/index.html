@@ -1,0 +1,101 @@
+{% extends 'front/base_front.html' %}
+
+{% block title %} 
+<title>Home</title>
+{% endblock %}
+
+
+{% block content %}
+
+    <div id="container_index">
+
+        <div id ="container_presentation">
+            <div id="presentation">    
+                <div id="presentation_title">
+                    <h1>Recycler intelligemment avec EcoScan</h1>
+                </div>
+                <div>
+                    <p class="text_service">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Temporibus sed 
+                    similique optio cumque dicta consequatur accusamus ratione dolore rem provident, 
+                    deleniti fuga voluptates beatae maiores reprehenderit numquam eos deserunt 
+                    exercitationem.
+                    </p>
+                </div>
+                <div id="container_apps_store">
+                    <div>
+                        <a href="#app_store"><img src="{{ url_for('static', path='/img/front/app_store.png') }}" alt="app_store" class="app_store" id="app_store"></a>
+                    </div>
+                    <div>
+                        <a href="#google_play"><img src="{{ url_for('static', path='/img/front/google_play.png') }}" alt="google_play" class="app_store" id="google_play"></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="img_presentation">
+                <img src="{{ url_for('static', path='/img/front/copia_montri_1_v2.png') }}" alt="" class="img_portafolio">
+            </div>
+            
+        </div>
+
+
+        <div id="container_slideshow">
+            <div id="title_slide" style="margin-bottom: 30px;">
+                <h2>Le saviez-vous ?</h2>
+            </div>
+
+            <div class="slideshow">
+                <ul class="slider">
+                    {% for img in img_slider %}
+                    <li>
+                        <img src="{{ url_for('static', path=img['path_img_slide']) }}">
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="direcciones">
+                <a class="atras">&#10094;</a>
+                <a class="adelante">&#10095;</a>
+            </div>
+        </div>
+
+        <div id="section_service">
+            <div id="service_title">
+                <h2>Participez au changement et gagnez !</h2>
+            </div>
+
+            <div id="container_service">
+                <div id="img_service">
+                    <img src="{{ url_for('static', path='/img/front/copia_montri_2_v2.png') }}" alt="">
+                </div>
+
+                <div id="content_service">
+                    <p class="text_service">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Temporibus sed 
+                        similique optio cumque dicta consequatur accusamus ratione dolore rem provident, 
+                        deleniti fuga voluptates beatae maiores reprehenderit numquam eos deserunt 
+                        exercitationem.
+                    </p>
+                </div>
+            </div>
+            
+        </div>
+
+        <div id="welcome_to_app">
+            <div id="container_avatar">
+                <div id="text_avatar">
+                    <p>Essayez l'application et participez au changement!</p>
+                </div>
+                <div id="img_avatar">
+                    <img src="{{ url_for('static', path='/img/front/avatar/welcome_avatar_v1.jpg') }}" alt="welcome_to_app">
+                </div>
+            </div>
+            <div id="welcome_button">
+                <div>
+                    <a href="/register"><button type="button">Test App</button></a>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+
+{% endblock %}

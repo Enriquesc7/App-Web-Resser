@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{alert.status_code}}</title>
+    
+</head>
+
+<body>
+
+    <section id="presentation_users">
+
+        <h1>¡Vaya, ha ocurrido un error!</h1>
+        <br>
+        <h2> {{alert.detail}}</h2>
+        <h2> Error: {{alert.status_code}}</h2>
+        <img id="img_error" src="{{ url_for('static', path = 'img/safety/oops.png') }}" alt="logo_usuario">
+        <section>
+            <div class="elements_form">
+                <button type="button"><a href="/login">Ir al Login</a></button>
+            </div>
+        </section>
+
+        
+    </section>
+        
+            
+</body>
+    
+</html>

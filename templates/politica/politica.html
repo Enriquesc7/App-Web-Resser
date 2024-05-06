@@ -1,0 +1,33 @@
+{% extends "front/base_front.html" %} 
+
+{% block title %} 
+<title>Politica de Privacidad</title>
+{% endblock %} 
+
+
+{% block content %} 
+
+        <section id="container_privacidad">
+                <div>
+                    <h1><strong>Politica de Privacidad</strong></h1>
+                </div>
+        </section>
+        <br>
+        <div>
+                {% for notice in content %}
+                <div>
+                        <h3>{{notice['title']}}</h3>
+                        <br>
+                        <p>{{notice['author']}}</p>
+                        <br>
+                        <h4>{{notice['subtitle']}}</h4>
+                        <br>
+                        {% for parrafo in notice['body'] %}
+                        <p>{{parrafo}}</p>
+                        {% endfor %}
+                </div>
+                <br>
+                <br>
+                {% endfor %}
+        </div>
+{% endblock %}
