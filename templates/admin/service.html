@@ -1,0 +1,50 @@
+{% extends "admin/base_admin.html" %} 
+
+{% block title %} 
+<title>Servicios</title>
+{% endblock %} 
+
+
+{% block content %} 
+
+        <section id="presentation_users">
+
+            <section>
+                <div class="elements_form">
+                    <button type="button"><a href="/admin/{{admin['username']}}/new-service">Nuevo Servicio</a></button>
+                </div>
+            </section>
+
+            <section id="presentation_users">
+                <div id="titulo_users">
+                    <h2 class="articulos_ne"><strong>Todos los Servicios</strong></h2>
+                </div>
+                <section class="section_users clase_users">
+                    {% for service in all_services %}
+                    <div class="cont_users">    
+                        <div class="users">
+                            <img src="{{ url_for('static', path=service['path_img_service']) }}" alt="img_service">
+                             <p>Titulo: {{service['title']}}</p>
+                             <p>Categoría: {{service['category']}} </p>
+                             <p>Descripción: {{service['description']}}</p>
+                             <p>Contenido: {{service['content']}}</p>
+                         </div>
+                        <div id="buttom_users">
+                             <div class="elements_form_login buttom_modificar">
+                                 <button type="button"><a class="buttom_users">Modificar</a></button>
+                             </div>
+                             <div class="elements_form_login buttom_eliminar">
+                                 <button type="button" onclick="return DeleteService()">
+                                    <a href="/admin/{{admin['username']}}/service/{{service['service_id']}}/delete" class="buttom_users">Eliminar</a>
+                                </button>
+                             </div> 
+                         </div>
+                    </div>
+                    {% endfor %}
+                </section>
+            </section>
+            
+
+        </section>
+
+{% endblock %}

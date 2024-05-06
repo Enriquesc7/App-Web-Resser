@@ -1,0 +1,75 @@
+{% extends "admin/base_admin.html" %}
+
+{% block title %} 
+<title>Users</title>
+{% endblock %} 
+
+
+{% block content %}
+    <section id="presentation_users">
+            <div class="titulo_users">
+                <h2 class="articulos_ne"><strong>Lista de Usuarios</strong></h2>
+            </div>
+
+            <div id="section_question">
+                <div id="question"><p style="font-size: 20px; text-align: center;">¿Estas segur@ que deseas eliminar este usuario?</p></div>
+                <div id="options_question" >
+                    <button id="option_yes"><a href="#"><p>Si</p></a></button>
+                    <button id="option_no">No</button>
+                </div>
+            </div>
+
+            <section class="section_users">
+                {% for user in users %}
+                <div class="cont_users">    
+                    <div class="users">
+                            <p>ID: <span id="id_user">{{user['user_id']}}</span></p>
+                            <p>User name: {{user['username']}} </p>
+                            <p>Nombre: {{user['first_name']}}</p>
+                            <p>Apellido: {{user['last_name']}}</p>
+                            <p>Email: {{user['email']}}</p>
+                        </div>
+                    <div class="buttom_users">
+                            <div class="elements_form_login buttom_modificar">
+                                <button type="button">
+                                    <a href="/admin/{{admin['username']}}/users/{{user['user_id']}}/update" class="buttom_users">Modificar</a>
+                                </button>
+                            </div>
+                            <div class="elements_form_login buttom_eliminar">
+                                <button type="button" class="buttom_users delete_user" onclick="return DeleteUser()">
+                                    <a href="/admin/{{user['username']}}/users/{{user['user_id']}}/delete">Eliminar</a>
+                                </button>
+                            </div>   
+                        </div>
+                </div>
+                {% endfor %}
+            </section>
+            <div class="titulo_users">
+                <h2 class="articulos_ne"><strong>Lista de Administradores</strong></h2>
+            </div>
+            <section class="section_users">
+                {% for admin in admins %}
+                <div class="cont_users">
+                    <div class="users">
+                        <p>ID: {{admin['user_id']}}</p>
+                        <p>User name: {{admin['username']}} </p>
+                        <p>Nombre: {{admin['first_name']}}</p>
+                        <p>Apellido: {{admin['last_name']}}</p>
+                        <p>Email: {{admin['email']}}</p>
+                    </div>
+                    <div class="buttom_users">
+                        <div class="elements_form_login buttom_modificar">
+                            <button type="button"><a href="#" class="buttom_users">Modificar</a></button>
+                        </div>
+                        <div class="elements_form_login buttom_eliminar">
+                             <button type="button" class="delete_admin" onclick="return DeleteAdmin()">
+                                <a href="/admin/{{admin['username']}}/users/{{admin['user_id']}}/delete" class="buttom_users">Eliminar</a>
+                            </button>
+                        </div>   
+                    </div>
+                </div>
+                {% endfor %}
+            </section>
+    </section>
+
+{% endblock %}

@@ -1,0 +1,8 @@
+test.db
+data
+test.sqlite
+.env
+venv
+# Byte-compiled / optimized / DLL files
+__pycache__
+static/img

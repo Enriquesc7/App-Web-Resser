@@ -1,0 +1,286 @@
+{% extends "admin/base_admin.html" %}
+
+{% block title %} 
+<title>Admin Front</title>
+{% endblock %} 
+
+{% block content %}
+
+{% if permission == 'Super Admin' %}
+<div class="container_form_front">
+    <h3>Agregar nueva imagen al Slider</h3>
+    <section class="container_form">
+        <br>
+        <form method="POST" action="/admin/front/img-slider" enctype="multipart/form-data">
+            <table>
+                <tr>
+                    <th class="name_field">Titulo:</th>
+                    <td><input type="text" name="title" required ="True"></td>
+                </tr>
+                <tr>
+                    <th class="name_field">Adjuntar imagen:</th>
+                    <td><input type="file"  name="new_img" required="true"><br></td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td><button type="submit">Guardar</button></td>
+                </tr>
+            </table> 
+        </form>
+    </section>
+</div>
+{% else %}
+<br>
+<br>
+{% endif %}
+<section class="section_table">
+    <table class="table">
+        <caption>Slider</caption>
+        <thead>
+            <tr>
+                <th>Imagen</th>
+                <th>ID</th>
+                <th>Titulo</th>
+                <th>Admin</th>
+                <th>Creado</th>
+                <th>Actualizado</th>
+                <th>Editar</th>
+                {% if permission == 'Super Admin' %}
+                <th>Eliminar</th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for img in img_slider %}
+            <tr>
+                <th>
+                    <img src="{{ url_for('static', path=img['path_img_slide']) }}" width="100px" alt="img_slide">
+                </th>
+                <th>{{img.id}}</th>
+                <th>{{img.title}}</th>
+                <th>{{img.admin}}</th>
+                <th>{{img.create.date().strftime("%d/%m/%Y")}}</th>
+                <th>{{img.update.date().strftime("%d/%m/%Y") if img.update != None else ""}}</th>
+                <th class="update_content">
+                    <img src="{{ url_for('static', path='img/base/editar.png') }}" alt="Editar" title="Editar" width="20px">
+                </th>
+                {% if permission == 'Super Admin' %}
+                <th>
+                <a href="/admin/{{admin['username']}}/front/{{img['id']}}/delete-image" onclick="return DeleteImage()">
+                    <img src="{{ url_for('static', path='img/base/basura.png') }}" alt="Eliminar|" title="Eliminar" width="20px">
+                </a>
+                </th>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>   
+    </table>
+    <br>
+    <div class="section_update_front">
+        <h3>Aquí irá el formulario para actualizar</h3>
+        <p>De momento se tendra que escribir el id del contenido a actualizar (presionará un boton de "Buscar"), 
+            se aplicará Ajax para cargar un formulario con el contenido a actualizar. Con Jquery se podría insertar
+            automáticamente el id del contenido a actualizar en el input a buscar.
+        </p>
+    </div>
+</section>
+
+{% if permission == 'Super Admin' %}
+<div class="container_form_front">
+    <h3>Agregar nuevo Servicio</h3>
+    <section class="container_form">
+        <br>
+        <form method="POST" action="/admin/front/new-service" enctype="multipart/form-data">
+            <table>
+                <tr>
+                    <th class="name_field">Titulo:</th>
+                    <td><input type="text" name="title" required ="True"></td>
+                </tr>
+                <tr>
+                    <th class="name_field">Categoría:</th>
+                    <td><input type="text" name="category" required ="True"></td>
+                </tr>
+                <tr>
+                    <th class="name_field">Descripción:</th>
+                    <td><textarea name="description" rows="5" cols="80" required="true"></textarea></td>
+                </tr>
+                <tr>
+                    <th class="name_field">Contenido:</th>
+                    <td><textarea name="content" rows="10" cols="80" required="true"></textarea></td>
+                </tr>
+                <tr>
+                    <th class="name_field">Adjuntar imagen:</th>
+                    <td><input type="file"  name="img_service" required="true"></td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td><button type="submit">Guardar</button></td>
+                </tr>
+            </table>
+        </form>
+    </section>
+</div>
+{% else %}
+<br>
+<br>
+{% endif %}
+<section class="section_table">
+    <table class="table">
+        <caption>Servicios</caption>
+        <thead>
+            <tr>
+                <th>Imagen</th>
+                <th>ID</th>
+                <th>Titulo</th>
+                <th>Descripción</th>
+                <th>Contenido</th>
+                <th>Categoría</th>
+                <th>Admin</th>
+                <th>Creado</th>
+                <th>Actualizado</th>
+                <th>Editar</th>
+                {% if permission == 'Super Admin' %}
+                <th>Eliminar</th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for service in services %}
+            <tr>
+                <th>
+                    <img src="{{ url_for('static', path=service['path_img_service']) }}" width="100px" alt="img_slide">
+                </th>
+                <th>{{service.id}}</th>
+                <th>{{service.title}}</th>
+                <th>{{service.description}}</th>
+                <th>{{service.content}}</th>
+                <th>{{service.category}}</th>
+                <th>{{service.admin}}</th>
+                <th>{{service.create.date().strftime("%d/%m/%Y")}}</th>
+                <th>{{service.update.date().strftime("%d/%m/%Y") if service.update != None else ""}}</th>
+                <th>
+                    <a href="#">
+                        <img src="{{ url_for('static', path='img/base/editar.png') }}" alt="Editar" title="Editar" width="20px">
+                    </a>
+                </th>
+                {% if permission == 'Super Admin' %}
+                <th>
+                    <a href="/admin/{{admin['username']}}/front/{{service['id']}}/delete-service" onclick="return DeleteService()">
+                        <img src="{{ url_for('static', path='img/base/basura.png') }}" alt="Editar" title="Eliminar" width="20px">
+                    </a>
+                </th>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>   
+    </table>
+</section>
+
+{% if permission == 'Super Admin' %}
+<div class="container_form_front">
+    <h3>Agregar nuevo Plan</h3>
+    <section class="container_form">
+        <br>
+        <form method="POST" action="/admin/front/new-plan">
+            <table>
+                <tr>
+                    <th class="name_field">Nombre:</th>
+                    <td>
+                        <select name="plan">
+                            <option value="basic">Basic</option>
+                            <option value="advance">Advance</option>
+                            <option value="expert">Expert</option>
+                            <option value="Company">Company</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="name_field">Precio:</th>
+                    <td><input type="text" name="price" required ="True"></td>
+                </tr>
+                <tr>
+                    <th class="name_field">Renovación:</th>
+                    <td>
+                        <select name="renewal">
+                            <option value="1 mes">1 mes</option>
+                            <option value="3 meses">3 meses</option>
+                            <option value="1 año">1 año</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="name_field">Inicio:</th>
+                    <td><input type="text" id="start_date" name="start_date" required ="True" readonly="True"></td>
+                </tr>
+                <tr>
+                    <th class="name_field">Termino:</th>
+                    <td><input type="text" id="end_date" name="end_date" required ="True" readonly="True"></td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td><button type="submit">Guardar</button></td>
+                </tr>
+            </table>
+        </form>
+    </section>
+</div>
+{% else %}
+<br>
+<br>
+{% endif %}
+<section class="section_table">
+    <table class="table">
+        <caption>Planes</caption>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Precio</th>
+                <th>Renovación</th>
+                <th>Comienzo</th>
+                <th>Termino</th>
+                <th>Creado</th>
+                <th>Actualizado</th>
+                <th>Admin</th>
+                <th>Editar</th>
+                {% if permission  == 'Super Admin' %}
+                <th>Eliminar</th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for plan in plans %}
+            <tr>
+                <th>{{plan.id}}</th>
+                <th>{{plan.name.value}}</th>
+                <th>{{plan.price}}</th>
+                <th>{{plan.renewal}}</th>
+                <th>{{plan.start_date.date().strftime("%d/%m/%Y")}}</th>
+                <th>{{plan.end_date.date().strftime("%d/%m/%Y")}}</th>
+                <th>{{plan.create.date().strftime("%d/%m/%Y")}}</th>
+                <th>{{plan.update.date().strftime("%d/%m/%Y") if plan.update != None else ""}}</th>
+                <th>{{plan.admin}}</th>
+                <th>
+                    <a href="#">
+                        <img src="{{ url_for('static', path='img/base/editar.png') }}" alt="Editar" title="Editar" width="20px">
+                    </a>
+                </th>
+                {% if permission == 'Super Admin' %}
+                <th>
+                    <a href="/admin/front/{{plan.id}}/delete-plan" onclick="return DeletePlan()">
+                        <img src="{{ url_for('static', path='img/base/basura.png') }}" alt="Editar" title="Eliminar" width="20px">
+                    </a>
+                </th>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>   
+    </table>
+</section>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+{% endblock %}

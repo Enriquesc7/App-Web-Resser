@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/auth/style_auth.css') }}">
+    
+    <script src="{{ url_for('static', path='/scripts/jquery/jquery-3.5.1.min.js') }}"></script>
+    <script src="{{ url_for('static', path='/scripts/jquery.easing/jquery.easing.1.3.js') }}"></script>
+    <script src="{{ url_for('static', path='/scripts/scripts_ajax.js') }}"></script>
+
+</head>
+
+<body style="height: 100%; background-color: #FFFF;">
+
+    <section class="section_form">
+        <div id="container_img_form_signup">
+            <img src="{{ url_for('static', path='/img/auth/registrate.gif')}}" alt="logo_user">
+        </div>
+        <div class="container_form">
+            <form method="POST" action="/register" id="register_user">
+                <div class="elements_form" id="error_register">
+
+                </div>             
+                <div class="elements_form">
+                    <input type="email" value="{{email if email else ''}}" placeholder="{{'Adresse électronique' if not email else ''}}"  name="email" required="true">
+                </div>
+                <div class="elements_form">
+                    <input type="text" value="{{results['first_name'] if results else ''}}" placeholder="{{'Nom et prénom' if not results else ''}}" name="first_name" required="true">
+                </div>
+                <div class="elements_form">
+                    <input type="text" value="{{results['last_name'] if results else ''}}" placeholder="{{'Nom de famille' if not results else ''}}" name="last_name" required="true">
+                </div>
+                <div class="elements_form">
+                    <input type="password" placeholder="Mot de passe" name="password" required="true">
+                </div>
+                <div class="elements_form">
+                    <input type="password" placeholder="Confirmer le mot de passe" name="password_confirmation" required="true">
+                </div>
+                
+                <div class="elements_form">
+                    <button type="submit" id="register_button">S'inscrire</button>
+                </div>
+                <div class="elements_form">
+                    <button type="button"><a href="/">Haut de page</a></button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+</body>
+</html>
+
+
+
+

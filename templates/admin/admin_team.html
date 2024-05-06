@@ -1,0 +1,143 @@
+{% extends "admin/base_admin.html" %} 
+
+{% block title %} 
+<title>Team</title>
+{% endblock %} 
+
+
+{% block content %} 
+
+<section>
+    <div class="container_form_front">
+        <h3>Agregar al Equipo!</h3>
+        <section class="container_form">
+            <br>
+            <form method="POST" action="/admin/team/new-staff/ajax">
+                <table>
+                    <tr>
+                        <th class="name_field">Nombre:</th>
+                        <td><input type="text" name="first_name" required ="True"></td>
+                        <th class="name_field">Apellido:</th>
+                        <td><input type="text" name="last_name" required ="True"></td>
+                        <th class="name_field">Rut:</th>
+                        <td><input type="text" name="rut" required ="True"></td>
+                    </tr>
+                    <tr> 
+                        <th class="name_field">Email:</th>
+                        <td><input type="text" name="email" required ="True"></td>
+                        <th class="name_field">Telefono:</th>
+                        <td><input type="text" name="phone" required ="True"></td>
+                        <th class="name_field">País:</th>
+                        <td><input type="text" name="country" value="Chile" required="True" disabled="True"></td>
+                    </tr>
+                    <tr>   
+                        <th class="name_field">Región:</th>
+                        <td>
+                            <select id="region" name="region">
+                            {% for region in regions %}
+                            <option value="{{region.region}}">{{region.region}}</option>
+                            {% endfor %}
+                            </select>
+                        </td>
+                        <th class="name_field">Comuna:</th>
+                        <td>
+                            <select id="commune" name="commune"> 
+                            </select>
+                        </td>
+                        <th class="name_field">Domicilio:</th>
+                        <td><input type="text" name="address_name" required ="True"></td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="name_field">Número:</th>
+                        <td><input type="text" name="address_number" required ="True">
+                        <th class="name_field">Área:</th>
+                        <td>
+                            <select id="work_areas" name="work_area"> 
+                                {% for area in work_areas %}
+                                <option value="{{area.area}}">{{area.area}}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                        <th class="name_field">Puesto:</th>
+                        <td>
+                            <select id="employments" name="employment"> 
+                            </select>
+                        </td>
+                    <tr>
+                        <th class="name_field">Comienzo:</th>
+                        <td>
+                            <input type="text" name="start_date" id="start_date" required="True" readonly="">
+                        </td>
+                        <th class="name_field">Termino:</th>
+                        <td>
+                            <input type="text" name="end_date" id="end_date" required="True" readonly="">
+                        </td>
+                    </tr>
+                    </tr>
+                    <tr>  
+                        <th></th>
+                        <td><button type="submit">Guardar</button></td>
+                    </tr> 
+                </table>
+            </form>
+        </section>
+    </div>
+    <br>
+    <h3>Todo relacionado al equipo de trabajo, desde agregar personal, asignación de cargos... hasta generación de sueldos</h3>
+    <br>
+    <section class="section_table">
+        <table class="table" id="table_team">
+            <caption>Team</caption>
+            <thead>
+                <tr>
+                    <th>Rut</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Email</th>
+                    <th>Telefono</th>
+                    <th>Puesto</th>
+                    <th>Área</th>
+                    <th>Comienzo</th>
+                    <th>Termino</th>
+                    <th>Ver más</th>
+                    {% if permission == "Super Admin" %}
+                    <th>Eliminar</th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for person, employee, phone in team %}
+                <tr>
+                    <th>{{person.rut}}</th>
+                    <th>{{person.first_name}}</th>
+                    <th>{{person.last_name}}</th>
+                    <th>{{person.email}}</th>
+                    <th>{{phone.phone}}</th>
+                    <th>{{employee.employment}}</th>
+                    <th>{{employee.area}}</th>
+                    <th>{{employee.start_date.date().strftime('%d/%m/%Y')}}</th>
+                    <th>{{employee.end_date.date().strftime('%d/%m/%Y')}}</th>
+                    <th>
+                    <a href="#">
+                        <img src="{{ url_for('static', path='img/base/entrar.png') }}" alt="Ver más" title="Ver más" width="20px">
+                    </a>
+                    </th>
+                    {% if permission == 'Super Admin' %}
+                    <th>
+                    <a href="/admin/team/{{person.id}}/delete" onclick="return DeleteUser()">
+                        <img src="{{ url_for('static', path='img/base/basura.png') }}" alt="Editar" title="Eliminar" width="20px">
+                    </a>
+                    </th>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>   
+        </table>
+    </section>
+
+</section>
+
+{% endblock %}
+
+

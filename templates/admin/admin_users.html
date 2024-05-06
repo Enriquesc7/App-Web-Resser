@@ -1,0 +1,201 @@
+{% extends "admin/base_admin.html" %}
+
+{% block title %} 
+<title>Users</title>
+{% endblock %} 
+
+
+{% block content %}
+
+{% if permission == 'Super Admin' %}
+<div class="container_form_front">
+    <h3>Agregar nuevo</h3>
+    <section class="container_form">
+        <br>
+        <form method="POST" action="/admin/users/create/ajax" id="admin_create_user"
+        data-edit-img="{{ url_for('static', path='img/base/editar.png') }}"
+        data-login-img="{{ url_for('static', path='img/base/iniciar-sesion.png') }}"
+        data-delete-img="{{ url_for('static', path='img/base/basura.png') }}">
+
+            <div id="error_create">
+        
+            </div>  
+            <table>
+                <tr>
+                    <th class="name_field">Email:</th>
+                    <td><input type="text" name="email" required ="True"></td>
+                </tr>
+                <tr>
+                    <th class="name_field">Nombre:</th>
+                    <td><input type="text" name="first_name" required ="True"></td>
+                </tr>
+                <tr>
+                    <th class="name_field">Apellido:</th>
+                    <td><input type="text" name="last_name" required ="True"></td>
+                </tr>
+                <tr>
+                    <th class="name_field">Rol:</th>
+                    <td>
+                        <select name="rol">
+                            <option>User</option>
+                            <option>Admin</option>
+                            <option>Super Admin</option>                            
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="name_field">Contraseña:</th>
+                    <td><input type="password" name="password" required ="True"></td>
+                </tr>
+                <tr>
+                    <th class="name_field">Confirmación contraseña:</th>
+                    <td><input type="password" name="password_confirmation" required ="True"></td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td><button type="submit">Guardar</button></td>
+                </tr>
+            </table> 
+        </form>
+    </section>
+</div>
+<section class="section_table">
+    <table class="table" id="table_super_admin">
+        <caption>Super Admin</caption>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Email</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Creado</th>
+                <th>Actualizado</th>
+                <th>Conectado</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for super in super_admins %}
+            <tr>
+                <th>{{super.id}}</th>
+                <th>{{super.email}}</th>
+                <th>{{super.first_name}}</th>
+                <th>{{super.last_name}}</th>
+                <th>{{super.create.date().strftime('%d/%m/%Y')}}</th>
+                <th>{{super.update.date().strftime('%d/%m/%Y') if super.update != None else ""}}</th>
+                <th>{{True if super.disabled == False else False}}</th>
+            </tr>
+            {% endfor %}
+        </tbody>   
+    </table>
+</section>
+<br>
+<br>
+<section class="section_table">
+    <table class="table" id="table_admin">
+        <caption>Admin</caption>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Email</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Creado</th>
+                <th>Actualizado</th>
+                <th>Conectado</th>
+                <th>Editar</th>
+                <th>Loguear</th>
+                {% if permission == 'Super Admin' %}
+                <th>Eliminar</th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for admin in admins %}
+            <tr>
+                <th>{{admin.id}}</th>
+                <th>{{admin.email}}</th>
+                <th>{{admin.first_name}}</th>
+                <th>{{admin.last_name}}</th>
+                <th>{{admin.create.date().strftime('%d/%m/%Y')}}</th>
+                <th>{{admin.update.date().strftime('%d/%m/%Y') if admin.update != None else ""}}</th>
+                <th>{{True if admin.disabled == False else False}}</th>
+                <th>
+                    <a href="/admin/{{admin['username']}}/users/{{admin['id']}}">
+                        <img src="{{ url_for('static', path='img/base/editar.png') }}" alt="Editar" title="Editar" width="20px">
+                    </a>
+                </th>
+                <th>
+                    <a href="#">
+                        <img src="{{ url_for('static', path='img/base/iniciar-sesion.png') }}" alt="Loguear" title="Loguear" width="20px">
+                    </a>
+                </th>
+                {% if permission == 'Super Admin' %}
+                <th>
+                    <a href="/admin/users/{{admin['id']}}/delete" onclick="return DeleteUser()">
+                        <img src="{{ url_for('static', path='img/base/basura.png') }}" alt="Editar" title="Eliminar" width="20px">
+                    </a>
+                </th>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>   
+    </table>
+</section>
+{% endif %}
+<br>
+<br>
+<section class="section_table">
+    <table class="table" id="table_user">
+        <caption>Usuarios</caption>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Email</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Creado</th>
+                <th>Actualizado</th>
+                <th>Conectado</th>
+                <th>Editar</th>
+                <th>Loguear</th>
+                {% if permission == 'Super Admin' %}
+                <th>Eliminar</th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <th>{{user.id}}</th>
+                <th>{{user.email}}</th>
+                <th>{{user.first_name}}</th>
+                <th>{{user.last_name}}</th>
+                <th>{{user.create.date().strftime('%d/%m/%Y')}}</th>
+                <th>{{user.update.date().strftime('%d/%m/%Y') if user.update != None else ""}}</th>
+                <th>{{True if user.disabled == False else False}}</th>
+                <th>
+                <a href="/admin/users/{{user['id']}}">
+                    <img src="{{ url_for('static', path='img/base/editar.png') }}" alt="Editar" title="Editar" width="20px">
+                </a>
+                </th>
+                <th>
+                    <a href="#">
+                        <img src="{{ url_for('static', path='img/base/iniciar-sesion.png') }}" alt="Loguear" title="Loguear" width="20px">
+                    </a>
+                </th>
+                {% if permission == 'Super Admin' %}
+                <th>
+                <a href="/admin/users/{{user['id']}}/delete" onclick="return DeleteUser()">
+                    <img src="{{ url_for('static', path='img/base/basura.png') }}" alt="Editar" title="Eliminar" width="20px">
+                </a>
+                </th>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>   
+    </table>
+</section>
+<br>
+<br>
+<br>
+{% endblock %}

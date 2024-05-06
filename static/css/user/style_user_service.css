@@ -1,0 +1,226 @@
+/*=================================== SERVICE.HTML ===============================================================*/
+
+
+/*============= Nuestros planes para ti =====================*/
+
+
+#viendo{
+    background-image: linear-gradient(#3300319a, #0d043db3), url('../../img/img_clima.png');
+    height: 100vh;
+    width: 100%;
+    
+}
+
+#title_section_plans{
+    margin: 30px auto;
+    text-align: center;
+}
+    #title_section_plans h2{
+        color: white;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+
+#price_table_container{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 50px auto;
+    
+}
+
+    #price_table_container .table{
+        width: 300px;
+        height: 442px;
+        padding: 30px;
+        box-sizing: border-box;
+        position: relative;
+        z-index:5;
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    }
+    
+    #price_table_container .table:first-child{
+        border-radius: 10px 0 0 10px;
+    }
+
+    #price_table_container .table:last-child{
+        border-radius: 0 10px 10px 0;
+    }
+
+    #price_table_container .table.recommended{
+        height: 500px;
+        border-radius: 10px;
+        padding: 50px 30px 60px 30px;
+        z-index: 6;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    }
+
+        .table .title{
+            font-weight: bold;
+            text-align: center;
+            font: 20px;
+        }
+        .table .price{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2px
+        }
+            .table .price .currency{
+                font-size: 25px;
+            }
+            .table .price .number{
+                font-size:40px;
+                font-weight: bold;
+            }
+            .table .price .frequency{
+                color: #999;
+            }
+
+            .table .features{
+                flex: 1;
+            }
+                .table .features ul{
+                    list-style: none;
+                    padding: 0;
+                    margin: 0;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+                }
+                .table .features ul li{
+                    display: flex;
+                    align-items: center;
+                    gap: 5px;
+                }
+
+                .actions .btn{
+                    display: block;
+                    text-align: center;
+                    padding: 20px 0;
+                    border: solid 1px #999;
+                    color: #999;
+                    text-decoration: none;
+                    border-radius: 3px;
+                    font-weight: bold;
+                    text-transform: uppercase;
+                }
+
+                .actions .btn:hover{
+                    background-color: #2579e7;
+                    color: white;
+                }
+
+                .actions .btn.Expert{
+                    background-color: #2579e7;
+                    color: white;
+                    border: 1px solid #2579e7;
+                }
+                .actions .btn.Expert:hover{
+                    background-color: #1961be;
+                    color: white;
+                    border: 1px solid #1961be;
+                }
+
+
+/*============= Los servicios que tendras =====================*/
+
+#title_section_services{
+    margin: 10px auto;
+}
+    
+#section_services{
+    padding: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start;
+    gap: 20px;
+}
+
+    .content_service{
+        flex-basis: 250px;
+        flex-grow: 1;
+        max-width: 300px;
+        overflow: hidden;
+        padding: 10px;
+        
+        border-radius: 10px;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    }
+
+        .title_service{
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+        }
+
+       
+            .img_service img{
+                width: 250px;
+                height: 200px;
+                display: block;
+                margin: auto;   
+            }
+        .content_text_service{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+            .content_text_service p{
+                text-align: justify;
+                padding: 10px;
+            }
+
+            .button_more_info{
+                width: 100%;
+            }
+
+            .button_more_info a{
+                text-decoration: none;
+            }
+            .button_more_info button{
+                width: 70%;
+                padding: 10px;
+                display: block;
+                margin: auto;
+                color: rgba(255, 255, 255, 0.9) !important;
+                font-size: 20px;
+                font-weight: 500;
+                padding: 0.5em 1.2em;
+                background: #318aac;
+                border: 2px solid;
+                border-color: #318aac;
+            }
+            .button_more_info button:hover{
+                color: rgba(255, 255, 255, 1) !important;
+                box-shadow: 0 4px 16px rgba(49, 138, 172, 1);
+                transition: all 0.2s ease;
+            }
+
+
+/* ============================ Suscribe to Service =====================================================*/
+
+#content_pay{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    column-gap: 100px;
+    
+}
+
+#content_pay div{
+    width: 400px;
+}
+
+.name_field{
+    text-align: end;
+}

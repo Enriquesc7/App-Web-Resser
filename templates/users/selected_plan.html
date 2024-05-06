@@ -1,0 +1,168 @@
+{% extends "users/base_user.html" %} 
+
+{% block title %} 
+<title>Perfil</title>
+{% endblock %}
+
+
+{% block content %} 
+
+<div class="barra_progreso" style="margin: 20px 0 0 30px;">
+    <h2>AQUÍ IRA UNA BARRA DE PROGRESO QUE FUNCIONARÁ CON AJAX</h2>
+</div>
+
+<section id="section_info_user">
+
+    <div id="title_info_user">
+        <h3>Información personal</h3>
+    </div>
+    <br>
+    <div class="data_user">
+            <p>Nombre: {{user['first_name']}}</p>
+            <p>Apellido: {{user['last_name']}}</p>
+            <p>Correo: {{user['email']}}</p>
+    </div>
+    <br>
+    <div id="title_info_user">
+        <h3>Plan Seleccionado</h3>
+    </div>
+    <br>
+    <div class="data_user">
+            <p>Plan: {{plan.name.value}}</p>
+            <p>Precio: ${{ '{:,.0f}'.format(plan.price)|replace(",", ".") }}</p>
+            <p>Renovación: Cada {{plan.renewal}}</p>
+    </div>
+
+</section>
+
+<br>
+
+<section id="content_pay">
+    <div style="padding-left: 30px;">
+        <div class="options_info">
+            <p style="font-weight: bold;">Deseo que la factura posea mi información:</p>
+            <input type="radio" name="option_facturation" id="personal" value="Personal" checked>
+            <label for="personal">Personal</label><br>
+            <input type="radio" name="option_facturation" id="empresa" value="Empresa">
+            <label for="empresa">Empresa</label><br>
+        </div>
+        <br>
+        <form action="" id="content_client">
+            <table style="width: 650px;">
+                <tr>
+                    <th class="name_field">Rut:</th>
+                    <td><input type="text" name="rut" required ="True"></td>
+                    <th class="name_field">Pais:</th>
+                    <td><input type="text" value="Chile" name="country" required ="True" disabled></td>
+                </tr>
+                <tr>
+                    <th class="name_field">Región:</th>
+                    <td>
+                        <select id="region_customer" name="region">
+                        {% for region in regions %}
+                        <option value="{{region.region}}">{{region.region}}</option>
+                        {% endfor %}
+                        </select>
+                    </td>
+                    <th class="name_field">Comuna:</th>
+                    <td>
+                        <select id="commune_customer" name="commune"> 
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="name_field">Dirección:</th>
+                    <td><input type="text" name="address_name" required ="True"></td>
+                    <th class="name_field">Número:</th>
+                    <td><input type="text" name="address_number" required ="True"></td>
+                </tr>
+                <tr>
+                    <th class="name_field">Telefono:</th>
+                    <td><input type="text" name="phone" required ="True"></td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td><button type="submit">Guardar</button></td>
+                </tr>
+            </table> 
+        </form>
+        <form action="" id="content_client_company">
+            <table style="width: 750px;">
+                <tr>
+                    <th class="name_field">Nombre Empresa:</th>
+                    <td><input type="text" name="company_name" required ="True"></td>
+                    <th class="name_field">Razón Social:</th>
+                    <td><input type="text" name="legal_name" required ="True"></td>
+                </tr>
+                <tr>
+                    <th class="name_field">Rut:</th>
+                    <td><input type="text" name="rut" required ="True"></td>
+                    <th class="name_field">Telefono:</th>
+                    <td><input type="text" name="phone" required ="True"></td>
+                </tr>
+                <tr>
+                    <th class="name_field">Giro:</th>
+                    <td><input type="text" name="commercial_business" required ="True"></td>
+                    <th class="name_field">País:</th>
+                    <td><input type="text" value="Chile" name="country" required ="True" disabled></td>
+                </tr>
+                <tr>
+                    <th class="name_field">Región:</th>
+                    <td>
+                        <select id="region_business_customer" name="region">
+                        {% for region in regions %}
+                        <option value="{{region.region}}">{{region.region}}</option>
+                        {% endfor %}
+                        </select>
+                    </td>
+                    <th class="name_field">Comuna:</th>
+                    <td>
+                        <select id="commune_business_customer" name="commune"> 
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="name_field">Dirección:</th>
+                    <td><input type="text" name="address_name" required ="True"></td>
+                    <th class="name_field">Número:</th>
+                    <td><input type="text" name="address_number" required ="True"></td>
+                </tr>
+                <tr>
+                    <th class="name_field">Telefono:</th>
+                    <td><input type="text" name="phone" required ="True"></td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td><button type="submit">Guardar</button></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <div id="data_payment">
+        <p style="font-weight: bold;">Pago</p>
+        <br>
+        <div class="options_pay">
+            <form action="">
+                <input type="radio" name="option_pay" id="transferencia" value="Transferencia" required = "True">
+                <label for="Transferencia">Pago por transferencia bancaria</label><br>
+                <p id="text_transferencia">Por favor, transfiera el importe de la factura a nuestra cuenta 
+                    bancaria. Recibirá nuestra confirmación de pedido por correo electrónico con los datos 
+                    bancarios y el número de pedido. Los productos se reservarán 3 horas para usted y procesaremos 
+                    el pedido inmediatamente tras las recepción del pago. <a>Más información</a></p>
+                <br>
+                <input type="radio" name="option_pay" id="tarjeta" value="Tarjeta" required = "True">
+                <label for="Tarjeta">Pago con tarjetas de crédito o Redcompra</label>
+                <br>
+                <br>
+                <button type="submit">TRANSACCIÓN CON OBLIGACIÓN DE PAGO</button>
+            </form>
+            <br>
+            <div id="payment_methods">
+                <img src="{{ url_for('static', path='img/webpay.png') }}" alt="img_payment">
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}

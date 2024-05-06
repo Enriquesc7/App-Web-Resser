@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %} 
+    {% endblock %}
+
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/front/style_base_front.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/front/style_front.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/user/style_user_service.css') }}">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js" integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://unpkg.com/htmx.org@1.6.1"></script>
+    <script src="{{ url_for('static', path='/scripts/jquery/jquery-3.5.1.min.js') }}"></script>
+    <script src="{{ url_for('static', path='/scripts/jquery.easing/jquery.easing.1.3.js') }}"></script>
+    <script src="{{ url_for('static', path='/scripts/scripts_slider.js') }}"></script>
+    {% block head %}
+    {% endblock %}
+
+
+<script>
+$(document).ready(function() {
+    
+    // BOTÓN DE LOGIN EN INDEX ============================================================
+    $("#img_user").click(function(){
+        $("#option_user").slideToggle();
+        $(this).toggleClass("abierto")
+    }); 
+    // FIN BOTÓN DE LOGIN EN INDEX ========================================================
+
+    // SCROLL AUTOMÁTICO A LAS POSICIONES DE LOS SERVICIOS (POR TERMINAR!)
+    $(".text_portafolio a").on("click", function(){
+        var posicion = $("#title_proyect").offset().top;
+        $("html, body").animate({
+            scrollTop:posicion
+        }, 1000);
+    });
+
+
+})
+
+</script>
+
+</head>
+
+<body>
+
+    <div id="container">
+    
+        <header id="header">
+            <div class="container_header">
+                <div class="logo">
+                    <a href="/">
+                        <img src="{{ url_for('static', path='img/base/logo_app-removebg.png') }}" alt="Logo app">
+                    </a>
+                </div>
+                <section class="section_barra_nav"> 
+                    <nav>
+                        <div id="barra_nav">
+                            <ul id="element_nav">
+                                <li class="{% if request['path'] == '/' %}active{% endif %}"><a href="/"><p>Accueil</p></a></li>
+                                <li class="{% if request['path'] == '/para-ti' %}active{% endif %}"><a href="#"><p>Pour vous</p></a></li>
+                                <li class="{% if request['path'] == '/nostros' %}active{% endif %} test_app"><a href="/register/"><p>Test App</p></a></li>
+                            </ul>
+                        </div>
+                    </nav>
+                </section>
+            </div>
+        </header>
+        <section id="section">
+        {% block content %}
+
+        {% endblock %}
+        </section>
+        <footer>
+            <section id="footer_suscribete">
+                <h3>S'abonner</h3>
+                <p>Laissez-moi votre adresse électronique si vous souhaitez recevoir des nouvelles, des avis de nouveaux services ou toute autre information pertinente.</p>
+                <form id="form_suscribete" action=""> <!--Quitamos la acción de POST -->
+                    <div>
+                        <input type="email" placeholder="courriel" name="email" required="true">
+                    </div>
+                    <div>
+                        <button type="#">Envoyer</button>
+                    </div>
+                </form>
+            </section>
+            <section id="footer_politica">
+                <div><a href="/politica"><p>Politique de confidentialité</p></a></div><br>
+                <div><a href="/cookies"><p>Cookies</p></a></div>
+            </section>
+        </footer>
+    
+    </div>
+    
+</body>
+</html>

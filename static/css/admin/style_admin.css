@@ -1,0 +1,98 @@
+/*================= Update data Admin =========================== */
+
+/* Form */
+
+#form_update_data_user{
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}  
+
+    .container_data_user{
+        display: flex;
+        column-gap: 20px;
+    }
+
+            .elements_form_user input{
+                font-size: 1.2rem;
+                padding-left: 5px;
+            }
+            .text_data_input{
+                font-size: 1.2rem;
+            }
+
+
+
+
+/*================= Tablas en Front =========================== */
+
+.section_table{
+    width: 100%;
+    
+}
+
+caption{
+    font-size: 1.3em;
+    font-weight: bold;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    padding-bottom: 5px;
+}
+
+.table{
+    border-spacing: 0;
+    border-collapse: collapse;
+    width: 90%;
+    margin: auto;
+}
+    .table td, .table th{
+        border: solid 1px #ccc;
+        padding: 5px;
+    }
+    .table th{
+        font-size: 13px;
+    }
+        .table tr:nth-child(even){
+            background-color: #eee;
+        }
+    
+    .table tbody tr:hover{
+        background-color: rgb(160, 222, 225) !important;
+    }
+    .table thead{
+        background-color: rgb(77, 139, 255);
+        color: white;
+    }
+
+/*================= Form en Front =========================== */
+
+.container_form_front{
+    width: 90%;
+    margin: 30px auto;
+}
+        .container_form_front h3{
+            background: url('../../img/base/mas.png') no-repeat 5px 0px;
+            height: 40px;
+            background-size: 40px; 
+	        padding: 10px 0 0 50px;
+	        cursor: pointer;
+        }
+
+        .container_form_front h3.cerrar {
+            background-image: url('../../img/base/menos.png');
+        }
+    
+        .name_field{
+            text-align: end;
+        }
+/*================= Update content Front =========================== */
+
+.section_update_front{
+    width: 90%;
+    margin: auto;
+}
+
+/*====================== ADMIN FRONT ================================================*/
+
+/* color rojo interesante --> background-color: rgb(246, 68, 68);
+   color azul interesante --> background-color: rgb(77, 139, 255);   */
+   

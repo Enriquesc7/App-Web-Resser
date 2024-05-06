@@ -1,0 +1,32 @@
+{% extends "users/base_user.html" %} 
+
+{% block title %} 
+<title>Perfil</title>
+{% endblock %}
+
+
+{% block content %} 
+
+    <section id="presentation_users" style="margin-top: 10px;">
+                
+        <div id="titulo_users">
+            <h2 class="articulos_ne" style="color: black;">
+                <strong>Bienvenido | {{user['first_name']}} </strong>
+            </h2>
+        </div>
+        <br>
+        <p>Mostrar algún mensaje de "¿que desea hacer?"</p>
+        <br>
+        <p>Mostrar las opciones</p>
+        <br>
+        <p>Escanear Producto</p>
+        <br>
+        <p>Donde reciclar</p>
+        <br>
+        <p>Mis puntos Resser</p>
+        <br>
+
+    </section>
+
+
+{% endblock %}

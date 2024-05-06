@@ -1,0 +1,46 @@
+    <!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/auth/style_auth.css') }}">
+
+</head>
+
+<body>
+
+    <section class="section_form">
+        <div id="container_img_form_login">
+            <img src="{{ url_for('static', path='/img/base/logo_usuario.png') }}" alt="logo_user">
+        </div>
+        <div class="container_form">
+            <form method="POST" action="/login" id="form_login">
+                <div class="elements_form alert_form" id="error_login">
+                {% if message %}
+                    <p style="color: red; text-align: bottom;">{{message}}</p>
+                {% endif %}
+                </div>
+                <div class="elements_form">
+                    <input type="email" placeholder="Adresse électronique" name="username" required="true">
+                </div>
+                <div class="elements_form">
+                    <input type="password" placeholder="Mot de passe" name="password" required="true">
+                </div>
+                <div class="elements_form">
+                    <button type="submit">Se connecter</button>
+                </div>
+                <div class="elements_form" id='buttom_register_login'>
+                    <button type="button"><a href="/register">S'inscrire</a></button>
+                </div>
+                <div class="elements_form" id='buttom_come_back'>
+                    <button type="button"><a href="/">Haut de page</a></button>
+                </div>
+            </form>
+            
+        </div>
+    </section>
+</body>
+</html>
