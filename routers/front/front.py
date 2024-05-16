@@ -57,44 +57,6 @@ async def home(
         "img_slider": await FrontManager.get_slider(db),
         "services": await FrontManager.get_services(db)})
 
-### Servicios
-@router.get(
-    path = "/para-ti",
-    response_model = List[front.Service],
-    response_class=HTMLResponse,
-    status_code = status.HTTP_200_OK,
-    summary = "Services company",
-    tags= ["Front app"]
-)
-async def services(
-    request: Request,
-    db: Session = Depends(get_db)
-):
-    return templates.TemplateResponse(
-        'front/service.html',
-        {'request': request,
-        'services': await FrontManager.get_services(db)}
-    )
-
-
-### Servicios
-@router.get(
-    path = "/para-ti/planes",
-    response_model = List[front.Service],
-    response_class=HTMLResponse,
-    status_code = status.HTTP_200_OK,
-    summary = "Services company",
-    tags= ["Front app"]
-)
-async def plan_service(
-    request: Request,
-    db: Session = Depends(get_db)
-):
-    return templates.TemplateResponse(
-        "front/plan.html",
-        {"request":request,
-        "services": await FrontManager.get_services(db),
-        "plans": await FrontManager.get_plans(db)})
 
 
 ### Nosotros

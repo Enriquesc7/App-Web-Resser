@@ -1,0 +1,87 @@
+{% extends "users/base_user.html" %} 
+
+{% block title %} 
+<title>Información Producto</title>
+{% endblock %}
+
+
+{% block content %} 
+        <section id="container_product">
+            
+            <div id="img_product">
+                <img src="{{product['basic_data']['image']}}" alt="img_product">
+            </div>
+            <div id="data_product">
+                <h2>{{product['basic_data']['title']}}</h2>
+                <br>
+                <div id="container_logos">
+                    <div class="score_logo">
+                        <img src="{{product['environment_data']['ecoscore']['image']}}" alt="img_ecoscore">
+                    </div>
+                    <div class="nova_logo">
+                        <img src="{{product['nutritional_data']['nova']['image']}}" alt="img_nova">
+                    </div>
+                    <div class="score_logo">
+                        <img src="{{product['nutritional_data']['nutriscore']['image']}}" alt="img_nutriscore">
+                    </div>
+                </div>
+                <div id="emballage">
+                    <h3>Emballage</h3>
+                    <div id="content_emballage">
+                        <div id="impact_emballage">
+                            <img src="{{product['environment_data']['packaging']['image']}}" alt="img_packaging">
+                            <p>{{product['environment_data']['packaging']['content']}}</p>
+                        </div>
+                        <div>
+                            <img src="{{product['environment_data']['packaging']['image_label']}}" alt="img_label_packaging">
+                        </div>
+                    </div>
+                </div>
+                <div id="materials">
+                    <h3>Matériaux d'emballage</h3>
+                    <div>
+                        <section class="section_table">
+                            <table class="table" id="table_user">
+                                <thead>
+                                    <tr>
+                                    {% for column in product['environment_data']['packaging']['materials']['columns'] %}
+                                        <th>{{column}}</th>
+                                    {% endfor %}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% set columns_count = product['environment_data']['packaging']['materials']['columns']|length %}
+                                    {% set row_count = product['environment_data']['packaging']['materials']['rows']|length %}
+                                    {% for i in range(0, row_count, columns_count) %}
+                                        <tr>
+                                            {% for j in range(columns_count) %}
+                                                {% if i+j < row_count %}
+                                                    <td>{{ product['environment_data']['packaging']['materials']['rows'][i+j].strip() }}</td>
+                                                {% else %}
+                                                    <td></td> <!-- Si no hay suficientes elementos, añade celdas vacías -->
+                                                {% endif %}
+                                            {% endfor %}
+                                        </tr>
+                                    {% endfor %}
+                                </tbody> 
+                            </table>
+                        </section>
+                    </div>
+                </div>
+                <div id="transport">
+                    <h3>Transport</h3>
+                    <div>
+                        <img src="{{product['environment_data']['transport']['image']}}" alt="img_packaging">
+
+                        <p>{{product['environment_data']['transport']['content']}}</p>
+                    </div>
+                </div>
+
+            </div>
+
+
+            
+        </section>
+
+
+{% endblock %}

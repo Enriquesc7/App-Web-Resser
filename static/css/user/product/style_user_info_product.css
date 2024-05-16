@@ -1,0 +1,161 @@
+h1,h2,h3,h4,h5,p{
+    color: #003366;
+    font-family: 'Segoe UI', 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+/*================== Información específica de un producto ===============*/   
+
+
+#container_product{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: auto;
+    gap: 20px;
+    width: 100%;
+    padding: 50px 50px;
+}
+
+    #img_product{
+        width: 300px;
+        height: 400px;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    }
+        #img_product img{
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+    #data_product{
+        width: 70%;
+    }
+
+
+        #container_logos{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            padding: 20px;
+            width: 50%;
+        }
+            .score_logo{
+                width: 130px;
+                height: 100px;
+            }
+
+            .nova_logo{
+                width: 65px;
+                height: 100px;
+            }
+
+                #container_logos div img{
+                    width: inherit;
+                    height: inherit;
+                }
+
+
+    
+    #emballage{
+        display: flex;
+        flex-direction: column;
+    }
+
+        #content_emballage{
+            display: flex;
+            justify-content: row;
+        }
+
+
+            #impact_emballage{
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                width: 50%;
+                gap: 30px;
+                padding: 20px;
+            }
+
+                #impact_emballage img{
+                    width: 100px;
+                }
+
+            #content_emballage div:last-child{
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                width: 200px;
+                height: 250px;
+            }    
+                #content_emballage div:last-child img{
+                    width: 100%;
+                    height: 100%;
+                    object-fit: contain;
+                }
+            
+            
+                
+            #transport{
+                display: flex;
+                flex-direction: column;
+            }
+
+                #transport div{
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    width: 50%;
+                    gap: 30px;
+                    padding: 20px;
+                }
+                    #transport div img{
+                        width: 100px;
+                    }
+
+
+
+
+
+/*============= Estilo de Tablas ============================  */
+
+.section_table{
+    width: 100%;
+    padding: 20px 0px 20px 0px;
+    
+}
+
+caption{
+    font-size: 1.3em;
+    font-weight: bold;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    padding-bottom: 5px;
+}
+
+.table{
+    border-spacing: 0;
+    border-collapse: collapse;
+    width: 90%;
+    margin: auto;
+}
+    .table td, .table th{
+        border: solid 1px #ccc;
+        padding: 5px;
+    }
+    .table th{
+        font-size: 13px;
+    }
+        .table tr:nth-child(even){
+            background-color: #eee;
+        }
+    
+    .table tbody tr:hover{
+        background-color: rgb(160, 222, 225) !important;
+    }
+    .table thead{
+        background-color: rgb(77, 139, 255);
+        color: white;
+    }

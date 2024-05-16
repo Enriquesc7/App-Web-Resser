@@ -128,13 +128,16 @@ $(document).ready(function() {
     //============== Section Add content======================
     $(".container_form").hide()    
 
-    $("h3").click(function(){
+    // Esta interacción quedará desabilitada hasta identificar de donde es, ya que afecta
+    // afecta los h3 de todos las paginas. 
+
+    //$("h3").click(function(){
       // next() apunto a lo siguiente (en este caso .respuesta) de donde nos encontramos (h3)...
       // fadeToggle tiene un comportamiento on/off de los elementos fadeIn y fadeOut
-      $(this).next().slideToggle();
+    //  $(this).next().slideToggle();
       // toggleClass tiene un comportamiento on/off con una clase que se quiera aplicar y quitar...
-      $(this).toggleClass("cerrar");
-    })
+    //  $(this).toggleClass("cerrar");
+    //})
 
     //============== Section Update content ======================
     $(".section_update_front").hide();

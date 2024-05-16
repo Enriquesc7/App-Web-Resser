@@ -31,11 +31,11 @@ router = APIRouter(
 
 ### Show profile - /profile
 @router.get(
-    path = "/{first_name}-{last_name}",
+    path = "/home",
     response_model = user.User,
     response_class= HTMLResponse, 
     status_code = status.HTTP_200_OK,
-    summary = "Go to profile",
+    summary = "Home",
     tags= ["User"]
 )
 async def profile(
@@ -52,11 +52,11 @@ async def profile(
 #=================== Go to Update User ============================
 
 @router.get(
-    path = "/{first_name}-{last_name}/update",
+    path = "/{first_name}-{last_name}",
     response_model = user.User,
     response_class= HTMLResponse,
     status_code = status.HTTP_200_OK,
-    summary = "Go to Update a profile",
+    summary = "Go to Profile",
     tags= ["User"]
 )
 async def update_profile(
@@ -76,7 +76,7 @@ async def update_profile(
     response_model = user.User,
     response_class= RedirectResponse,
     status_code = status.HTTP_200_OK,
-    summary = "Update a profile",
+    summary = "Update Profile",
     tags= ["User"]
 )
 async def update_profile(

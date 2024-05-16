@@ -26,7 +26,8 @@ body{
 }
 
 h1,h2,h3,h4,h5,p{
-    color:black
+    color: #003366;
+    font-family: 'Segoe UI', 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 /*==================================== NAV ============================================================*/
 
@@ -148,4 +149,4 @@ nav:hover{
                 justify-content: center;
             }
 
-        
+

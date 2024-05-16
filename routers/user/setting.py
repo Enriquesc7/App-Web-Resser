@@ -39,7 +39,7 @@ router = APIRouter(
 
 
 @router.get(
-    path = "/configuracion",
+    path = "/setting",
     response_model = user.User,
     status_code = status.HTTP_200_OK,
     summary = "Go to Setting",
