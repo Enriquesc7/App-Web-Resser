@@ -1,53 +1,49 @@
-/*========================================================================================================================
-============================= INDEX.HTML ===========================================================================
-==========================================================================================================================*/
+/*================= INDEX.HTML ===========================*/
 
 #container_index{
     height: 100%;
     width: 90%;
     display: flex;
     flex-direction: column;
-
 }
   
 
 /* ======================= Presentación ======================== */
 #container_presentation{
-        /*display: grid;
-        grid-template-rows: repeat(5, 50px);
-        grid-template-columns: repeat(10, 1fr);*/
         display: flex;
         flex-direction: row;
         justify-content: center;
         margin: auto;
         width: 85%;
-        height: 400px;
+        height: auto;
         margin-top: 100px;
         margin-bottom: 100px;
+        flex-wrap: wrap;
 }
 
     #presentation{
-        /*grid-row: 1 / 6;
-        grid-column: 5 / 10;*/
         flex-grow: 3;
-        width: 70%;
+        width: 50%;
         display: flex;
         flex-direction: column;
         justify-content: center;
         padding: 5px;
         gap: 30px;
         height: 100%;
+        min-width: 300px;
     }
 
-        #presentation_title h1{
-            font-size: 38px;
+        #presentation_title h1 {
+            font-size: 2.375rem;
+            min-width: 23ch;
         }
 
         .text_service{
-            text-align:justify;
+            text-align: center;
             line-height:1.5em;
-            font-size: 1.2em;
-            width: 39ch;
+            font-size: 1.2rem;
+            width: 100%;
+            max-width: 39ch;
         }
         
     #container_apps_store{
@@ -65,22 +61,115 @@
 
 
     #img_presentation{
-        /*grid-row: 1/ 6;
-        grid-column: 3 / 5;*/
         padding: 10px;
-        flex-grow: 1;
-        width: 100%;
-        position: relative;
+        width: 50%;
+        display: flex;
+        justify-content: center;
+        min-width: 300px;
     }
         #img_presentation img{
-            width: 530px;
-            height: 500px;
+            width: 100%;
+            max-width: 400px;
+            min-width: 350px;
+            height: auto;
             border-radius: 10%;
-            position: absolute;
-            right: 50px;
         }
             
+/* ======================= Presentando los servicios ======================== */
+
+#section_service{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: auto;
+    width: 85%;
+    height: auto;
+    margin-bottom: 50px;
+    margin-top: 20px;
+}
+
+    #img_service{
+        padding: 10px;
+        width: 100%;
+    }
+
+        #img_service img{
+            width: 100%;
+            max-width: 530px;
+            min-width: 400px;
+            height: auto;
+            border-radius: 10%;
+        }
+
+    #content_service{
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        padding-right: 20px;
+    }
+
+/* ======================= Welcome to the app ======================== */
+
+#welcome_to_app{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: auto;
+    width: 85%;
+    margin-bottom: 40px;
+}
+
+    #img_avatar{
+        padding: 10px;
+        width: 50%;
+    }
+
+        #img_avatar img{
+            width: 100%;
+            min-width: 400px;
+            
+        }
+
+    #welcome_button{
+        height: 100%;
+        width: 50%;
+        max-width: 400px;
+        min-width: 350px;
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        padding-right: 5%;
         
+    }
+
+        #welcome_button div{
+            width: 100%;
+            height: 40px;
+        }
+
+        #welcome_button a{
+            width: 100%;
+            height: 100%;
+        }
+
+        #welcome_button a button{
+            width: 100%;
+            height: 100%;
+            color: #FFFFFF;
+            background-color: #228B22;
+            border: 1px solid #003366;
+            font-family: 'Segoe UI', 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-size: 1.1em;
+            border-radius: 5px;
+        }
+
+        #welcome_button a button:hover{
+            transition: 100ms;
+            background-color: #38a138;
+            border: 1.5px solid #003366;
+        }
+
 
 /* ======================= Slider de imágenes del index ======================== */ 
 
@@ -124,7 +213,7 @@
         margin: auto;
         height: 100%;
         position: absolute;
-        top: 0;
+        top: 0px;
         display: flex;
         justify-content: flex-end;
         align-items: flex-end;
@@ -151,136 +240,235 @@
             opacity: 1;
         }
 
-/* ======================= Presentando los servicios ======================== */
 
-#section_service{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin: auto;
-    width: 85%;
-    height: 400px;
-    margin-bottom: 300px;
-}
 
-    #service_title{
-        margin-bottom: 100px;
-        display: flex;
-        justify-content: center;
-    }       
 
-        #service_title h2{
-            font-size: 38px;
+
+
+
+
+        /*.container{
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-gap: 10px
         }
+        */
+@media only screen and (max-width: 600px){
+    /* Your Css Styles for size smaller than 600px */
+        
+    /* Presentation */
 
-    #container_service{
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-    }
-
-        #img_service{
-            padding: 10px;
-            flex-grow: 1;
-            width: 100%;
-            position: relative;
-        }
-
-            #img_service img{
-                width: 540px;
-                height: 500px;
-                border-radius: 10%;
-                position: absolute;
-                left: 50px;
-                top: -50px;
-            }
-
-
-        #content_service{
-            display: flex;
-            align-items: center;
-            padding-right: 20px;
-        }
-
-/* ======================= Invitando a la app ======================== */
-
-#welcome_to_app{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin: auto;
-    width: 85%;
-    margin-bottom: 600px;
-    
-}
-
-    #container_avatar{
-        padding: 10px;
+    #container_presentation{
+        flex-direction: column;
+        height: auto;
         width: 100%;
-        position: relative;
+        flex-wrap: nowrap;
+        gap: 30px;
+        margin-top: 30px;
+        margin-bottom: 30px;
     }
 
-        #text_avatar{
-            position: absolute;
-            width: 20ch;
-            left: 480px;
-            top: 60px;
-            z-index: 2;
+        #presentation{
+            width: 100%;
         }
-            #text_avatar p{
-                width: 100%;
-                text-align: start;
-                font-weight: bold;
-                
+            #presentation_title h1{
+                text-align: center;
+                font-size: 1.6rem;
             }
+
+            .text_service{
+                width: 100%;
+                margin: auto;
+                font-size: 1.1rem;
+                max-width: 30ch;
+            }
+        
+        #container_apps_store{
+            margin: auto;
+            gap: 10px;
+        }
+            .app_store{
+                width: 120px;
+                height: 45px;
+            }
+
+
+        #img_presentation{
+            position: static;
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+        }
+            #img_presentation img{
+                width: inherit;
+                max-width: 250px;
+                min-width: 150px;
+            }
+
+    /* Services */        
+
+    #section_service{
+        flex-direction: column-reverse  ;
+    }
+
+    #img_service{
+        padding: 0px;
+        display: flex;
+        justify-content: center;
+    }
+        #img_service img{
+            max-width: 300px;
+            min-width: 220px;
+        }
+
+    #content_service{
+        padding-right: 0px;
+    }
+
+    /* Welcome to the app */
+
+    #welcome_to_app{
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 60px;
+    }
 
         #img_avatar{
-            position: absolute;
-            left: 200px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+            #img_avatar img{
+                width: 100%;
+                max-width: 300px;
+                min-width: 200px;
+                height: auto;
+                
+            }
+        
+        #welcome_button{
+            padding-right: 0px;
+            max-width: 400px;
+            min-width: 200px;
         }
 
-            #img_avatar img{
-                width: 500px;
-            }
+    /* Slider */
 
+    #container_slideshow{
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }            
+        #container_slideshow h2{
+            font-size: 1.6rem;
+        }
 
-    #welcome_button{
-        width: 450px;
-        height: 40px;
-        position: relative;
+    .slider li img{
+        height: auto;
+        max-height: 220px;
+        min-height: 100px;
     }
 
-        #welcome_button div{
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            right: 200px;
-            top: 270px;
+        .direcciones{
+            display: none;
         }
 
-        #welcome_button a{
-            display: block;
-            width: 100%;
-            height: 100%;
-        }
-
-        #welcome_button a button{
-            width: 100%;
-            height: 100%;
-            color: #FFFFFF;
-            background-color: #228B22;
-            border: 1px solid #003366;
-            font-family: 'Segoe UI', 'Open Sans', 'Helvetica Neue', sans-serif;
-            font-size: 1.1em;
-        }
-
-        #welcome_button a button:hover{
-            transition: 100ms;
-            background-color: #38a138;
-            border: 1.5px solid #003366;
-        }
-
+}
         
+@media only screen and (min-width: 600px) and (max-width: 900px){
+    
+    
+    /* Presentation */
+
+    #container_presentation{
+        flex-direction: column;
+        height: auto;
+        width: 100%;
+        flex-wrap: nowrap;
+        gap: 30px;
+        margin-bottom: 30px;
+    }
+
+        #presentation{
+            width: 100%;
+        }
+            #presentation_title h1{
+                text-align: center;
+            }
+
+            .text_service{
+                width: 100%;
+                margin: auto;
+            }
+        
+        #container_apps_store{
+            margin: auto;
+        }
+
+        #img_presentation{
+            position: static;
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+        }
+            #img_presentation img{
+                width: inherit;
+                max-width: 200px;
+            }
+
+    /* Services */        
+
+    #section_service{
+        flex-direction: column-reverse  ;
+    }
+
+    #img_service{
+        padding: 0px;
+        display: flex;
+        justify-content: center;
+    }
+
+    #content_service{
+        padding-right: 0px;
+    }
+
+
+    /* Welcome to the app */
+
+    #welcome_to_app{
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 80px;
+    }
+
+        #img_avatar{
+            width: 100%;
+        }
+            #img_avatar img{
+                max-width: 80% ;
+            }
+        
+        #welcome_button{
+            padding-right: 0px;
+        }
+
+    /* Slider */
+
+    #container_slideshow{
+        margin-top: 0px;
+    }            
+
+    .slider li img{
+        height: 400px;
+    }
+
+}
+        
+@media only screen and (min-width: 900px){
+    /* Your Css Styles for size larger than 600px */
+        
+}
 
 
 

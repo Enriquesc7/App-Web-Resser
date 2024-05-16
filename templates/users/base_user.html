@@ -3,16 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     {% block title %} 
     {% endblock %}
     
-
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/user/product/style_user_info_product.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/front/style_base_front.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', path='/css/user/style_base_user.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', path='/css/user/style_user.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', path='/css/user/style_user_service.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', path='/css/user/style_user_setting.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', path='/scripts/jquery.datepicker/jquery-ui.css') }}">
+
 
     <!-- Iconos -->
     <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script> 
@@ -25,100 +24,106 @@
     <!-- Horus -->
     <script src="{{ url_for('static', path='/scripts/scripts_base.js') }}"></script>
     <script src="{{ url_for('static', path='/scripts/scripts_ajax.js') }}"></script>
-    
+
 <script>
 $(document).ready(function() {
-            
-    // BOTÓN DE LOGIN EN INDEX ============================================================
+      // BOTÓN DE LOGIN EN INDEX ============================================================
     $("#img_user").click(function(){
         $("#option_user").slideToggle();
         $(this).toggleClass("abierto")
     }); 
     // FIN BOTÓN DE LOGIN EN INDEX ========================================================
 
+    // SCROLL AUTOMÁTICO A LAS POSICIONES DE LOS SERVICIOS (POR TERMINAR!)
+    $(".text_portafolio a").on("click", function(){
+        var posicion = $("#title_proyect").offset().top;
+        $("html, body").animate({
+            scrollTop:posicion
+        }, 1000);
+    });
 
-    $(".nav_admin").hover(function(){   // Se agrega un tercer parametro a la funcion animate(), que 
-		$(this).stop().animate({  // correspondera a un efecto de movimiento obtenido de los
-			left:"0"             // plugins descargados de JQuery (easing)... 
-		},300,"easeInSine");//Luego para no tener una sucesion de eventos al jugar con el evento
-	},                      //se agrega la funcion "stop()" que impide la acumulacion de eventos.
-	function(){
-		$(this).stop().animate({
-			left:"-65px"
-		},300, "easeInSine"); //easeOutBounce
-	});
+
+
+    $("#container_icon_menu").click(function(){
+        if ($("#header").hasClass("active")) {
+            $("#header").stop().animate({
+                top: "-145px"
+            }, 600, "easeInSine").removeClass("active");
+            $("#element_nav_burger").slideUp(400, "easeInSine");
+            $("#icon_menu").attr("src", "{{ url_for('static', path='img/front/gear-solid.png') }}"); // Cambia a icono de menú
+        } else {
+            $("#header").stop().animate({
+                top: "-50px"
+            }, 400, "easeInSine").addClass("active");  // easeOutBounce
+            $("#element_nav_burger").slideDown(600, "easeInSine");
+            $("#icon_menu").attr("src", "{{ url_for('static', path='img/front/icon_close.png') }}"); // Cambia a icono de cerrar
+        }
+    });      
         
 })
 </script>
 
 </head>
-
+<!--  style="width: 500px; height: 700px; background-color: aqua; margin: auto;"     -->
 <body>
-<div id="container_global" style="width: 500px; height: 700px; background-color: aqua; margin: auto;">
+<div id="container_global">
 
-    <div id="container">
-        <nav>
-            <header>
-                <div class="logo"><img src="{{ url_for('static', path='img/base/ojo_horus.png') }}" alt="img_perfil"></div>
-                <div class="user">
-                    {% if user['path_img_profile'] != None %}
-                    <img src="{{ url_for('static', path=user['path_img_profile']) }}" alt="img_perfil">
-                    {% else %} 
-                    <img src="{{ url_for('static', path='img/base/logo_usuario.png') }}" alt="img_perfil">
-                    {% endif %}
-                    <div class="name">{{user['first_name']}} {{user['last_name']}}</div>
-                    <a href="/{{user['first_name']}}-{{user['last_name']}}/update" class="button_edit">
-                        <button>Editar</button>
-                    </a>
+    <header id="header">
+        <div class="container_header">
+            <div class="logo">
+                <a href="/home">
+                    <img src="{{ url_for('static', path='img/base/logo_resser.png') }}" alt="Logo app">
+                </a>
+            </div>
+            
+            <section class="section_barra_nav"> 
+                <nav>
+                    <div id="barra_nav">
+                        <ul id="element_nav">
+                            <li class="{% if request['path'] == '/' %}active{% endif %}"><a href="/"><p>Accueil</p></a></li>
+                            <li class="{% if request['path'] == '/para-ti' %}active{% endif %}"><a href="#"><p>Pour vous</p></a></li>
+                            <li class="{% if request['path'] == '/nostros' %}active{% endif %} test_app"><a href="/started"><p>Test App</p></a></li>
+                        </ul>
+                    </div>
+                    
+                </nav>
+                <div id="container_icon_menu">
+                    <img id="icon_menu" src="{{ url_for('static', path='img/front/gear-solid.png') }}" alt="">
+                    
                 </div>
-            </header>
-            <div class="links">
-                <a href="/{{user['first_name']}}-{{user['last_name']}}">
-                    <div class="icon">
-                        <span 
-                            class="iconify-inline" 
-                            data-icon="flat-color-icons:home"
-                            data-width="32"
-                            data-height="32"></span>
-                    </div>
-                    <div class="title">Home</div>
-                </a>
-                <a href="/planes">
-                    <div class="icon">
-                        <span 
-                            class="iconify-inline" 
-                            data-icon="flat-color-icons:services"
-                            data-width="32"
-                            data-height="32"></span>
-                    </div>
-                    <div class="title">Planes</div>
-                </a>
-                <a href="/configuracion">
-                    <div class="icon">
-                        <span 
-                            class="iconify-inline" 
-                            data-icon="flat-color-icons:settings"
-                            data-width="32"
-                            data-height="32"></span>
-                    </div>
-                    <div class="title">Configuración</div>
-                </a>
-            </div>
-            <div id = container_logout>
-                <a href="/{{user['first_name']}}-{{user['last_name']}}/logout">
-                    <div class="icon">
-                        <img src="{{ url_for('static', path='img/base_admin/logout.png') }}" width="32px" alt="">
-                    </div>
-                    <div class="title">Cerrar sesión</div>
-                </a>
-            </div>
-        </nav>
+            </section>
+        </div>
+        <ul id="element_nav_burger">
+            <li class="{% if request['path'] == '/' %}active{% endif %}"><a href="#"><p>Configuration</p></a></li>
+            <li class="{% if request['path'] == '/para-ti' %}active{% endif %}"><a href="#"><p>Déconnexion</p></a></li>
+        </ul>
+    </header>
 
-            {% block content %}
 
-            {% endblock %}
+    {% block content %}
 
-    </div>
+    {% endblock %}
+
+    <section id="barra_navegacion_mobile">
+        
+        <div>
+            <a href="/home" class="{% if request['path'] == '/home' %}active{% endif %}"><img src="{{ url_for('static', path='img/nav_mobile/house.png') }}" style="width: 30px; height: 30px;" alt=""></a>
+        </div>
+        <div>
+            <a href="/escanear" class="{% if request['path'] == '/escanear' %}active{% endif %}"><img src="{{ url_for('static', path='img/nav_mobile/barcode.png') }}" style="width: 30px; height: 30px;" alt=""></a>
+        </div>
+        <div>
+            <a href="#"><img src="{{ url_for('static', path='img/nav_mobile/gps.png') }}" style="width: 30px; height: 30px;" alt=""></a>
+        </div>
+        <div>
+            <a href="#"><img src="{{ url_for('static', path='img/nav_mobile/shopping.png') }}" style="width: 30px; height: 30px;" alt=""></a>
+        </div>
+        <div>
+            <a href="/products/3179732326911"><img src="{{ url_for('static', path='img/nav_mobile/book.png') }}" style="width: 30px; height: 30px;" alt=""></a>
+        </div>
+
+    </section>
+
 </div>
 </body> 
 </html>

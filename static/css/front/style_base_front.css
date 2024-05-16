@@ -2,7 +2,6 @@
 /* https://css-tricks.com/snippets/css/complete-guide-grid/   */
 
 
-
 /*      Consideraciones de Diseño
 
 Color de fondo Front: #FFFFFF
@@ -16,295 +15,269 @@ Color de fondo botones hover: #38a138
 Color de borde botones: #003366
 
 
+La Suscripción a Resser permitirá:
+
+- BBDD accesible sin internet
+- Puntos limpios (mapas) accesibles sin internet
+- Beneficios y ofertas especiales
+- 
+
+El problema es poder reciclar y/o valorizar aquellos residuos
+plásticos que no se pueden 
+
+Diagrama del paso a paso 
+Encuesta
+
 
 
 */
 
 
-
-
-*{  padding: 0;
+*{
+    padding: 0;
     margin: 0;
-    -webkit-box-sizing:border-box ;
-    -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
 
-body{
+body {
     background-color: #FFFFFF;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    overflow-x: hidden; /* Evitar el scroll horizontal */
+    max-width: 100vw; /* Asegurarse de que el cuerpo no exceda el ancho de la ventana */
 }
 
-#container{
+#container {
     display: grid;
     grid-template-rows: auto auto auto;
     width: 100%;
-    height: 100%;
+    max-width: 100%;
     margin: auto;  
-    
+    position: relative;
 }
 
-h1,h2,h3,h4,h5,p,a{
+h1, h2, h3, h4, h5, p, a{
     color: #003366;
     font-family: 'Segoe UI', 'Open Sans', 'Helvetica Neue', sans-serif;
 }
-/*================================================================================================================================================
-========================================CSS HEADER========================================================================================
-===================================================================================================================================================*/
 
 
-#header{
-    height: 100px;
+/* Header */
+
+#header {
+    height: 30vh;
     border-bottom: 0.05px solid black;
-    position: fixed;
     width: 100%;
     background-color: #FFFFFF;
-    z-index:10;
+    z-index: 10;
     box-shadow: 0 4px 8px -2px rgba(0, 0, 0, 0.2);
-    padding-left: 100px;
-    padding-right: 100px;
+    padding: 0 5%;
+    overflow: hidden;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    gap: 100px;
+    justify-content: flex-end;
+    align-items: center ;
 }
 
-    .container_header{
-        display: flex;
-        justify-content: space-between;
-        gap: 20px;
-        height: 100%;
-    }
-        
-        .logo{
-            height: 100px;   
-            width: 100px;
-            padding-top: 7px;  
-            padding-bottom: 7px;
-            margin-left: 100px; 
-        }
-
-            .logo a{
-                width: 100%;
-            }
-                .logo a img{
-                    width: 150px;
-                    height: 90px;  
-                }
 
 
-        .section_barra_nav{
-            display: flex;
-            justify-content: flex-end; 
-            height: 70px;
-            gap: 15px;
-            margin-right: 100px;
-        }
 
-            nav{ 
+.container_header {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    height: 100px;
+    width: 100%;
+    padding: 0 130px;
+    /*position: relative;*/
+    position: fixed;
+    top: 0px;
+    left: 0px;
+}
+
+.logo {
+    height: 100px;
+    width: 100px;
+    padding-top: 20px;
+    padding-bottom: 7px;
+    /*position: absolute;
+    top: 150px;*/
+}
+
+.logo a img {
+    width: 137px;
+    height: 45px;
+}
+
+.section_barra_nav {
+    display: flex;
+    justify-content: flex-end; 
+    height: 70px;
+    gap: 15px;
+    /*position: absolute;
+    top: 140px;
+    right: 100px; */
+}
+
+            nav { 
                 height: 100%;
-                
             }
 
-                #barra_nav{
+                #barra_nav {
                     height: 100%;
-                    width: 500px;
+                    width: 100%;
                     padding-top: 40px;
-                    padding-right: 100px;
                 }
 
-                    #barra_nav ul{
+                    #barra_nav ul {
                         display: flex;
                         justify-content: flex-end;
                         gap: 16px; 
                         height: 100%;
-                        
-                
                     }
 
-                        #barra_nav ul li{
+                        #barra_nav ul li {
                             height: 75%; 
                             display: flex;
                             align-items: center;
-                            box-sizing:content-box;
-                              
                         }
 
-                        #barra_nav ul li:last-child{
+                        #barra_nav ul li:last-child {
                             border-radius: 7px;
                             border: 2px solid #38a138;
-                            padding: 2px;
+                            padding: 5px;
                         }
 
-                        .test_app:hover{
-                            transition: 100ms;
-                            color: #FFFFFF;
-                            background-color: #38a138;
-                            border: 2px solid #228B22;
-
-                        }
-                            .test_app a p:hover{
-                                color: #FFFFFF;
-                            }
-
-
-                        #barra_nav ul li a{
-                            padding-bottom: 2px;
-                            height: 100%;
-                        }
-
-                        #barra_nav ul li:hover{
+                        #barra_nav ul li:hover {
                             transition: 100ms;
                             border-bottom: 2px solid #38a138;   
                         }
-                            
-                        .active{
-                            border-bottom: 2px solid #38a138;
-                        }
 
-                            #barra_nav a{
-                                width: 100%;
+                            #barra_nav ul li a {
+                                padding-bottom: 2px;
                                 height: 100%;
-                                
                             }
-                                #barra_nav p{
-                                    width: 9ch;
-                                    height: 100%;
-                                    text-align: center;
-                                }
                         
-                            #barra_nav ul li a{
-                                display: grid;
+                            .test_app:hover {
+                                transition: 100ms;
+                                color: #FFFFFF;
+                                background-color: #38a138;
+                                border: 2px solid #228B22;
+                            }
+
+                            .test_app a p:hover {
+                                color: #FFFFFF;
+                            }
+
+                            .active {
+                                border-bottom: 2px solid #38a138;
+                            }
+
+                            #barra_nav p {
+                                text-align: center;
+                            }
+
+                            #barra_nav ul li a {
+                                display: flex;
                                 align-items: center;
                                 text-decoration: none;
-                                font-size: 16px;  
+                                font-size: 1rem;  
                                 height: 100%;             
                             }
-                                #barra_nav li img{
-                                    height: 40px;
-                                    margin-top: 5px;
-                                }
+
+                            #barra_nav li img {
+                                height: 40px;
+                                margin-top: 5px;
+                            }
    
-        .container_option_user{
-            height: 100px;
-            width: 100%;
-            position: relative;
-            padding-top: 7px;
-            padding-top: 7px;
-            margin-top: 7px;
+    #container_icon_menu{
+        display: none;
+        cursor: pointer;
+        width: auto;
+        padding: 7px 0px;
+    }
+        #container_icon_menu img{
+            width: 20px;
+            height: 20px;
+            gap: 10px;
         }
 
-            .container_option_user img{
-                width: 70px;
-                height: 70px;
-            }
-            .container_option_user img:hover{
-                transition: 100ms;
-                opacity: 0.5;
-            }
-            .container_option_user .abierto{
-                opacity: 0.5;
-            }
-
-            #option_user{
-                display: none;
-                position: absolute;
-                left: -95px;
-                background-color: rgb(0, 0, 0, 0);
-                border-radius: 5px;
-            }
-                #option_user div{
-                    padding-top: 5px;
-                }
-                #option_user button{
-                    background-color:rgb(7, 41, 41, 1);
-                    width: 250px;
-                    height: 40px;
-                    color: white;
-                    font-family: Verdana, Geneva, Tahoma, sans-serif;
-                    
-                }
-                #option_user button:hover{
-                    border: 1px solid black;
-                    text-decoration:underline;
-                }
-                    
-        #option_admin{
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 70px; 
-            width: 100%;
-        } 
-
-            #all_user{
-                height: 80%;
-                display: grid;
-                align-items: center;
-                justify-self: center;
-                box-sizing:content-box; 
-            }
-          
-
-            #all_user:hover{
-                transition: 100ms;
-                border-bottom: 2px solid black;
+    #element_nav_burger{
+        display: none;
+        width: 50%;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        gap: 3px;
+        overflow: hidden;
+        list-style-type: none;
+    }
+        #element_nav_burger li{
+            width: 9ch;
+            margin: auto;
+            padding: 3px;
             
-            }
+        }
+        #element_nav_burger li:hover{
+            transition: 100ms;
+            border-bottom: 2px solid #38a138;   
+        }
 
-                #option_admin a{
-                    color:black;
-                    text-decoration: none;
-                }
+        #element_nav_burger li a{
+            text-decoration: none;
+        }
+
+        #element_nav_burger p{
+            text-align: center;
+            margin: auto;
+        }
+        
 
 
-/*===========================================================================================================================
-==============================CSS SECTION=======================================================================================0
-===============================================================================================================================*/
-                
-#section{
+
+/* Section */
+
+#section {
     margin-top: 100px;
     display: flex;
     justify-content: center;
 }
 
-/*===========================================================================================================================
-==============================CSS FOOTER=======================================================================================0
-===============================================================================================================================*/
 
-footer{
-    margin-top: 70px;
+/* Footer */
+footer {
+    margin: 50px 0;
     border-top: 0.05px solid black;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding-top: 30px;
-    width: 100%;
-    padding-left: 100px;
-    padding-right: 100px;
-    margin-bottom: 50px;
+    padding: 30px 5%;
 }
 
-    #footer_suscribete{
+    #footer_suscribete {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
     }
 
-        #footer_suscribete p{
+        #footer_suscribete p {
             max-width: 52ch;
             padding-top: 10px;
         }
-        
-        #form_suscribete{
+
+        #form_suscribete {
             padding-top: 10px;
-            
         }
-        
-            #form_suscribete div:first-child{
+
+            #form_suscribete div:first-child {
                 margin-bottom: 5px;
             }
 
-
-            #form_suscribete input{
+            #form_suscribete input {
                 height: 40px;
-                width: 400px;
+                width: 100%;
                 border-radius: 7px;
                 background-color: white;
                 color: black;
@@ -312,86 +285,186 @@ footer{
                 border: 0.5px solid black;
                 font-family: Verdana, Geneva, Tahoma, sans-serif;
             }
-            #form_suscribete button{
+
+            #form_suscribete button {
                 height: 40px;
-                width: 400px;
+                width: 100%;
                 border-radius: 7px;
                 color: white;
-                background-color:#228B22;
+                background-color: #228B22;
                 border: 1px solid #003366;
                 font-family: 'Segoe UI', 'Open Sans', 'Helvetica Neue', sans-serif;
                 font-size: 1.1em;
             }
-            #form_suscribete button:hover{
+
+            #form_suscribete button:hover {
                 transition: 100ms;
                 background-color: #38a138;
                 border: 1.5px solid #003366;
-
             }
 
-    #footer_politica a{
+    #footer_politica a {
         text-decoration: none;
     }
-        #footer_politica p{
-            color: blueviolet;
+
+    #footer_politica p {
+        color: blueviolet;
+    }
+
+
+
+@media only screen and (max-width: 600px){
+    /* Your Css Styles for size smaller than 600px */
+    
+    /* Header */
+
+    #header{
+        top: -145px;
+    }
+    
+    .logo{
+        top: 165px;
+    }
+        .logo a img{
+            width: 120px;
+            height: 40px;
+        }
+
+    .container_header{
+        padding: 0px 30px;
+    }
+       
+    
+    
+    .section_barra_nav{
+        padding: 20px 0px 7px 0px;
+        right: 0px;
+        top: 150px;
+    }
+    
+        #container_icon_menu{
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }   
+            #container_icon_menu h3{
+                font-size: 1.2rem;
+                height: 30px;
+            }
+        nav{
+            display: none;
         }
 
 
+    /* Footer */
 
-
-/*===========================================================================================================================
-==============================CSS Questions=======================================================================================0
-===============================================================================================================================*/
-
-
-#section_question{
-    position: absolute;
-	margin-left: auto;
-	margin-right: auto;
-	left:0;
-	right:0;
-	width: 400px;
-	height: 200px;
-	z-index: 1;
-    background-color:white;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-}
-
-    #question{
-        padding:10px
+    footer{
+        flex-direction: column;
+        gap: 40px;
     }
 
-    #options_question{
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        gap: 20px;
-    }
+        #footer_suscribete h3{
+            width: 9ch;
+        }
+        #footer_suscribete p{
+            max-width: 39ch;
+            min-width: 18ch;
+            font-size: 0.8rem;
+            text-align: justify;
+        }
 
-        #options_question button{
-            width: 120px;
+        #form_suscribete div{
+            width: 93%;
+        }
+
+        #form_suscribete input{
+            width: inherit;
+            max-width: 300px;
+            min-width: 150px;
+        }
+        #form_suscribete button{
+            width: inherit;
+            max-width: 300px;
+            min-width: 150px;
+        }
+
+        #footer_politica{
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
         }
         
-        #option_yes{
-            background-color: rgb(246, 68, 68);
-        }
-            #option_yes a{
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                width: 100%;
-                height: 100%;
-                text-decoration: none;
-            }
-                #option_yes p{
-                    color: white;
-                }
 
-        #option_no{
-            background-color: rgb(77, 139, 255);
+}
+
+
+
+
+
+
+@media only screen and (max-width: 900px){
+    /* Your Css Styles for size smaller than 900px */
+
+    #barra_nav_burger.active{
+        display: flex;
+  
+    }
+
+}
+
+
+
+
+        
+@media only screen and (min-width: 600px) and (max-width: 900px){
+    /* Your Css Styles for size between 600px and 900px */
+    
+    #header{
+        top: -145px;
+    }
+    
+    .logo{
+        top: 165px;
+    }
+        .logo a img{
+            width: 120px;
+            height: 40px;
         }
+
+    .container_header{
+        padding: 0px 70px;
+    }
+
+    .section_barra_nav{
+        padding: 20px 0px 7px 0px;
+        right: 0px;
+        top: 150px;
+    }
+
+        #container_icon_menu{
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }   
+        #container_icon_menu h3{
+            font-size: 1.2rem;
+            height: 30px;
+        }        
+
+        nav{
+            display: none;
+        }
+
+}
+
+
+@media only screen and (min-width: 900px){
+    /* Your Css Styles for size larger than 600px */
+    #header{
+        top: -145px;
+    }
+}
+
 
 
 

@@ -29,10 +29,10 @@
                     <input type="email" value="{{email if email else ''}}" placeholder="{{'Adresse électronique' if not email else ''}}"  name="email" required="true">
                 </div>
                 <div class="elements_form">
-                    <input type="text" value="{{results['first_name'] if results else ''}}" placeholder="{{'Nom et prénom' if not results else ''}}" name="first_name" required="true">
+                    <input type="text" value="{{results['first_name'] if results else ''}}" placeholder="{{'Prénom' if not results else ''}}" name="first_name" required="true">
                 </div>
                 <div class="elements_form">
-                    <input type="text" value="{{results['last_name'] if results else ''}}" placeholder="{{'Nom de famille' if not results else ''}}" name="last_name" required="true">
+                    <input type="text" value="{{results['last_name'] if results else ''}}" placeholder="{{'Nom' if not results else ''}}" name="last_name" required="true">
                 </div>
                 <div class="elements_form">
                     <input type="password" placeholder="Mot de passe" name="password" required="true">

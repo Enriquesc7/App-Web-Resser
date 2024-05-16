@@ -80,7 +80,7 @@ async def login_for_access_token(
             response = RedirectResponse("admin/"+user.first_name+"-"+user.last_name, status_code= status.HTTP_302_FOUND)
             
     elif user.rol.value == UserRoleEnum.user.value:
-        response = RedirectResponse("/"+user.first_name+"-"+user.last_name, status_code= status.HTTP_302_FOUND)
+        response = RedirectResponse("/home", status_code= status.HTTP_302_FOUND)
 
     response.set_cookie(key="access_token", value=f"Bearer {access_token}", httponly=True)
     return response

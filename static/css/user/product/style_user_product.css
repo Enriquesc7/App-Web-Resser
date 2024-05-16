@@ -1,0 +1,228 @@
+/*=================================== PRODUCTS.HTML ===============================================================*/
+
+h1,h2,h3,h4,h5,p{
+    color: #003366;
+    font-family: 'Segoe UI', 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+/*============= Barra de busqueda =====================*/
+
+
+#titulo_users{
+    background-color: #FFFFFF;
+    padding: 25px 25px;
+ }
+
+
+#form_search_product{
+    display: flex;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+    .button_search{
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        padding: 10px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+    }
+    .button_scan{
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        padding: 10px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+    }
+
+    .busqueda {
+        position: relative;
+        width: 100%;
+        /*margin: auto;  Centrar la barra de búsqueda */
+        border: 1px solid black;
+        border-radius: 3px;
+        padding: 1px;
+    }
+    
+    .busqueda input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        padding-right: 20px; /* Dar espacio para el ícono de la lupa */
+        border: none;
+        background-color: white;
+        color: black;
+    }
+    
+    .busqueda i{
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: grey;
+        pointer-events: none; /* Evita que el ícono de la lupa interfiera con el clic en el campo de texto */
+    }
+
+
+ /*==================== Todos los productos ===========================*/   
+
+
+ #results_search{
+    background-color: #FFFFFF;
+    padding: 25px 25px;
+ }
+
+
+ .product-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.product-item {
+    flex-basis: calc(100% - 20px); /* Esto hará que haya 4 productos por fila. Ajusta según tus necesidades. */
+    background-color: #FFFFFF;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    margin-bottom: 20px;
+    text-align: center;
+    position: relative;
+    padding-bottom: 50px;
+}
+    .product-item a{
+        text-decoration: none;
+        
+    }
+
+    .product-item img{
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+    }
+
+    #product-logos{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        margin: auto;
+        width: 80%;
+        gap: 10px;
+        padding-top: 20px;
+    }
+        .score{
+            width: 70px;
+            height: 50px;
+        }
+
+        .nova{
+            width: 35px;
+            height: 50px;
+        }
+            #product-logos div img{
+                width: inherit;
+                height: inherit;
+            }
+
+  
+  .compare-button {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 5px;
+    background-color: #4CAF50;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 3px;
+    color: white;
+  }
+
+
+
+/*==== Probando ==================*/
+
+/* Ocultar el contenedor de la cámara por defecto */
+.hidden {
+    display: none;
+}
+
+/* Hacer que el contenedor de la cámara ocupe toda la pantalla */
+.fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999; /* Asegurarse de que esté por encima de otros elementos */
+    background-color: rgba(0, 0, 0, 0.8); /* Fondo semi-transparente */
+}
+
+/* Estilo para el botón de cerrar */
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 10000; /* Asegurarse de que esté por encima del contenedor */
+}
+
+
+
+/*============== Paginación ===========================*/
+
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+.pagination a, .pagination span {
+    margin: 0 5px;
+    padding: 10px 15px;
+    text-decoration: none;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+}
+.pagination a.active {
+    background-color: #007bff;
+    color: white;
+}
+.pagination a:hover {
+    background-color: #ddd;
+}
+
+
+
+
+
+/*================ Medias Queries ========================*/
+
+/* Media Queries */
+@media (min-width: 600px) {
+    .product-item {
+        flex-basis: calc(50% - 20px);  /* Dos productos por fila en tabletas y pantallas más grandes */
+    }
+}
+
+@media (min-width: 900px) {
+    .product-item {
+        flex-basis: calc(25% - 20px);  /* Cuatro productos por fila en pantallas grandes */
+    }
+
+    .product-item img{
+        width: 200px;
+        height: 250px;
+        object-fit: contain;
+    }
+
+}

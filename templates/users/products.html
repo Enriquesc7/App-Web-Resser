@@ -1,0 +1,191 @@
+{% extends "users/base_user.html" %} 
+
+{% block title %} 
+<title>Productos</title>
+{% endblock %}
+
+
+{% block content %} 
+
+<section id="price_table_container">
+
+    <div id="titulo_users">
+        <h2 class="articulos_ne">
+            <strong> Producto buscado</strong>
+        </h2>
+        <br>
+        <br>
+        <form method="POST" action="" id="form_search_product">
+            <div class="busqueda">
+                {% if product %}
+                <input type="text" name ="search" placeholder="{{product}}">
+                {% else %}
+                <input type="text" name ="search" placeholder="Buscar...">
+                {% endif %}
+                <i class="fas fa-search"></i>
+            </div>
+            &nbsp &nbsp
+            <div class="container_button_search">
+                <button class="button_search">Buscar</button>
+            </div>
+        </form>
+    </div>
+    <br>
+
+
+    <div id="camera-container" class="hidden">
+        <div id="camera" style="width: 100%; height: 100%;"></div>
+        <button class="close-button" onclick="resetCamera()">Cerrar</button>
+    </div>
+    <div class="container_button_search">
+        <button class="button_scan" onclick="startScanner();">Escanear</button>
+    </div>
+    <div id="container_message">
+        <p id="message"></p>
+    </div> <!-- Div para mostrar el mensaje -->
+    
+    <script src="https://cdn.jsdelivr.net/npm/@ericblade/quagga2/dist/quagga.min.js"></script>
+    <script>
+        function startScanner() {
+            // Mostrar el contenedor de la cámara en modo fullscreen
+            const cameraContainer = document.getElementById('camera-container');
+            cameraContainer.classList.remove('hidden');
+            cameraContainer.classList.add('fullscreen');
+    
+            const quaggaConf = {
+                inputStream: {
+                    target: document.querySelector("#camera"),
+                    type: "LiveStream",
+                    constraints: {
+                        width: { min: 640 },
+                        height: { min: 480 },
+                        facingMode: "environment",
+                        aspectRatio: { min: 1, max: 2 }
+                    }
+                },
+                decoder: {
+                    readers: ['ean_reader',
+                            'code_128_reader',
+                            'ean_8_reader',
+                            'code_39_reader',
+                            'code_39_vin_reader',
+                            'codabar_reader',
+                            'upc_reader',
+                            'upc_e_reader',
+                            'i2of5_reader',
+                            '2of5_reader',
+                            'code_93_reader',
+                            'code_32_reader'] // lector correcto para EAN-13
+                },
+            };
+    
+            Quagga.init(quaggaConf, function (err) {
+                if (err) {
+                    console.log(err);
+                    alert('Error starting Quagga: ' + err.message);
+                    return;
+                }
+                Quagga.start();
+            });
+    
+            Quagga.onDetected(function (result) {
+                if (result.codeResult && result.codeResult.code) {
+                    console.log("Código escaneado: " + result.codeResult.code);
+                    Quagga.stop(); // Detener Quagga después de la detección
+                    processBarcode(result.codeResult.code);
+                } else {
+                    console.error("Código no detectado correctamente.");
+                    alert('Error detecting barcode');
+                }
+            });
+        }
+    
+        function processBarcode(code) {
+            console.log('Enviando código al servidor:', code);
+            fetch('/get_barcode', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ barcode: code })
+            }).then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Something went wrong on server!');
+                }
+            }).then(data => {
+                console.log('Respuesta del servidor:', data); // Agrega este log para verificar la respuesta
+                if (data.redirect) {
+                    window.location.href = data.redirect; // Redirecciona usando la URL proporcionada por el servidor
+                } else if (data.message) {
+                    resetCamera(); // Resetea la cámara después de mostrar el mensaje
+                    document.getElementById('message').innerText = data.message; // Muestra el mensaje en la página
+                } else {
+                    alert('Unexpected response from server.');
+                }
+            }).catch(err => {
+                console.error('Error processing barcode:', err);
+                alert('Error processing barcode: ' + err.message);
+                resetCamera(); // Resetea la cámara en caso de error
+            });
+        }
+    
+        function resetCamera() {
+            const cameraContainer = document.getElementById('camera-container');
+            cameraContainer.classList.remove('fullscreen');
+            cameraContainer.classList.add('hidden');
+            document.getElementById('message').innerText = ''; // Limpiar el mensaje
+        }
+    </script>
+
+    <div id="results_search">
+        <div class="elements_form alert_form" id="error_login">
+            {% if message %}
+                <p style="color: white; text-align: bottom;">{{message}}</p>
+            {% endif %}
+        </div>
+        <div class="product-grid">
+            {% for product in products %}
+                <div class="product-item">
+                    <img src="{{product['basic_data']['image']}}" alt="imagen_ejemplo">
+                    <h3>{{product['basic_data']['title']}}</h3>
+                    <div id="product-logos">
+                        <div class="score">
+                            <img src="{{product['environment_data']['ecoscore']['image']}}" alt="ecoscore">
+                        </div>
+                        <div class="nova">
+                            <img src="{{product['nutritional_data']['nova']['image']}}" alt="nova">
+                        </div>
+                        <div class="score">
+                            <img src="{{product['nutritional_data']['nutriscore']['image']}}" alt="nutriscore">
+                        </div>
+                    </div>
+                    <a href="/products/{{product['basic_data']['bar_code']}}">
+                    <button class="compare-button">Ver más</button>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Paginación -->
+    <div class="pagination">
+        {% if page > 1 %}
+        <a href="?page={{ page - 1 }}">&laquo; Anterior</a>
+        {% endif %}
+        {% for p in pagination %}
+        {% if p == '...' %}
+        <span>...</span>
+        {% else %}
+        <a href="?page={{ p }}" class="{% if p == page %}active{% endif %}">{{ p }}</a>
+        {% endif %}
+        {% endfor %}
+        {% if page < total_pages %}
+        <a href="?page={{ page + 1 }}">Siguiente &raquo;</a>
+        {% endif %}
+    </div>
+
+</section>
+
+{% endblock %}

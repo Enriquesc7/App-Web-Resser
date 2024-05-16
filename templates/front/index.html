@@ -12,14 +12,10 @@
         <div id ="container_presentation">
             <div id="presentation">    
                 <div id="presentation_title">
-                    <h1>Recycler intelligemment avec EcoScan</h1>
+                    <h1>Recycler intelligemment <br> avec EcoScan</h1>
                 </div>
                 <div>
-                    <p class="text_service">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Temporibus sed 
-                    similique optio cumque dicta consequatur accusamus ratione dolore rem provident, 
-                    deleniti fuga voluptates beatae maiores reprehenderit numquam eos deserunt 
-                    exercitationem.
-                    </p>
+                    <p class="text_service">Téléchargez EcoScan et découvrez les avantages du recyclage intelligent dès aujourd'hui.</p>
                 </div>
                 <div id="container_apps_store">
                     <div>
@@ -32,15 +28,36 @@
             </div>
             
             <div id="img_presentation">
-                <img src="{{ url_for('static', path='/img/front/copia_montri_1_v2.png') }}" alt="" class="img_portafolio">
+                <img src="{{ url_for('static', path='/img/front/copia_montri_3.png') }}" alt="" class="img_portafolio">
             </div>
             
         </div>
 
+        <div id="section_service">
+            <div id="img_service">
+                <img src="{{ url_for('static', path='/img/front/copia_montri_2_v2.png') }}" alt="">
+            </div>
 
+            <div id="content_service">
+                <p class="text_service">Utilisez la technologie pour un recyclage plus intelligent. Scanner, trier et recycler avec facilité.</p>
+            </div>
+        </div>
+
+        <div id="welcome_to_app">
+            <div id="img_avatar">
+                <img src="{{ url_for('static', path='/img/front/test_app.png') }}" alt="welcome_to_app">
+            </div>
+            <div id="welcome_button">
+                <div>
+                    <a href="/started"><button type="button">Test App</button></a>
+                </div>
+                
+            </div>
+        </div>
+        
         <div id="container_slideshow">
             <div id="title_slide" style="margin-bottom: 30px;">
-                <h2>Le saviez-vous ?</h2>
+                <h2>Nos Partenaires</h2>
             </div>
 
             <div class="slideshow">
@@ -58,44 +75,8 @@
             </div>
         </div>
 
-        <div id="section_service">
-            <div id="service_title">
-                <h2>Participez au changement et gagnez !</h2>
-            </div>
 
-            <div id="container_service">
-                <div id="img_service">
-                    <img src="{{ url_for('static', path='/img/front/copia_montri_2_v2.png') }}" alt="">
-                </div>
 
-                <div id="content_service">
-                    <p class="text_service">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Temporibus sed 
-                        similique optio cumque dicta consequatur accusamus ratione dolore rem provident, 
-                        deleniti fuga voluptates beatae maiores reprehenderit numquam eos deserunt 
-                        exercitationem.
-                    </p>
-                </div>
-            </div>
-            
-        </div>
-
-        <div id="welcome_to_app">
-            <div id="container_avatar">
-                <div id="text_avatar">
-                    <p>Essayez l'application et participez au changement!</p>
-                </div>
-                <div id="img_avatar">
-                    <img src="{{ url_for('static', path='/img/front/avatar/welcome_avatar_v1.jpg') }}" alt="welcome_to_app">
-                </div>
-            </div>
-            <div id="welcome_button">
-                <div>
-                    <a href="/register"><button type="button">Test App</button></a>
-                </div>
-                
-            </div>
-        </div>
-        
     </div>
 
 {% endblock %}

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     {% block title %} 
     {% endblock %}
 
@@ -39,6 +39,24 @@ $(document).ready(function() {
     });
 
 
+
+    $("#container_icon_menu").click(function(){
+        if ($("#header").hasClass("active")) {
+            $("#header").stop().animate({
+                top: "-145px"
+            }, 600, "easeInSine").removeClass("active");
+            $("#element_nav_burger").slideUp(400, "easeInSine");
+            $("#icon_menu").attr("src", "{{ url_for('static', path='img/front/icon_menu.png') }}"); // Cambia a icono de menú
+        } else {
+            $("#header").stop().animate({
+                top: "-50px"
+            }, 400, "easeInSine").addClass("active");  // easeOutBounce
+            $("#element_nav_burger").slideDown(600, "easeInSine");
+            $("#icon_menu").attr("src", "{{ url_for('static', path='img/front/icon_close.png') }}"); // Cambia a icono de cerrar
+        }
+    });
+
+
 })
 
 </script>
@@ -53,27 +71,41 @@ $(document).ready(function() {
             <div class="container_header">
                 <div class="logo">
                     <a href="/">
-                        <img src="{{ url_for('static', path='img/base/logo_app-removebg.png') }}" alt="Logo app">
+                        <img src="{{ url_for('static', path='img/base/logo_resser.png') }}" alt="Logo app">
                     </a>
                 </div>
+                
                 <section class="section_barra_nav"> 
                     <nav>
                         <div id="barra_nav">
                             <ul id="element_nav">
                                 <li class="{% if request['path'] == '/' %}active{% endif %}"><a href="/"><p>Accueil</p></a></li>
                                 <li class="{% if request['path'] == '/para-ti' %}active{% endif %}"><a href="#"><p>Pour vous</p></a></li>
-                                <li class="{% if request['path'] == '/nostros' %}active{% endif %} test_app"><a href="/register/"><p>Test App</p></a></li>
+                                <li class="{% if request['path'] == '/nostros' %}active{% endif %} test_app"><a href="/started"><p>Test App</p></a></li>
                             </ul>
                         </div>
+                        
                     </nav>
+                    <div id="container_icon_menu">
+                        <h3>MENU</h3>
+                        <img id="icon_menu" src="{{ url_for('static', path='img/front/icon_menu.png') }}" alt="">
+                        
+                    </div>
                 </section>
             </div>
+            <ul id="element_nav_burger">
+                <li class="{% if request['path'] == '/' %}active{% endif %}"><a href="/"><p>Accueil</p></a></li>
+                <li class="{% if request['path'] == '/para-ti' %}active{% endif %}"><a href="#"><p>Pour vous</p></a></li>
+                <li class="{% if request['path'] == '/nostros' %}active{% endif %} test_app"><a href="/started"><p>Test App</p></a></li>
+            </ul>
         </header>
+
         <section id="section">
         {% block content %}
 
         {% endblock %}
         </section>
+
         <footer>
             <section id="footer_suscribete">
                 <h3>S'abonner</h3>
@@ -88,8 +120,8 @@ $(document).ready(function() {
                 </form>
             </section>
             <section id="footer_politica">
-                <div><a href="/politica"><p>Politique de confidentialité</p></a></div><br>
-                <div><a href="/cookies"><p>Cookies</p></a></div>
+                <div><a href="#"><p>Politique de confidentialité</p></a></div><br>
+                <div><a href="#"><p>Cookies</p></a></div>
             </section>
         </footer>
     

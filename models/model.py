@@ -1,7 +1,7 @@
 # SQLAlchemist
 from email.policy import default
 from operator import index
-from sqlalchemy import Column, ForeignKey, Integer, String, Boolean, DateTime
+from sqlalchemy import Column, ForeignKey, Integer, String, Boolean, DateTime, Enum
 
 # App
 from data import Base
@@ -9,7 +9,8 @@ from data import Base
 # Utils
 from datetime import datetime, date
 
-
+# Models
+from models.enum import Genero
 
 # Models
 # Información basica del usuario al momento de registrarse
@@ -73,3 +74,12 @@ class Slider(Base):
     title = Column(String(50))
     path_img_slide = Column(String(100))
     create = Column(DateTime, default =datetime.now, onupdate = datetime.now)
+
+
+
+# Información basica del usuario al momento de registrarse
+class UserStage(Base):
+    __tablename__ = 'user_stage'
+    name = Column(String(20))
+    age = Column(String(3))
+    genero = Column(Enum(Genero), nullable=False)

@@ -13,3 +13,9 @@ class PlanEnum(str, Enum):
     advance = "Advance"
     expert = "Expert"
     company = "Company"
+
+
+class Genero(str, Enum):
+    masculino = "Homme"
+    femenino = "Femme"
+    otro = "Autre"

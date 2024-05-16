@@ -27,36 +27,204 @@ router = APIRouter(
 )
 
 
+
+#========================= Welcome User ===============================
+
+
+@router.get(
+    path = "/started",
+    response_model = user.User,
+    response_class= HTMLResponse, 
+    status_code = status.HTTP_200_OK,
+    summary = "Form Register",
+    tags= ["User"]
+)
+async def profile(
+    request: Request    
+):
+    return templates.TemplateResponse(
+        "users/welcome/collect_data.html",{"request":request})
+
+
+
+@router.post(
+    path = "/started",
+    response_model = user.User,
+    response_class= HTMLResponse, 
+    status_code = status.HTTP_200_OK,
+    summary = "Form Register",
+    tags= ["User"]
+)
+async def profile(
+    request: Request    
+):
+    
+    
+    
+    
+    return templates.TemplateResponse(
+        "users/welcome/collect_data.html",{"request":request})
+
+
+
+
+@router.get(
+    path = "/welcome_1",
+    response_model = user.User,
+    response_class= HTMLResponse, 
+    status_code = status.HTTP_200_OK,
+    summary = "Welcome 1",
+    tags= ["User"]
+)
+async def profile(
+    request: Request    
+):
+    return templates.TemplateResponse(
+        "users/welcome/welcome_1.html",{"request":request})
+
+
+@router.get(
+    path = "/welcome_2",
+    response_model = user.User,
+    response_class= HTMLResponse, 
+    status_code = status.HTTP_200_OK,
+    summary = "Welcome 2",
+    tags= ["User"]
+)
+async def profile(
+    request: Request    
+):
+    return templates.TemplateResponse(
+        "users/welcome/welcome_2.html",{"request":request})
+
+
+@router.get(
+    path = "/welcome_3",
+    response_model = user.User,
+    response_class= HTMLResponse, 
+    status_code = status.HTTP_200_OK,
+    summary = "Welcome 3",
+    tags= ["User"]
+)
+async def profile(
+    request: Request    
+):
+    return templates.TemplateResponse(
+        "users/welcome/welcome_3.html",{"request":request})
+
+
+
+@router.get(
+    path = "/welcome_4",
+    response_model = user.User,
+    response_class= HTMLResponse, 
+    status_code = status.HTTP_200_OK,
+    summary = "Welcome 4",
+    tags= ["User"]
+)
+async def profile(
+    request: Request    
+):
+    return templates.TemplateResponse(
+        "users/welcome/welcome_4.html",{"request":request})
+
+
+
+
+@router.get(
+    path = "/welcome_5",
+    response_model = user.User,
+    response_class= HTMLResponse, 
+    status_code = status.HTTP_200_OK,
+    summary = "Welcome 5",
+    tags= ["User"]
+)
+async def profile(
+    request: Request    
+):
+    return templates.TemplateResponse(
+        "users/welcome/welcome_5.html",{"request":request})
+
+
+
+
+@router.get(
+    path = "/welcome_6",
+    response_model = user.User,
+    response_class= HTMLResponse, 
+    status_code = status.HTTP_200_OK,
+    summary = "Welcome 6",
+    tags= ["User"]
+)
+async def profile(
+    request: Request    
+):
+    return templates.TemplateResponse(
+        "users/welcome/welcome_6.html",{"request":request})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #========================= Go to User Profile ===============================
 
 ### Show profile - /profile
 @router.get(
-    path = "/{first_name}-{last_name}",
+    path = "/home",
     response_model = user.User,
     response_class= HTMLResponse, 
     status_code = status.HTTP_200_OK,
-    summary = "Go to profile",
+    summary = "Home",
     tags= ["User"]
 )
 async def profile(
-    request: Request,
-    db: Session = Depends(get_db),
-    current_user: user.User = Depends(get_current_active_user)
+    request: Request 
 ):
     return templates.TemplateResponse(
-        "users/profile.html",
-        {"request":request, 
-        "user": await AdminManager.get_user_by_email(db, current_user.email)})
+        "users/profile.html", {"request":request})
+
+
+
+@router.get(
+    path = "/escanear",
+    response_model = user.User,
+    response_class= HTMLResponse, 
+    status_code = status.HTTP_200_OK,
+    summary = "Home",
+    tags= ["User"]
+)
+async def profile(
+    request: Request 
+):
+    
+    
+
+
+    return templates.TemplateResponse(
+        "users/escanear.html", {"request":request})
+
 
 
 #=================== Go to Update User ============================
 
 @router.get(
-    path = "/{first_name}-{last_name}/update",
+    path = "/{first_name}-{last_name}",
     response_model = user.User,
     response_class= HTMLResponse,
     status_code = status.HTTP_200_OK,
-    summary = "Go to Update a profile",
+    summary = "Go to Profile",
     tags= ["User"]
 )
 async def update_profile(
@@ -76,7 +244,7 @@ async def update_profile(
     response_model = user.User,
     response_class= RedirectResponse,
     status_code = status.HTTP_200_OK,
-    summary = "Update a profile",
+    summary = "Update Profile",
     tags= ["User"]
 )
 async def update_profile(
