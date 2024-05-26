@@ -195,8 +195,7 @@ async def info_product(
 async def product_lookup(
     request: Request,
     barcode: BarcodeData,
-    db: Session = Depends(get_db),
-    current_user: user.User = Depends(get_current_active_user)
+    db: Session = Depends(get_db)
 ):
     # Cargamos la información del archivo
     with open('data/open_food-big.json', 'r', encoding='utf-8') as f:

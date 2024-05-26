@@ -4,14 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    {% block title %} 
-    {% endblock %}
-    
+    <title>Gestión de Reciclaje</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/user/product/style_user_product.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', path='/css/user/product/style_user_info_product.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', path='/css/front/style_base_front.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', path='/css/user/style_base_user.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', path='/css/user/style_user.css') }}">
-
 
     <!-- Iconos -->
     <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script> 
@@ -24,47 +23,7 @@
     <!-- Horus -->
     <script src="{{ url_for('static', path='/scripts/scripts_base.js') }}"></script>
     <script src="{{ url_for('static', path='/scripts/scripts_ajax.js') }}"></script>
-
-<script>
-$(document).ready(function() {
-      // BOTÓN DE LOGIN EN INDEX ============================================================
-    $("#img_user").click(function(){
-        $("#option_user").slideToggle();
-        $(this).toggleClass("abierto")
-    }); 
-    // FIN BOTÓN DE LOGIN EN INDEX ========================================================
-
-    // SCROLL AUTOMÁTICO A LAS POSICIONES DE LOS SERVICIOS (POR TERMINAR!)
-    $(".text_portafolio a").on("click", function(){
-        var posicion = $("#title_proyect").offset().top;
-        $("html, body").animate({
-            scrollTop:posicion
-        }, 1000);
-    });
-
-
-
-    $("#container_icon_menu").click(function(){
-        if ($("#header").hasClass("active")) {
-            $("#header").stop().animate({
-                top: "-145px"
-            }, 600, "easeInSine").removeClass("active");
-            $("#element_nav_burger").slideUp(400, "easeInSine");
-            $("#icon_menu").attr("src", "{{ url_for('static', path='img/front/gear-solid.png') }}"); // Cambia a icono de menú
-        } else {
-            $("#header").stop().animate({
-                top: "-50px"
-            }, 400, "easeInSine").addClass("active");  // easeOutBounce
-            $("#element_nav_burger").slideDown(600, "easeInSine");
-            $("#icon_menu").attr("src", "{{ url_for('static', path='img/front/icon_close.png') }}"); // Cambia a icono de cerrar
-        }
-    });      
-        
-})
-</script>
-
 </head>
-<!--  style="width: 500px; height: 700px; background-color: aqua; margin: auto;"     -->
 <body>
 <div id="container_global">
 
@@ -75,7 +34,6 @@ $(document).ready(function() {
                     <img src="{{ url_for('static', path='img/base/logo_resser.png') }}" alt="Logo app">
                 </a>
             </div>
-            
             <section class="section_barra_nav"> 
                 <nav>
                     <div id="barra_nav">
@@ -85,11 +43,9 @@ $(document).ready(function() {
                             <li class="{% if request['path'] == '/nostros' %}active{% endif %} test_app"><a href="/started"><p>Test App</p></a></li>
                         </ul>
                     </div>
-                    
                 </nav>
                 <div id="container_icon_menu">
-                    <img id="icon_menu" src="{{ url_for('static', path='img/front/gear-solid.png') }}" alt="">
-                    
+                    <img id="icon_menu" src="{{ url_for('static', path='img/front/gear-solid.png') }}" alt="menu">
                 </div>
             </section>
         </div>
@@ -99,31 +55,195 @@ $(document).ready(function() {
         </ul>
     </header>
 
+    
 
     {% block content %}
 
     {% endblock %}
 
-    <section id="barra_navegacion_mobile">
-        
-        <div>
-            <a href="/home" class="{% if request['path'] == '/home' %}active{% endif %}"><img src="{{ url_for('static', path='img/nav_mobile/house.png') }}" style="width: 30px; height: 30px;" alt=""></a>
-        </div>
-        <div>
-            <a href="/escanear" class="{% if request['path'] == '/escanear' %}active{% endif %}"><img src="{{ url_for('static', path='img/nav_mobile/barcode.png') }}" style="width: 30px; height: 30px;" alt=""></a>
-        </div>
-        <div>
-            <a href="#"><img src="{{ url_for('static', path='img/nav_mobile/gps.png') }}" style="width: 30px; height: 30px;" alt=""></a>
-        </div>
-        <div>
-            <a href="#"><img src="{{ url_for('static', path='img/nav_mobile/shopping.png') }}" style="width: 30px; height: 30px;" alt=""></a>
-        </div>
-        <div>
-            <a href="/products/3179732326911"><img src="{{ url_for('static', path='img/nav_mobile/book.png') }}" style="width: 30px; height: 30px;" alt=""></a>
-        </div>
 
+
+
+    <!-- Contenido para que aparezca la camara -->
+
+    <section id="section_scanner" style="margin: auto; width: 80%;">
+        <div id="camera-container" class="hidden">
+            <div id="camera" style="width: 100%; height: 100%;"></div>
+            <button class="close-button" onclick="resetCamera()">Cerrar</button>
+        </div>
+        <div id="container_message">
+            <p id="message"></p>
+        </div>
     </section>
 
+
+
+
+    <section id="section_nav_mobile">
+        <div id="container_nav_mobile">
+            <div>
+                <a href="/home" class="{% if request['path'] == '/home' %}active{% endif %}">
+                    <img class="img_nav" src="{{ url_for('static', path='img/nav_mobile/house.png') }}" alt="home">
+                </a>
+            </div>
+            <div>
+                <a href="#" class="{% if request['path'] == '/escanear' %}active{% endif %}">
+                    <img class="img_nav button_scan" onclick="startScanner()" src="{{ url_for('static', path='img/nav_mobile/barcode.png') }}" alt="barcode">
+                </a>
+            </div>
+            <div>
+                <a href="#">
+                    <img class="img_nav" src="{{ url_for('static', path='img/nav_mobile/gps.png') }}" alt="location">
+                </a>
+            </div>
+            <div>
+                <a href="#">
+                    <img class="img_nav" src="{{ url_for('static', path='img/nav_mobile/shopping.png') }}" alt="shopping">
+                </a>
+            </div>
+            <div>
+                <a href="/products/3179732326911">
+                    <img class="img_nav" src="{{ url_for('static', path='img/nav_mobile/book.png') }}" alt="library">
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/@ericblade/quagga2/dist/quagga.min.js"></script>
+    <script>
+        function startScanner() {
+    // Mostrar el contenedor de la cámara en modo fullscreen
+    const cameraContainer = document.getElementById('camera-container');
+    cameraContainer.classList.remove('hidden');
+    cameraContainer.classList.add('fullscreen');
+
+    const quaggaConf = {
+        inputStream: {
+            target: document.querySelector("#camera"),
+            type: "LiveStream",
+            constraints: {
+                width: { min: 640, ideal: 1280, max: 1920 },
+                height: { min: 480, ideal: 720, max: 1080 },
+                facingMode: "environment",
+                aspectRatio: { min: 1, max: 2 }
+            }
+        },
+        locator: {
+            patchSize: "large", // Opciones: 'x-small', 'small', 'medium', 'large', 'x-large'
+            halfSample: false,
+            debug: {
+                showCanvas: true,
+                showPatches: true,
+                showFoundPatches: true,
+                showSkeleton: true,
+                showLabels: true,
+                showPatchLabels: true,
+                showRemainingPatchLabels: true,
+                boxFromPatches: {
+                    showTransformed: true,
+                    showTransformedBox: true,
+                    showBB: true
+                }
+            }
+        },
+        numOfWorkers: navigator.hardwareConcurrency || 4,
+        decoder: {
+            readers: ['ean_reader'],
+            debug: {
+                drawBoundingBox: true,
+                showFrequency: true,
+                drawScanline: true,
+                showPattern: true
+            },
+            multiple: false
+        },
+        locate: true,
+        frequency: 10 // Añadir un pequeño retardo para mejorar la precisión
+    };
+
+    Quagga.init(quaggaConf, function (err) {
+        if (err) {
+            console.log(err);
+            alert('Error starting Quagga: ' + err.message);
+            return;
+        }
+        Quagga.start();
+    });
+
+    Quagga.onProcessed(function(result) {
+        var drawingCtx = Quagga.canvas.ctx.overlay,
+            drawingCanvas = Quagga.canvas.dom.overlay;
+
+        if (result) {
+            if (result.boxes) {
+                drawingCtx.clearRect(0, 0, drawingCanvas.width, drawingCanvas.height);
+                result.boxes.filter(function (box) {
+                    return box !== result.box;
+                }).forEach(function (box) {
+                    Quagga.ImageDebug.drawPath(box, {x: 0, y: 1}, drawingCtx, {color: 'green', lineWidth: 2});
+                });
+            }
+
+            if (result.box) {
+                Quagga.ImageDebug.drawPath(result.box, {x: 0, y: 1}, drawingCtx, {color: '#00F', lineWidth: 2});
+            }
+
+            if (result.codeResult && result.codeResult.code) {
+                Quagga.ImageDebug.drawPath(result.line, {x: 'x', y: 'y'}, drawingCtx, {color: 'red', lineWidth: 3});
+            }
+        }
+    });
+
+    Quagga.onDetected(function (result) {
+        if (result.codeResult && result.codeResult.code) {
+            console.log("Código escaneado: " + result.codeResult.code);
+            Quagga.stop();
+            processBarcode(result.codeResult.code);
+        } else {
+            console.error("Código no detectado correctamente.");
+            alert('Error detecting barcode');
+        }
+    });
+}
+
+function processBarcode(code) {
+    console.log('Enviando código al servidor:', code);
+    fetch('/get_barcode', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ barcode: code })
+    }).then(response => {
+        if (response.ok) {
+            return response.json();
+        } else {
+            throw new Error('Something went wrong on server!');
+        }
+    }).then(data => {
+        console.log('Respuesta del servidor:', data);
+        if (data.redirect) {
+            window.location.href = data.redirect;
+        } else if (data.message) {
+            resetCamera();
+            document.getElementById('message').innerText = data.message;
+        } else {
+            alert('Unexpected response from server.');
+        }
+    }).catch(err => {
+        console.error('Error processing barcode:', err);
+        alert('Error processing barcode: ' + err.message);
+        resetCamera();
+    });
+}
+
+function resetCamera() {
+    const cameraContainer = document.getElementById('camera-container');
+    cameraContainer.classList.remove('fullscreen');
+    cameraContainer.classList.add('hidden');
+    document.getElementById('message').innerText = '';
+}
+    </script>
 </div>
-</body> 
+</body>
 </html>

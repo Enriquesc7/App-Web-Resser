@@ -31,16 +31,6 @@ h1,h2,h3,h4,h5,p{
         display: inline-block;
         font-size: 16px;
     }
-    .button_scan{
-        background-color: #4CAF50;
-        border: none;
-        color: white;
-        padding: 10px 32px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-    }
 
     .busqueda {
         position: relative;
@@ -146,7 +136,7 @@ h1,h2,h3,h4,h5,p{
 
 
 
-/*==== Probando ==================*/
+/*==== Probando Camara ==================*/
 
 /* Ocultar el contenedor de la cámara por defecto */
 .hidden {
@@ -175,6 +165,26 @@ h1,h2,h3,h4,h5,p{
     cursor: pointer;
     z-index: 10000; /* Asegurarse de que esté por encima del contenedor */
 }
+
+
+
+    #section_scanner{
+        background-color: cadetblue;
+        border-radius: 5px;
+        position: fixed;
+        top: 100px;
+        z-index: 1000;
+    }
+        #message{
+            color: crimson;
+        }
+
+
+
+
+
+
+
 
 
 
