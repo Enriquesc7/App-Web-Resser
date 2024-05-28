@@ -7,28 +7,97 @@
 
 {% block content %} 
 
-    <section id="presentation_users" style="margin-top: 130px; width: 80%;">
+<div id="container_user">
                 
-        <div id="titulo_users">
-            <h2 class="articulos_ne" style="color: black;">
-                <strong>Bienvenido </strong>
-            </h2>
-        </div>
-        <br>
-        <p>Mis puntos Resser</p>
-        <br>
-        <p>Beneficios</p>
-        <br>
-        <p>Producto escaneados</p>
-        <br>
-        <p>Organizaciones que valorizan</p>
-        <br>
-        <p>Partners</p>
-        <br>
-        
-        
+    <div id="welcome_user">
+        <h2>
+            <strong>Bienvenido!</strong>
+        </h2>
+    </div>
 
-    </section>
+    <div id="container_point_resser" > 
+        <p class="number_point">0</p>
+        <p class="text_point">Pts</p>
+    </div>
+
+    <div class="shopping" > 
+        <div class="img_shopping">
+            <img src="{{ url_for('static', path='img/start_to_scanner.png') }}">
+        </div>
+        <div class="text_shopping">
+            <h3>Productos escaneados</h3>
+            <p>Aún no cuentas con ninguno. Comienza ya!</p>
+        </div>
+        <div class="buttom_shopping" onclick="startScanner()">
+            <a class="adelante">&#10095;</a>
+        </div>
+    </div>
+
+    <div class="shopping" > 
+        <div class="img_shopping">
+            <img src="{{ url_for('static', path='img/porcentaje_descuento.jpg') }}">
+        </div>
+        <div class="text_shopping">
+            <p>Enterate de todos los beneficios que Resser tiene para ti!</p>
+        </div>
+        <div class="buttom_shopping">
+            <a class="adelante">&#10095;</a>
+        </div>
+    </div>
+    
+    <div id="organizations_recycle">
+        <p><strong>Organizaciones que valorizan</strong></p>
+
+        <div class="slideshow">
+            <ul class="slider_enterprise">
+                <li>
+                    <img src="{{ url_for('static', path='img/partners/enterprise/green_fablab.png') }}">
+                </li>
+                <li>
+                    <img src="{{ url_for('static', path='img/partners/enterprise/saju.png') }}">
+                </li>
+                <li>
+                    <img src="{{ url_for('static', path='img/partners/enterprise/reciclapp.png') }}">
+                </li>
+            </ul>
+        </div>
+        <div class="direcciones_enterprise">
+            <a class="atras">&#10094;</a>
+            <a class="adelante">&#10095;</a>
+        </div>
+    </div>
+
+    <div id="partners">
+        <p><strong>Partners</strong></p>
+
+        <div class="slideshow">
+            <ul class="slider_partners">
+                <li>
+                    <img src="{{ url_for('static', path='img/partners/img_lorraine.png') }}">
+                </li>
+                <li>
+                    <img src="{{ url_for('static', path='img/partners/img_erpi.png') }}">
+                </li>
+                <li>
+                    <img src="{{ url_for('static', path='img/partners/foire.jpg') }}">
+                </li>
+                <li>
+                    <img src="{{ url_for('static', path='img/partners/img_ensgsi.png') }}">
+                </li>
+                <li>
+                    <img src="{{ url_for('static', path='img/partners/img_usach.jpg') }}">
+                </li>
+            </ul>
+        </div>
+        <div class="direcciones_partners">
+            <a class="atras">&#10094;</a>
+            <a class="adelante">&#10095;</a>
+        </div>
+
+
+    </div>
+        
+</div>
 
 
 {% endblock %}

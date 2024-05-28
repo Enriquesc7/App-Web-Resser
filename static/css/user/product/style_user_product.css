@@ -7,12 +7,6 @@ h1,h2,h3,h4,h5,p{
 /*============= Barra de busqueda =====================*/
 
 
-#titulo_users{
-    background-color: #FFFFFF;
-    padding: 25px 25px;
- }
-
-
 #form_search_product{
     display: flex;
     width: 90%;

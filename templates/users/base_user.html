@@ -6,11 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Gestión de Reciclaje</title>
 
+    <!-- Nav Mobile -->
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/user/style_base_user.css') }}">
+    
+    <!-- Home/Profile -->
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/user/style_user.css') }}">
+
     <link rel="stylesheet" href="{{ url_for('static', path='/css/user/product/style_user_product.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', path='/css/user/product/style_user_info_product.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', path='/css/front/style_base_front.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', path='/css/user/style_base_user.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', path='/css/user/style_user.css') }}">
+  
+    
 
     <!-- Iconos -->
     <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script> 
@@ -23,9 +28,39 @@
     <!-- Horus -->
     <script src="{{ url_for('static', path='/scripts/scripts_base.js') }}"></script>
     <script src="{{ url_for('static', path='/scripts/scripts_ajax.js') }}"></script>
+    <script src="{{ url_for('static', path='/scripts/scripts_slider_mobile.js') }}"></script>
+
+<script>
+$(document).ready(function() {
+            
+        
+    $("#container_icon_menu").click(function(){
+        if ($("#header").hasClass("active")) {
+            $("#header").stop().animate({
+                top: "-145px"
+            }, 600, "easeInSine").removeClass("active");
+            $("#element_nav_burger").slideUp(400, "easeInSine");
+            $("#icon_menu").attr("src", "{{ url_for('static', path='img/front/icon_menu.png') }}"); // Cambia a icono de menú
+        } else {
+            $("#header").stop().animate({
+                top: "-50px"
+            }, 400, "easeInSine").addClass("active");  // easeOutBounce
+            $("#element_nav_burger").slideDown(600, "easeInSine");
+            $("#icon_menu").attr("src", "{{ url_for('static', path='img/front/icon_close.png') }}"); // Cambia a icono de cerrar
+        }
+    });
+        
+        
+})
+        
+</script>
+
+
+
 </head>
 <body>
-<div id="container_global">
+
+<div id="container">
 
     <header id="header">
         <div class="container_header">
@@ -38,9 +73,8 @@
                 <nav>
                     <div id="barra_nav">
                         <ul id="element_nav">
-                            <li class="{% if request['path'] == '/' %}active{% endif %}"><a href="/"><p>Accueil</p></a></li>
-                            <li class="{% if request['path'] == '/para-ti' %}active{% endif %}"><a href="#"><p>Pour vous</p></a></li>
-                            <li class="{% if request['path'] == '/nostros' %}active{% endif %} test_app"><a href="/started"><p>Test App</p></a></li>
+                            <li class="{% if request['path'] == '/' %}active{% endif %}"><a href="/"><p>Configuration</p></a></li>
+                            <li class="{% if request['path'] == '/para-ti' %}active{% endif %}"><a href="#"><p>Déconnexion</p></a></li>
                         </ul>
                     </div>
                 </nav>
@@ -56,11 +90,11 @@
     </header>
 
     
-
+    <section id="section">
     {% block content %}
 
     {% endblock %}
-
+    </section>
 
 
 
@@ -92,17 +126,17 @@
                 </a>
             </div>
             <div>
-                <a href="#">
+                <a href="/recycling_point">
                     <img class="img_nav" src="{{ url_for('static', path='img/nav_mobile/gps.png') }}" alt="location">
                 </a>
             </div>
             <div>
-                <a href="#">
+                <a href="/shopping">
                     <img class="img_nav" src="{{ url_for('static', path='img/nav_mobile/shopping.png') }}" alt="shopping">
                 </a>
             </div>
             <div>
-                <a href="/products/3179732326911">
+                <a href="/library">
                     <img class="img_nav" src="{{ url_for('static', path='img/nav_mobile/book.png') }}" alt="library">
                 </a>
             </div>

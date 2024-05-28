@@ -1,85 +1,246 @@
-:root{
-    --width_nav: 180px;
-}
 
 
-*{  padding: 0;
-    margin: 0;
-    -webkit-box-sizing:border-box ;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-}
-
-body{
-    background-color: white;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
-
-#container{
-    display: grid;
-    grid-template-rows: auto auto auto;
-    width: 90%;
-    height: 100%;
-    margin: auto;  
-    
-}
-
-h1,h2,h3,h4,h5,p{
-    color:black
-}
+/*================== Home ===========================*/
 
 
-
-/*==================================== NAV ============================================================*/
-
-
-        
-
-/*==================================== PROFILE.HTML ============================================================*/
-
-#presentation_users{
-    margin: 30px 0 30px 30px;
+#container_user{
     width: 80%;
-    margin: auto;
+    max-width: 600px;
+    min-width: 300px;
+    height: auto;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 100px;
+
 }
-    #title_info_user{
-        margin-left: 20px;
+
+    #container_user div{
+        width: 100%;
+        padding: 5px;
     }
 
-    #container_data_user{
-        border: 1px solid black;
-        border-radius: 10px;
-        padding: 20px;
+
+
+ /* Point Resser */   
+
+    #container_point_resser{
+        height: 120px;
+        width: 50%;
+        max-width: 200px;
+        box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px;
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
-        width: 100%;    
+        justify-content: start;
+        margin-bottom: 15px;
     }
-        .data_user{
-            display: flex;
-            flex-direction: column;  
+        .number_point{
+            font-size: 6rem;
+            align-self: flex-end;
+        }
+        .text_point{
+            align-self: flex-end;
+            font-size: 1.2rem;
         }
 
-        .container_button{
-            height: 40px;
-            width: 200px;
+
+/* Enterprise */
+
+    #organizations_recycle{
+        height: 200px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+        #organizations_recycle p{
+            font-size: 1.4rem;
         }
-            .button_update{
+
+
+
+/* Partners */
+
+    #partners{
+        height: 200px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+        #partners p{
+            font-size: 1.4rem;
+        }
+
+        .slideshow{
+            width: 90%;
+            height: 150px;
+            margin: auto;
+            overflow: hidden;
+            
+        }
+            .slider_partners{
+                display:flex;
+                padding: 0px;
                 width: 100%;
-                height: 100%;
-                background-color:rgba(7, 41, 41, 0.9);
-                border-radius: 7px;
             }
-                .button_update a{
-                    text-decoration: none;
-                    color: white;
-                    font-family:Verdana, Geneva, Tahoma, sans-serif;
-                    font-size: 1.2em;
+                .slider_partners li{
+                    list-style: none;
+                    width: 100%;
+                    background-color: #FFFF;
+                    padding: 0px 5px;
                 }
-                .button_update:hover{
-                    background-color:rgb(7, 41, 41, 1);
-                    border: 1px solid black;
+                    .slider_partners li img{
+                        width: 100%;
+                        height: 150px;
+                        object-fit: contain;
+                    }
+            .slider_enterprise{
+                display:flex;
+                padding: 0px;
+                width: 100%;
+            }
+                .slider_enterprise li{
+                    list-style: none;
+                    width: 100%;
+                    background-color: #FFFF;
+                    padding: 0px 5px;
+                }
+                    .slider_enterprise li img{
+                        width: 100%;
+                        height: 150px;
+                        object-fit: contain;
+                    }                    
+
+        .direcciones_partners{
+            display: none;
+        }
+
+        .direcciones_enterprise{
+            display: none;
+        }
+
+
+/*================== Recycling Point ===========================*/
+
+    #title_point_recycle{
+        display: flex;
+        justify-content: center;
+    }
+        #title_point_recycle h3{
+            text-align: center;
+        }
+
+    #img_point_recycle{
+        display: flex;
+        justify-content: center;
+    }
+        #img_point_recycle img{
+            height: auto;
+            width: 100%;
+            max-width: 350px;
+            min-width: 300px;
+            border-radius: 20px;
+        }
+    
+    #content_point_recycle{
+        height: auto;
+        width: 100%;
+        max-width: 350px;
+        min-width: 250px;
+    }
+        #content_point_recycle p{
+            text-align: center;
+        }
+
+        .elements_form{
+            width: 100%;
+            max-width: 350px;
+            min-width: 250px;
+            height: 50px;
+            padding: 5px;
+            overflow: hidden;
+        }
+            .elements_form button{
+                height: 40px;
+                width: 100%;
+                border-radius: 7px;
+                color: white;
+                background-color:#228B22;
+                border: 1px solid #003366;
+                font-family: 'Segoe UI', 'Open Sans', 'Helvetica Neue', sans-serif;
+                font-size: 1.1em;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+                .elements_form button a{
+                    color: white;
+                    text-decoration: none;
+                    width: inherit;
+                    display: block;
+                    
                 }
 
+
+    #title_action_1{
+        display: flex;
+        justify-content: center;
+    }      
+ 
+/*================== Shopping ===========================*/    
+
+    .shopping{
+        width: 100%;
+        max-width: 450px;
+        height: 160px;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+        display: grid;
+        grid-template-columns: 2fr 2fr 30px;
+        border-radius: 10px;
+    }
+        .img_shopping{
+           display: flex;
+           justify-content: center;
+           align-items: center;
+          
+        }    
+            .img_shopping img{
+                height: 150px;
+                width: inherit;
+                object-fit: contain;
+            }
+        .text_shopping{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+            .text_shopping p{
+                font-size: 0.9rem;
+            }
+        .buttom_shopping{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+        }
+            .buttom_shopping a{
+                display: inline-block;
+                padding: 20px;
+                text-decoration: none;
+                font-size: 30px;
+                opacity: 0.7;
+                transition: .5s;
+                color: #003366;
+            }
+
+
+
+/*================== Libraries ===========================*/    
+
+    #library{
+        height: 100px;
+        background-color: aquamarine;
+    }

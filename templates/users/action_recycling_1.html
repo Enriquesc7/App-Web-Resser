@@ -1,0 +1,36 @@
+{% extends "users/base_user.html" %} 
+
+{% block title %} 
+<title>Recycling Waste</title>
+{% endblock %}
+
+
+{% block content %} 
+
+<div id="container_user">
+                
+    <div id="title_point_recycle">
+        <h3>
+            <strong>Escanea el código QR del contenedor para continuar</strong>
+        </h3>
+    </div>
+
+    <div id="img_point_recycle" > 
+        <img style="width: 80%;" src="{{ url_for('static', path='img/qr_resser.png') }}">
+    </div>
+    <div id="content_point_recycle">
+        <p style="padding-bottom: 10px;">8 Rue Bastien-Lepage, 54000 Nancy - ENSGSI  <img style="width: 10px; display: inline; color: red;"  src="{{ url_for('static', path='img/gps.png') }}" alt="gps"></p>
+        
+        
+        <div class="elements_form">
+            <button type="button"><a href="#">Escanear QR</a></button>
+        </div>
+        <div class="elements_form">
+            <button type="button"><a href="#">Como llegar</a></button>
+        </div>
+    </div>
+        
+</div>
+
+
+{% endblock %}

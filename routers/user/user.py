@@ -39,7 +39,7 @@ router = APIRouter(
     summary = "Form Register",
     tags= ["User"]
 )
-async def profile(
+async def started(
     request: Request    
 ):
     return templates.TemplateResponse(
@@ -55,13 +55,9 @@ async def profile(
     summary = "Form Register",
     tags= ["User"]
 )
-async def profile(
+async def started(
     request: Request    
 ):
-    
-    
-    
-    
     return templates.TemplateResponse(
         "users/welcome/collect_data.html",{"request":request})
 
@@ -76,7 +72,7 @@ async def profile(
     summary = "Welcome 1",
     tags= ["User"]
 )
-async def profile(
+async def welcome_1(
     request: Request    
 ):
     return templates.TemplateResponse(
@@ -91,7 +87,7 @@ async def profile(
     summary = "Welcome 2",
     tags= ["User"]
 )
-async def profile(
+async def welcome_2(
     request: Request    
 ):
     return templates.TemplateResponse(
@@ -106,7 +102,7 @@ async def profile(
     summary = "Welcome 3",
     tags= ["User"]
 )
-async def profile(
+async def welcome_3(
     request: Request    
 ):
     return templates.TemplateResponse(
@@ -122,7 +118,7 @@ async def profile(
     summary = "Welcome 4",
     tags= ["User"]
 )
-async def profile(
+async def welcome_4(
     request: Request    
 ):
     return templates.TemplateResponse(
@@ -139,7 +135,7 @@ async def profile(
     summary = "Welcome 5",
     tags= ["User"]
 )
-async def profile(
+async def welcome_5(
     request: Request    
 ):
     return templates.TemplateResponse(
@@ -156,7 +152,7 @@ async def profile(
     summary = "Welcome 6",
     tags= ["User"]
 )
-async def profile(
+async def welcome_6(
     request: Request    
 ):
     return templates.TemplateResponse(
@@ -164,23 +160,8 @@ async def profile(
 
 
 
+#================= Go to Home ==================
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-#========================= Go to User Profile ===============================
-
-### Show profile - /profile
 @router.get(
     path = "/home",
     response_model = user.User,
@@ -189,31 +170,117 @@ async def profile(
     summary = "Home",
     tags= ["User"]
 )
-async def profile(
+async def home(
     request: Request 
 ):
     return templates.TemplateResponse(
         "users/profile.html", {"request":request})
 
 
+#================= Go to Recycling Point ==================
 
+# Ir a la sección de puntos de reciclaje
 @router.get(
-    path = "/escanear",
+    path = "/recycling_point",
     response_model = user.User,
     response_class= HTMLResponse, 
     status_code = status.HTTP_200_OK,
-    summary = "Home",
+    summary = "Recycling Point",
     tags= ["User"]
 )
-async def profile(
+async def recycling_point(
     request: Request 
 ):
-    
-    
-
-
     return templates.TemplateResponse(
-        "users/escanear.html", {"request":request})
+        "users/recycling_point.html", {"request":request})
+
+
+# Ir al punto de collecta más cercano
+@router.get(
+    path = "/point_collector",
+    response_model = user.User,
+    response_class= HTMLResponse, 
+    status_code = status.HTTP_200_OK,
+    summary = "Find Point Collect",
+    tags= ["User"]
+)
+async def recycling_point(
+    request: Request 
+):
+    return templates.TemplateResponse(
+        "users/point_collector.html", {"request":request})
+
+
+# Primera interacción para reciclar
+@router.get(
+    path = "/action_recycling_1",
+    response_model = user.User,
+    response_class= HTMLResponse, 
+    status_code = status.HTTP_200_OK,
+    summary = "Find Point Collect",
+    tags= ["User"]
+)
+async def recycling_point(
+    request: Request 
+):
+    return templates.TemplateResponse(
+        "users/action_recycling_1.html", {"request":request})
+
+
+#================= Go to Shopping ==================
+
+@router.get(
+    path = "/shopping",
+    response_model = user.User,
+    response_class= HTMLResponse, 
+    status_code = status.HTTP_200_OK,
+    summary = "Section Shopping",
+    tags= ["User"]
+)
+async def shopping(
+    request: Request 
+):
+    return templates.TemplateResponse(
+        "users/shopping.html", {"request":request})
+
+
+
+#================= Go to Libraries ==================
+
+@router.get(
+    path = "/library",
+    response_model = user.User,
+    response_class= HTMLResponse, 
+    status_code = status.HTTP_200_OK,
+    summary = "Section Libraries",
+    tags= ["User"]
+)
+async def shopping(
+    request: Request 
+):
+    return templates.TemplateResponse(
+        "users/library.html", {"request":request})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
