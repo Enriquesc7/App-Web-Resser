@@ -79,7 +79,7 @@ async def products_user(
 
 # Mostramos la información específica del producto
 @router.get(
-    path = "/products/3179732326911",
+    path = "/products/{bar_code}",
     response_model = user.User,
     status_code = status.HTTP_200_OK,
     summary = "Show information about product",
@@ -87,98 +87,18 @@ async def products_user(
 )
 async def info_product(
     request: Request,
+    db: Session = Depends(get_db),
+    bar_code: str = Path()
 ):
+    # Cargamos la información del archivo
+    with open('data/open_food-big.json', 'r', encoding='utf-8') as f:
+        products = json.load(f)
 
-    f ={
-    "url": "https://fr.openfoodfacts.org/produit/3179732326911/eau-vittel",
-    "basic_data": {
-        "title": "Eau Vittel - 1 l",
-        "bar_code": "3179732326911",
-        "image": "https://images.openfoodfacts.org/images/products/317/973/232/6911/front_fr.22.400.jpg",
-        "generic_name": 'null',
-        "quantity": "1 l",
-        "packaging": [
-            "Plastique"
-        ],
-        "brands": "Vittel",
-        "categories": [
-            "Boissons et préparations de boissons",
-            "Boissons",
-            "Eaux",
-            "Eaux de sources",
-            "Eaux minérales",
-            "Boissons sans sucre ajouté",
-            "Eaux minérales naturelles"
-        ],
-        "labels": {
-            "name": [],
-            "image": 'null'
-        },
-        "manufacturing": [],
-        "countries": [
-            "France"
-        ]
-    },
-    "nutritional_data": {
-        "nutriscore": {
-            "image": "https://static.openfoodfacts.org/images/attributes/dist/nutriscore-a.svg",
-            "grade": "Nutri-Score A",
-            "content": "Très bonne qualité nutritionnelle"
-        },
-        "nova": {
-            "image": "https://static.openfoodfacts.org/images/attributes/dist/nova-group-1.svg",
-            "grade": "NOVA 1",
-            "content": "Aliments non transformés ou minimalement transformés"
-        }
-    },
-    "environment_data": {
-        "ecoscore": {
-            "image": "https://static.openfoodfacts.org/images/attributes/dist/ecoscore-not-applicable.svg",
-            "grade": "\n                \n                Eco-Score n'est pas encore applicable\n            ",
-            "content": "Pas encore applicable pour la catégorie : Eaux"
-        },
-        "packaging": {
-            "image": "https://static.openfoodfacts.org/images/icons/dist/packaging.svg",
-            "image_label": 'null',
-            "content": "\n                \n                Emballage à impact moyen\n            ",
-            "materials": {
-                "columns": [
-                    "\n                    Matière\n                ",
-                    "\n                    %\n                ",
-                    "\n                    Poids de l'emballage\n                ",
-                    "\n                    Poids de l'emballage pour 100 g de produit\n                "
-                ],
-                "rows": [
-                    "\n            Plastique\n        ",
-                    "\n            \n        ",
-                    "\n            \n        ",
-                    "\n            \n        "
-                ]
-            }
-        },
-        "transport": {
-            "image": "https://static.openfoodfacts.org/images/icons/dist/public.svg",
-            "title_image": "\n                \n                Origines des ingrédients\n            ",
-            "content": "Origines des ingrédients ayant un faible impact",
-            "origins_table": {
-                "columns": [
-                    "\n                    Origine du produit et/ou de ses ingrédients\n                ",
-                    "\n                    % d'ingrédients\n                ",
-                    "\n                    Impact\n                "
-                ],
-                "rows": []
-            }
-        }
-    }
-}
-
-
-    product = f
-
-    
+    # Identificamos el producto que queremos mostrar dado el código de barras
+    product = next((product for product in products if product['basic_data']['bar_code'] == bar_code) , None)
     
     return templates.TemplateResponse(
-        "users/info_product.html",
+        "users/products/info_product.html",
         {"request":request,
         'product': product})
 
