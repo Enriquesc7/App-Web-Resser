@@ -129,7 +129,7 @@ async def product_lookup(
     
     print('Vemos si esta el producto:', product)
 
-    message = "Este producto aún no se encuentra en nuestra base de datos. Lamentamos el inconveniente."
+    message = "Ce produit ne se trouve pas encore dans notre base de données. Nous nous excusons pour le désagrément."
 
 
     if product is None:

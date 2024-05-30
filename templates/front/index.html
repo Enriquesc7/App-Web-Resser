@@ -49,7 +49,7 @@
             </div>
             <div id="welcome_button">
                 <div>
-                    <a href="/started"><button type="button">Test App</button></a>
+                    <a href="/welcome_1"><button type="button">Test App</button></a>
                 </div>
                 
             </div>
@@ -62,11 +62,21 @@
 
             <div class="slideshow">
                 <ul class="slider">
-                    {% for img in img_slider %}
                     <li>
-                        <img src="{{ url_for('static', path=img['path_img_slide']) }}">
+                        <img src="{{ url_for('static', path='img/partners/img_lorraine.png') }}">
                     </li>
-                    {% endfor %}
+                    <li>
+                        <img src="{{ url_for('static', path='img/partners/img_erpi.png') }}">
+                    </li>
+                    <li>
+                        <img src="{{ url_for('static', path='img/partners/foire.jpg') }}">
+                    </li>
+                    <li>
+                        <img src="{{ url_for('static', path='img/partners/img_ensgsi.png') }}">
+                    </li>
+                    <li>
+                        <img src="{{ url_for('static', path='img/partners/img_usach.jpg') }}">
+                    </li>
                 </ul>
             </div>
             <div class="direcciones">

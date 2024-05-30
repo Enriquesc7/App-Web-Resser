@@ -71,7 +71,7 @@ $(document).ready(function() {
             <div class="container_header">
                 <div class="logo">
                     <a href="/">
-                        <img src="{{ url_for('static', path='img/base/logo_resser.png') }}" alt="Logo app">
+                        <img src="{{ url_for('static', path='img/base/resser-logo.png') }}" alt="Logo app">
                     </a>
                 </div>
                 
@@ -81,7 +81,7 @@ $(document).ready(function() {
                             <ul id="element_nav">
                                 <li class="{% if request['path'] == '/' %}active{% endif %}"><a href="/"><p>Accueil</p></a></li>
                                 <li class="{% if request['path'] == '/para-ti' %}active{% endif %}"><a href="#"><p>Pour vous</p></a></li>
-                                <li class="{% if request['path'] == '/nostros' %}active{% endif %} test_app"><a href="/started"><p>Test App</p></a></li>
+                                <li class="{% if request['path'] == '/nostros' %}active{% endif %} test_app"><a href="/welcome_1"><p>Test App</p></a></li>
                             </ul>
                         </div>
                         
@@ -96,7 +96,7 @@ $(document).ready(function() {
             <ul id="element_nav_burger">
                 <li class="{% if request['path'] == '/' %}active{% endif %}"><a href="/"><p>Accueil</p></a></li>
                 <li class="{% if request['path'] == '/para-ti' %}active{% endif %}"><a href="#"><p>Pour vous</p></a></li>
-                <li class="{% if request['path'] == '/nostros' %}active{% endif %} test_app"><a href="/started"><p>Test App</p></a></li>
+                <li class="{% if request['path'] == '/nostros' %}active{% endif %} test_app"><a href="/welcome_1"><p>Test App</p></a></li>
             </ul>
         </header>
 

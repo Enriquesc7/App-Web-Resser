@@ -127,7 +127,7 @@
         display: flex;
         justify-content: center;
     }
-        #title_point_recycle h3{
+        #title_point_recycle h2{
             text-align: center;
         }
 
@@ -190,6 +190,14 @@
     }      
  
 /*================== Shopping ===========================*/    
+
+    #title_shopping{
+        display: flex;
+        justify-content: center;
+    }
+        #title_shopping h2{
+            text-align: center;
+        }
 
     .shopping{
         width: 100%;
