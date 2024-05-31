@@ -53,7 +53,7 @@ async def products_user(
     page: int = 1,
     limit: int = 50
 ):
-    with open('data/open_food-big.json', 'r', encoding='utf-8') as f:
+    with open('data/total_unique_products.json', 'r', encoding='utf-8') as f:
         products = json.load(f)
 
     total_products = len(products)
@@ -91,7 +91,7 @@ async def info_product(
     bar_code: str = Path()
 ):
     # Cargamos la información del archivo
-    with open('data/open_food-big.json', 'r', encoding='utf-8') as f:
+    with open('data/total_unique_products.json', 'r', encoding='utf-8') as f:
         products = json.load(f)
 
     # Identificamos el producto que queremos mostrar dado el código de barras
@@ -118,7 +118,7 @@ async def product_lookup(
     db: Session = Depends(get_db)
 ):
     # Cargamos la información del archivo
-    with open('data/open_food-big.json', 'r', encoding='utf-8') as f:
+    with open('data/total_unique_products.json', 'r', encoding='utf-8') as f:
         products = json.load(f)
 
     #Mostramos el valor por consola

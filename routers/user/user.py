@@ -227,6 +227,40 @@ async def recycling_point(
         "users/action_recycling_1.html", {"request":request})
 
 
+
+# Ganando puntos por reciclar
+@router.get(
+    path = "/win_resser_point",
+    response_model = user.User,
+    response_class= HTMLResponse, 
+    status_code = status.HTTP_200_OK,
+    summary = "Win Resser Point",
+    tags= ["User"]
+)
+async def win_resser_point(
+    request: Request 
+):
+    return templates.TemplateResponse(
+        "users/resser_point.html", {"request":request})
+
+
+
+# Ganando puntos por reciclar
+@router.get(
+    path = "/resser",
+    response_model = user.User,
+    response_class= HTMLResponse, 
+    status_code = status.HTTP_200_OK,
+    summary = "Win Resser Point",
+    tags= ["User"]
+)
+async def resser(
+    request: Request 
+):
+    return templates.TemplateResponse(
+        "users/resser.html", {"request":request})
+
+
 #================= Go to Shopping ==================
 
 @router.get(

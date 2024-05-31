@@ -302,7 +302,7 @@ h1,h2,h3,h4,h5,p{
     /* Your Css Styles for size between 600px and 900px */
     
     #header{
-        top: -145px;
+        top: -240px;
     }
     
     .logo{
@@ -343,6 +343,6 @@ h1,h2,h3,h4,h5,p{
 @media only screen and (min-width: 900px){
     /* Your Css Styles for size larger than 600px */
     #header{
-        top: -145px;
+        top: -200px;
     }
 }

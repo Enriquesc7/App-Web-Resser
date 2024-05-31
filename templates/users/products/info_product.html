@@ -6,14 +6,16 @@
 
 
 {% block content %} 
-    <section id="container_product">
+<section id="container_product">
+
+    <div id="container_basic_info">
         
-        <div id="img_product">
-            <img src="{{product['basic_data']['image']}}" alt="img_product">
-        </div>
-        <div id="data_product">
-            <h2>{{product['basic_data']['title']}}</h2>
-            <br>
+        
+        <div id="container_img">
+            <div id="img_product">
+                <img src="{{product['basic_data']['image']}}" alt="img_product">
+            </div>
+
             <div id="container_logos">
                 <div class="score_logo">
                     <img src="{{product['environment_data']['ecoscore']['image']}}" alt="img_ecoscore">
@@ -25,33 +27,56 @@
                     <img src="{{product['nutritional_data']['nutriscore']['image']}}" alt="img_nutriscore">
                 </div>
             </div>
-            <div id="emballage">
-                <h3>Emballage</h3>
-                <div id="content_emballage">
-                    <div id="impact_emballage">
-                        <img src="{{product['environment_data']['packaging']['image']}}" alt="img_packaging">
-                        <p>{{product['environment_data']['packaging']['content']}}</p>
-                    </div>
-                    <div>
-                        <img src="{{product['environment_data']['packaging']['image_label']}}" alt="img_label_packaging">
-                    </div>
+        </div>
+
+        <div id="data_product">
+            
+            <h2>{{product['basic_data']['title']}}</h2>
+            
+            
+            <div id="impact_emballage">
+                <img src="{{product['environment_data']['packaging']['image']}}" alt="img_packaging">
+                <p>{{product['environment_data']['packaging']['content']}}</p>
+            </div>
+                        
+            <div id="component_emballage">
+                <img src="{{ url_for('static', path='img/logo_tri.png') }}" alt="img_packaging">
+                <div>
+                    {% for item in product['environment_data']['packaging']['element_emballage'] %}
+                    <p> {{item}} </p>
+                    {% endfor %}
                 </div>
             </div>
-            <div id="materials">
-                <h3>Matériaux d'emballage</h3>
-                <div>
-                    <section class="section_table">
-                        <table class="table" id="table_user">
-                            <thead>
-                                <tr>
+
+            <div id="button_recycler">
+                <button><a href="/point_collector">recycler</a></button>
+            </div>
+
+        </div>
+    </div>    
+
+    <div id="container_especific_info">
+
+        <div id="materials">
+            <h3>Matériaux d'emballage</h3>
+            <div>
+                <section class="section_table">
+                    <table class="table" id="table_user">
+                        <thead>
+                            <tr>
+                            {% if product['environment_data']['packaging']['materials'] is defined and 
+                                  product['environment_data']['packaging']['materials']['columns'] is defined %}
                                 {% for column in product['environment_data']['packaging']['materials']['columns'] %}
-                                    <th>{{column}}</th>
+                                    <th>{{ column }}</th>
                                 {% endfor %}
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% set columns_count = product['environment_data']['packaging']['materials']['columns']|length %}
-                                {% set row_count = product['environment_data']['packaging']['materials']['rows']|length %}
+                            {% endif %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% set columns_count = product['environment_data']['packaging']['materials']['columns']|length if product['environment_data']['packaging']['materials'] is defined and product['environment_data']['packaging']['materials']['columns'] is defined else 0 %}
+                            {% set row_count = product['environment_data']['packaging']['materials']['rows']|length if product['environment_data']['packaging']['materials'] is defined and product['environment_data']['packaging']['materials']['rows'] is defined else 0 %}
+                            
+                            {% if columns_count > 0 and row_count > 0 %}
                                 {% for i in range(0, row_count, columns_count) %}
                                     <tr>
                                         {% for j in range(columns_count) %}
@@ -63,25 +88,30 @@
                                         {% endfor %}
                                     </tr>
                                 {% endfor %}
-                            </tbody> 
-                        </table>
-                    </section>
-                </div>
+                            {% else %}
+                                <tr>
+                                    <td colspan="{{ columns_count }}">Informations non disponibles pour le moment</td>
+                                </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </section>
             </div>
+        </div>
+        <div id="container_transport">
+            <h3>Transport</h3>
             <div id="transport">
-                <h3>Transport</h3>
-                <div>
-                    <img src="{{product['environment_data']['transport']['image']}}" alt="img_packaging">
+                <img src="{{product['environment_data']['transport']['image']}}" alt="img_packaging">
 
-                    <p>{{product['environment_data']['transport']['content']}}</p>
-                </div>
+                <p>{{product['environment_data']['transport']['content']}}</p>
             </div>
-
         </div>
 
+    </div>
 
-        
-    </section>
+
+    
+</section>
 
 
 {% endblock %}

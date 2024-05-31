@@ -37,13 +37,13 @@ $(document).ready(function() {
     $("#container_icon_menu").click(function(){
         if ($("#header").hasClass("active")) {
             $("#header").stop().animate({
-                top: "-145px"
+                top: "-250px"
             }, 600, "easeInSine").removeClass("active");
             $("#element_nav_burger").slideUp(400, "easeInSine");
             $("#icon_menu").attr("src", "{{ url_for('static', path='img/front/icon_menu.png') }}"); // Cambia a icono de menú
         } else {
             $("#header").stop().animate({
-                top: "-50px"
+                top: "-150px"
             }, 400, "easeInSine").addClass("active");  // easeOutBounce
             $("#element_nav_burger").slideDown(600, "easeInSine");
             $("#icon_menu").attr("src", "{{ url_for('static', path='img/front/icon_close.png') }}"); // Cambia a icono de cerrar
@@ -192,7 +192,7 @@ $(document).ready(function() {
             multiple: false
         },
         locate: true,
-        frequency: 10 // Añadir un pequeño retardo para mejorar la precisión
+        frequency: 5 // Añadir un pequeño retardo para mejorar la precisión
     };
 
     Quagga.init(quaggaConf, function (err) {

@@ -8,8 +8,8 @@
     {% endblock %}
     
 
-    
     <link rel="stylesheet" href="{{ url_for('static', path='/css/user/style_welcome.css') }}">
+
 
     <!-- Iconos -->
     <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script> 
@@ -30,35 +30,53 @@ $(document).ready(function() {
 })
 </script>
 
+<style>
+
+#container_resser{
+    width: 80%;
+    display: flex;
+    margin: auto;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+    .container_img_resser{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+        .container_img_resser a{
+            height: 100vh;
+            display: flex;
+            flex-direction: row;
+            justify-items: center;
+            align-items: center;
+        }
+
+            .container_img_resser a img{
+                width: 100%;
+                max-width: 400px;
+                min-width: 280px;
+            }
+
+
+</style>
+
+
 </head>
 <!--  style="width: 500px; height: 700px; background-color: aqua; margin: auto;"     -->
 <body id="body_welcome">
-<div id="container_global">
 
+<div id="container_resser">
 
-    <div id="container">
-
-        <div id="title_welcome">
-            <h2 style="text-align: center;">
-                <strong>Scannez vos produits</strong>
-            </h2>
-        </div>
-
-        <div class="container_img_welcome">
-            <img src="{{ url_for('static', path='/img/welcome/escanear_codigo.png')}}" style="width: 350px;" alt="scanner_bar_code">
-        </div>
-
-        <div class="container_info_welcome">
-            <p>Obtenez des informations détaillées sur le type de matériau de l'emballage et comment le recycler correctement. Il vous suffit de scanner le code-barres avec la caméra de votre téléphone.</p>
-        </div>
-
-        <div class="elements_form position_welcome">
-            <button type="button"><a href="/welcome_2">Suivant</a></button>
-        </div>
-
+    <div class="container_img_resser">
+        <a href="home"><img src="{{ url_for('static', path='/img/base/resser-logo.png')}}" alt="resser_points"></a>
     </div>
-
-
+     
 </div>
+
 </body> 
 </html>

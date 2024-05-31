@@ -10,20 +10,23 @@
 <div id="container_user">
                 
     <div id="title_point_recycle">
-        <h3>
+        <h3 style="text-align: center;">
             <strong>Scannez le code QR du conteneur pour continuer</strong>
         </h3>
     </div>
 
     <div id="img_point_recycle" > 
-        <img style="width: 80%;" src="{{ url_for('static', path='img/qr_resser.png') }}">
+        <img style="width: 80%;" src="{{ url_for('static', path='img/scanner_basurero.png') }}">
     </div>
+    <br>
     <div id="content_point_recycle">
-        <p style="padding-bottom: 10px;">8 Rue Bastien-Lepage, 54000 Nancy - ENSGSI  <img style="width: 10px; display: inline; color: red;"  src="{{ url_for('static', path='img/gps.png') }}" alt="gps"></p>
+        <p style="padding-bottom: 10px;">Parc Expo de Nancy • 12 route de Mirecourt
+            54500 Vandœuvre-lès-Nancy  <img style="width: 10px; display: inline; color: red;"  src="{{ url_for('static', path='img/gps.png') }}" alt="gps">
+        </p>
         
-        
+        <br>
         <div class="elements_form">
-            <button type="button"><a href="#">Scanner le QR</a></button>
+            <button type="button"><a href="/win_resser_point">Scanner le QR</a></button>
         </div>
         <div class="elements_form">
             <button type="button"><a href="#">Comment y arriver</a></button>
