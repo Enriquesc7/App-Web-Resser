@@ -77,8 +77,8 @@ h1,h2,h3,h4,h5,p{
 }
 
 .logo a img {
-    width: 137px;
-    height: 45px;
+    width: 142px;
+    height: 70px;
 }
 
 .section_barra_nav {
@@ -169,8 +169,8 @@ h1,h2,h3,h4,h5,p{
         padding: 7px 0px;
     }
         #container_icon_menu img{
-            width: 20px;
-            height: 20px;
+            width: 30px;
+            height: 30px;
             gap: 10px;
         }
 
@@ -221,7 +221,7 @@ h1,h2,h3,h4,h5,p{
 
 #section_nav_mobile{
     width: 100%;
-    height: 50px;
+    height: 100px;
     position: fixed;
     bottom: 0px;
     box-shadow: 0 -4px 8px -2px rgba(0, 0, 0, 0.2);
@@ -243,8 +243,8 @@ h1,h2,h3,h4,h5,p{
     }
 
         .img_nav{
-            width: 25px;
-            height: 25px;
+            width: 34px;
+            height: 34px;
         }
 
 
@@ -302,7 +302,7 @@ h1,h2,h3,h4,h5,p{
     /* Your Css Styles for size between 600px and 900px */
     
     #header{
-        top: -240px;
+        top: -280px;
     }
     
     .logo{
@@ -341,8 +341,40 @@ h1,h2,h3,h4,h5,p{
 
 
 @media only screen and (min-width: 900px){
-    /* Your Css Styles for size larger than 600px */
     #header{
-        top: -200px;
+        top: -310px;
     }
+    
+    .logo{
+        top: 165px;
+    }
+        .logo a img{
+            width: 120px;
+            height: 40px;
+        }
+
+    .container_header{
+        padding: 0px 70px;
+    }
+
+    .section_barra_nav{
+        padding: 20px 0px 7px 0px;
+        right: 0px;
+        top: 150px;
+    }
+
+        #container_icon_menu{
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }   
+        #container_icon_menu h3{
+            font-size: 1.2rem;
+            height: 30px;
+        }        
+
+        nav{
+            display: none;
+        }
+
 }

@@ -48,6 +48,7 @@ h1,h2,h3,h4,h5,p{
                 width: 100%;
             }
                 #img_product img{
+                    max-width: 200px;
                     width: 100%; 
                     height: auto;
                     border-radius: 5px;
@@ -80,7 +81,7 @@ h1,h2,h3,h4,h5,p{
             gap: 10px;
         }
             #data_product h2{
-                font-size: 1.1rem;
+                font-size: 1.7rem;
                 text-align: center;
                 padding: 5px;
                 margin-bottom: 10px;
@@ -104,7 +105,7 @@ h1,h2,h3,h4,h5,p{
                 }
                 #impact_emballage p{
                     width: 70%;
-                    font-size: 0.8rem;
+                    font-size: 1.2rem;
                     padding: 5px;
                     text-align: center;
                 }
@@ -127,7 +128,7 @@ h1,h2,h3,h4,h5,p{
                 }
                     #component_emballage div p{
                         width: 100%;
-                        font-size: 0.7rem;
+                        font-size: 1.2rem;
                         text-align: center;
                         padding: 5px;
                     }
@@ -142,7 +143,7 @@ h1,h2,h3,h4,h5,p{
             }
                 #button_recycler button{
                     height: 100%;
-                    max-width: 350px;
+                    max-width: 400px;
                     min-width: 180px;
                     padding: 5px;
                     border-radius: 7px;
@@ -174,7 +175,7 @@ h1,h2,h3,h4,h5,p{
     }
 
             #materials h3{
-                font-size: 1rem;
+                font-size: 1.7rem;
             }
 
         #container_transport{
@@ -184,7 +185,7 @@ h1,h2,h3,h4,h5,p{
             gap: 10px;
         }
             #container_transport h3{
-                font-size: 1rem;
+                font-size: 1.7rem;
             }
 
             #transport{
@@ -198,6 +199,7 @@ h1,h2,h3,h4,h5,p{
             }
                 #transport img{
                     width: 30% ;
+                    max-width: 150px;
                     border-radius: 60%;
                     background-color: greenyellow;
                     -webkit-mask-size: cover;
@@ -205,7 +207,7 @@ h1,h2,h3,h4,h5,p{
                 }
                 #transport p{
                     width: 70%;
-                    font-size: 0.8rem;
+                    font-size: 1.2rem;
                     text-align: center;
                 }
 
@@ -230,7 +232,7 @@ h1,h2,h3,h4,h5,p{
 }
 
 caption{
-    font-size: 0.8rem;
+    font-size: 1.1rem;
     font-weight: bold;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     padding-bottom: 5px;
@@ -245,10 +247,10 @@ caption{
     .table td, .table th{
         border: solid 1px #ccc;
         padding: 5px;
-        font-size: 0.8rem;
+        font-size: 1rem;
     }
     .table th{
-        font-size: 0.8rem;
+        font-size: 1rem;
     }
         .table tr:nth-child(even){
             background-color: #eee;
