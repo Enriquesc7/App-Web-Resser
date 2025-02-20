@@ -8,6 +8,7 @@ h1,h2,h3,h4,h5,p{
 
 #container_product{
     display: flex;
+<<<<<<< HEAD
     flex-direction: row;
     justify-content: space-between;
     margin: auto;
@@ -117,6 +118,220 @@ h1,h2,h3,h4,h5,p{
                     }
 
 
+=======
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 900px;
+    min-width: 300px;
+    gap: 10px;
+    margin-bottom: 100px;
+}
+
+
+    #container_basic_info{
+        display: flex;
+        flex-direction: row;
+        width: 90%;
+        height: auto;
+        padding: 20px;
+        gap: 10px;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+    }
+
+
+        #container_img{
+            display: flex;
+            flex-direction: column;
+            width: 40%;
+            height: auto;
+            padding-top: 10px;
+            gap: 20px;
+            border-right: solid 1px #ccc;
+            padding: 10px;
+        }
+
+
+            #img_product{
+                display: flex;
+                justify-content: center;
+                align-items: start;
+                width: 100%;
+            }
+                #img_product img{
+                    max-width: 200px;
+                    width: 100%; 
+                    height: auto;
+                    border-radius: 5px;
+                    object-fit: contain;
+                }
+
+            #container_logos{
+                display: flex;
+                flex-direction: row;
+                width: 100%;
+                justify-content: space-around;
+                align-items: center;
+            }
+                #container_logos div{
+                    width: 30%;
+                }
+                    #container_logos div img{
+                        width: 100%;
+                        max-height: 50px;
+                        height: auto;
+                        object-fit: contain;
+                        
+                    }
+
+
+        #data_product{
+            width: 60%;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+            #data_product h2{
+                font-size: 1.7rem;
+                text-align: center;
+                padding: 5px;
+                margin-bottom: 10px;
+            }
+
+            #impact_emballage{
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                background-color: #FFFF;   
+            }
+                #impact_emballage img{
+                    width: 30%;
+                    max-width: 100px;
+                    min-width: 30px;
+                    border-radius: 5px;
+                    background-color: orange;
+                    -webkit-mask-size: cover;
+                    mask-size: cover;
+                }
+                #impact_emballage p{
+                    width: 70%;
+                    font-size: 1.2rem;
+                    padding: 5px;
+                    text-align: center;
+                }
+
+            #component_emballage{
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                background-color: #FFFF; 
+            }
+                #component_emballage img{
+                    width: 30%;
+                    max-width: 100px;
+                    min-width: 30px;
+                    border-radius: 5px;
+                }
+                #component_emballage div{
+                    width: 70%;
+                }
+                    #component_emballage div p{
+                        width: 100%;
+                        font-size: 1.2rem;
+                        text-align: center;
+                        padding: 5px;
+                    }
+
+
+
+            #button_recycler{
+                width: 100%;
+                height: 40px;
+                display: flex;
+                justify-content: center;
+            }
+                #button_recycler button{
+                    height: 100%;
+                    max-width: 400px;
+                    min-width: 180px;
+                    padding: 5px;
+                    border-radius: 7px;
+                    background-color:#228B22;
+                    border: 1px solid #003366;
+                    font-family: 'Segoe UI', 'Open Sans', 'Helvetica Neue', sans-serif;
+                    font-size: 1.1em;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+                    #button_recycler button a{
+                        text-decoration: none;
+                        color: white;
+                        display: block;
+                        width: 100%;
+                        height: 100%;
+                    }
+
+
+    #container_especific_info{
+        display: flex;
+        flex-direction: column;
+        width: 90%;
+        height: auto;
+        gap: 10px;
+        padding: 20px;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+    }
+
+            #materials h3{
+                font-size: 1.7rem;
+            }
+
+        #container_transport{
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+            #container_transport h3{
+                font-size: 1.7rem;
+            }
+
+            #transport{
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                gap: 10px;
+                padding: 10px;
+            }
+                #transport img{
+                    width: 30% ;
+                    max-width: 150px;
+                    border-radius: 60%;
+                    background-color: greenyellow;
+                    -webkit-mask-size: cover;
+                    mask-size: cover;
+                }
+                #transport p{
+                    width: 70%;
+                    font-size: 1.2rem;
+                    text-align: center;
+                }
+
+
+
+
+
+
+
+
+
+    
+>>>>>>> refactor_desing
 
 
 
@@ -129,7 +344,11 @@ h1,h2,h3,h4,h5,p{
 }
 
 caption{
+<<<<<<< HEAD
     font-size: 1.3em;
+=======
+    font-size: 1.1rem;
+>>>>>>> refactor_desing
     font-weight: bold;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     padding-bottom: 5px;
@@ -144,9 +363,16 @@ caption{
     .table td, .table th{
         border: solid 1px #ccc;
         padding: 5px;
+<<<<<<< HEAD
     }
     .table th{
         font-size: 13px;
+=======
+        font-size: 1rem;
+    }
+    .table th{
+        font-size: 1rem;
+>>>>>>> refactor_desing
     }
         .table tr:nth-child(even){
             background-color: #eee;

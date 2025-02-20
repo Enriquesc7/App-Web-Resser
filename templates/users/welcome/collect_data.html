@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/auth/style_auth.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/user/style_welcome.css') }}">
+    
+    <script src="{{ url_for('static', path='/scripts/jquery/jquery-3.5.1.min.js') }}"></script>
+    <script src="{{ url_for('static', path='/scripts/jquery.easing/jquery.easing.1.3.js') }}"></script>
+    <script src="{{ url_for('static', path='/scripts/scripts_ajax.js') }}"></script>
+
+</head>
+
+<body id="body_welcome">
+
+    <section class="section_form">
+        <div id="container_img_form_welcome">
+            <img src="{{ url_for('static', path='/img/welcome/collect_data.png')}}" style="width: 350px;" alt="form">
+        </div>
+        <div class="container_form_welcome">
+            <form method="POST" action="/collect_data" id="collect_data">
+                             
+                
+                <div class="elements_form">
+                    <input type="text" placeholder="Prénom" name="name" required="false">
+                </div>
+                <div class="elements_form">
+                    <input type="text" placeholder="Age" name="age" required="false">
+                </div>
+                <div class="elements_form">
+                    <input type="text" placeholder="Genre"  name="genero" required="false">
+                </div>
+
+
+                <div class="elements_form">
+                    <button type="submit" id="register_button">S'inscrire</button>
+                </div>
+                <div class="elements_form">
+                    <button type="button"><a href="/welcome_1">Next Step</a></button>
+                </div>
+
+            </form>
+        </div>
+    </section>
+
+</body>
+</html>

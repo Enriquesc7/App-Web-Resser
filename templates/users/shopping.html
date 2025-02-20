@@ -1,0 +1,82 @@
+{% extends "users/base_user.html" %} 
+
+{% block title %} 
+<title>Shopping</title>
+{% endblock %}
+
+
+{% block content %} 
+
+<div id="container_user">
+                
+    <div id="title_shopping">
+        <h2>
+            <strong>Magasins associés!</strong>
+        </h2>
+    </div>
+
+    <div class="shopping" > 
+        <div class="img_shopping">
+            <img src="{{ url_for('static', path='img/partners/enterprise/green_fablab.png') }}">
+        </div>
+        <div class="text_shopping">
+            <p>Obtenez les meilleurs produits à partir de plastique recyclé!</p>
+        </div>
+        <div class="buttom_shopping">
+            <a class="adelante">&#10095;</a>
+        </div>
+    </div>
+    
+    <div class="shopping" > 
+        <div class="img_shopping">
+            <img src="{{ url_for('static', path='img/partners/enterprise/saju.png') }}">
+        </div>
+        <div class="text_shopping">
+            <p>Obtenez les meilleures lunettes et accessoires à partir de plastique recyclé.</p>
+        </div>
+        <div class="buttom_shopping">
+            <a class="adelante">&#10095;</a>
+        </div>
+    </div>
+
+    <div class="shopping" > 
+        <div class="img_shopping">
+            <img src="{{ url_for('static', path='img/partners/enterprise/natura.png') }}">
+        </div>
+        <div class="text_shopping">
+            <p>50% (en poids) du plastique utilisé dans les emballages est recyclé.</p>
+        </div>
+        <div class="buttom_shopping">
+            <a class="adelante">&#10095;</a>
+        </div>
+    </div>
+
+    <div class="shopping" > 
+        <div class="img_shopping">
+            <img src="{{ url_for('static', path='img/partners/enterprise/postobon.png') }}">
+        </div>
+        <div class="text_shopping">
+            <p>Première entreprise colombienne à obtenir la certification de neutralité plastique.</p>
+        </div>
+        <div class="buttom_shopping">
+            <a class="adelante">&#10095;</a>
+        </div>
+    </div>
+
+    <div class="shopping" > 
+        <div class="img_shopping">
+            <img src="{{ url_for('static', path='img/partners/enterprise/hp.png') }}">
+        </div>
+        <div class="text_shopping">
+            <p>L'imprimante HP Color LaserJet est construite avec 16 % de plastique recyclé.</p>
+        </div>
+        <div class="buttom_shopping">
+            <a class="adelante">&#10095;</a>
+        </div>
+    </div>
+    
+        
+</div>
+
+
+{% endblock %}

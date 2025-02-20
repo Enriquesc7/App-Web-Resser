@@ -13,7 +13,6 @@ from schemas import front
 
 # Models
 from models.location import Country, Region, Commune
-from models.staff import WorkArea, Employment
 from models.enum import PlanEnum
 
 # SQLAlchemist
@@ -115,7 +114,7 @@ async def cookie(
 ############################################################################################
 
 
-
+'''
 def add_work_horus(db):
     with open('data/work.json', 'r', encoding='utf-8') as f:
         content = json.load(f)
@@ -136,6 +135,9 @@ def add_work_horus(db):
             db.add(employ)
             db.commit()
             db.refresh(employ)
+
+'''
+
 
 
 # Agregamos las regiones y comunas de Chile

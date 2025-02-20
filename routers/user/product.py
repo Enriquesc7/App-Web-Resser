@@ -1,12 +1,20 @@
 # FastAPI 
 from fastapi import APIRouter
+<<<<<<< HEAD
 from fastapi import status, Request, Depends, Path
+=======
+from fastapi import status, Request, Depends, Path, HTTPException
+>>>>>>> refactor_desing
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import RedirectResponse, JSONResponse
 
 # Python
 from typing import List
 import json
+<<<<<<< HEAD
+=======
+import httpx
+>>>>>>> refactor_desing
 
 # Schemas
 from schemas import user
@@ -35,6 +43,13 @@ router = APIRouter(
 )
 
 
+<<<<<<< HEAD
+=======
+
+API_OPENFOODFACTS = "https://world.openfoodfacts.org/api/v3/product"
+
+
+>>>>>>> refactor_desing
 #===============================================================================================================
 #============================ Products User ======================================================================
 
@@ -49,6 +64,7 @@ router = APIRouter(
 async def products_user(
     request: Request,
     db: Session = Depends(get_db),
+<<<<<<< HEAD
     current_user: user.User = Depends(get_current_active_user)
 ):
     with open('data/open_food.json', 'r', encoding='utf-8') as f:
@@ -59,6 +75,33 @@ async def products_user(
         {"request":request,
         "user": await AdminManager.get_user_by_email(db, current_user.email),
         "products": products})
+=======
+    current_user: user.User = Depends(get_current_active_user),
+    page: int = 1,
+    limit: int = 50
+):
+    with open('data/total_unique_products.json', 'r', encoding='utf-8') as f:
+        products = json.load(f)
+
+    total_products = len(products)
+    start = (page - 1)*limit
+    end = start + limit
+    paginated_products = products[start:end]
+    total_pages = (total_products // limit) 
+    total_pages = (total_products // limit) + (1 if total_products % limit > 0 else 0)
+    pagination = get_pagination(page, total_pages)
+    
+    return templates.TemplateResponse(
+        "users/products/products.html",
+        {"request":request,
+        "user": await AdminManager.get_user_by_email(db, current_user.email),
+        "products": paginated_products,
+        "page": page,
+        "total_pages": total_pages,
+        "pagination": pagination,})
+
+
+>>>>>>> refactor_desing
 
 
 
@@ -73,20 +116,32 @@ async def products_user(
 async def info_product(
     request: Request,
     db: Session = Depends(get_db),
+<<<<<<< HEAD
     current_user: user.User = Depends(get_current_active_user),
     bar_code: str = Path()
 ):
     # Cargamos la información del archivo
     with open('data/open_food.json', 'r', encoding='utf-8') as f:
+=======
+    bar_code: str = Path()
+):
+    # Cargamos la información del archivo
+    with open('data/total_unique_products.json', 'r', encoding='utf-8') as f:
+>>>>>>> refactor_desing
         products = json.load(f)
 
     # Identificamos el producto que queremos mostrar dado el código de barras
     product = next((product for product in products if product['basic_data']['bar_code'] == bar_code) , None)
     
     return templates.TemplateResponse(
+<<<<<<< HEAD
         "users/info_product.html",
         {"request":request,
         "user": await AdminManager.get_user_by_email(db, current_user.email),
+=======
+        "users/products/info_product.html",
+        {"request":request,
+>>>>>>> refactor_desing
         'product': product})
 
 
@@ -102,11 +157,18 @@ async def info_product(
 async def product_lookup(
     request: Request,
     barcode: BarcodeData,
+<<<<<<< HEAD
     db: Session = Depends(get_db),
     current_user: user.User = Depends(get_current_active_user)
 ):
     # Cargamos la información del archivo
     with open('data/open_food-big.json', 'r', encoding='utf-8') as f:
+=======
+    db: Session = Depends(get_db)
+):
+    # Cargamos la información del archivo
+    with open('data/total_unique_products.json', 'r', encoding='utf-8') as f:
+>>>>>>> refactor_desing
         products = json.load(f)
 
     #Mostramos el valor por consola
@@ -117,7 +179,11 @@ async def product_lookup(
     
     print('Vemos si esta el producto:', product)
 
+<<<<<<< HEAD
     message = "Este producto aún no se encuentra en nuestra base de datos. Lamentamos el inconveniente."
+=======
+    message = "Ce produit ne se trouve pas encore dans notre base de données. Nous nous excusons pour le désagrément."
+>>>>>>> refactor_desing
 
 
     if product is None:
@@ -138,3 +204,77 @@ async def product_lookup(
     #else:
     #    return RedirectResponse(f"/products/{barcode.barcode}", status_code=status.HTTP_302_FOUND)
     
+<<<<<<< HEAD
+=======
+
+
+# ===== Funciones varias ==========================0
+
+
+
+def get_pagination(page: int, total_pages: int, delta: int = 6):
+    if total_pages <= 1:
+        return []
+
+    pages = []
+    for p in range(1, total_pages + 1):
+        if p == 1 or p == total_pages or abs(p - page) <= delta:
+            pages.append(p)
+        elif pages and pages[-1] != '...':
+            pages.append('...')
+    
+    return pages
+
+
+
+
+
+# =========== Probando la obtención de productos con la API de OpenFoosFacts ==============
+
+
+# Botella de agua:  3268840001008
+
+
+@router.get(
+    path = "/producto/{barcode}",
+    response_model = user.User,
+    status_code = status.HTTP_200_OK,
+    summary = "API - Show information about product",
+    tags= ["User-Products"]
+)
+async def get_product_with_api(
+    request: Request,
+    barcode: str = Path()
+):
+    """
+    Obtiene información de un producto desde Open Food Facts usando el código de barras.
+    """
+    url = f"{API_OPENFOODFACTS}/{barcode}.json"
+    
+    async with httpx.AsyncClient() as client:
+        response = await client.get(url)
+
+    if response.status_code != 200:
+        raise HTTPException(status_code=response.status_code, detail="Error al consultar Open Food Facts")
+
+    data = response.json()
+
+    if "product" not in data:
+        raise HTTPException(status_code=404, detail="Producto no encontrado")
+
+    producto = {
+        "nombre": data["product"].get("product_name", "No disponible"),
+        "marca": data["product"].get("brands", "No disponible"),
+        "imagen": data["product"].get("image_url", ""),
+        "cantidad_n": data["product"].get("product_quantity", ""),
+        "cantidad_metrica": data["product"].get("product_quantity_unit", ""),
+        "embalaje": data["product"].get("packaging")
+    }
+
+    return templates.TemplateResponse(
+        "users/products/info_products_api.html",
+        {"request":request,
+        'producto': producto})
+
+
+>>>>>>> refactor_desing

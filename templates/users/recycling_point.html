@@ -1,0 +1,34 @@
+{% extends "users/base_user.html" %} 
+
+{% block title %} 
+<title>Puntos de Reciclaje</title>
+{% endblock %}
+
+
+{% block content %} 
+
+<div id="container_user">
+                
+    <div id="title_point_recycle">
+        <h2>
+            <strong>Points de recyclage!</strong>
+        </h2>
+    </div>
+
+    <div id="img_point_recycle" > 
+        <img src="{{ url_for('static', path='img/mapa.png') }}">
+    </div>
+    <div id="content_point_recycle">
+        <p style="font-size: 1.4rem;">Trouvez vos points de recyclage rapidement grâce à la géolocalisation de votre appareil!</p>
+        <br>
+        <br>
+        <br>
+        <div class="elements_form position_welcome" style="height: 55px;">
+            <button type="button" style="height: 50px;"><a href="/point_collector" style="font-size: 1.4rem;">Points à proximité</a></button>
+        </div>
+    </div>
+        
+</div>
+
+
+{% endblock %}

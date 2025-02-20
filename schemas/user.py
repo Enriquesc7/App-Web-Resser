@@ -3,7 +3,7 @@ from datetime import datetime
 from typing import Optional
 
 # Pydantics
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, BaseSettings
 from pydantic import Field
 
 # Models
@@ -114,3 +114,16 @@ class UpdateUser(BaseModel):
 ########## Models Mensaje #############
 class Mensaje(BaseModel):
     mensaje: str = "Registrado con exito"
+
+
+
+
+#============== Formulario de Contacto ================
+
+
+# Modelo para validar los datos del formulario
+class ContactForm(BaseModel):
+    name: str
+    email: EmailStr
+    message: str
+

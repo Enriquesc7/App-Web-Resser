@@ -7,28 +7,117 @@
 
 {% block content %} 
 
-    <section id="presentation_users" style="margin-top: 10px;">
+<div id="container_user">
                 
-        <div id="titulo_users">
-            <h2 class="articulos_ne" style="color: black;">
-                <strong>Bienvenido | {{user['first_name']}} </strong>
-            </h2>
-        </div>
-        <br>
-        <p>Mis puntos Resser</p>
-        <br>
-        <p>Beneficios</p>
-        <br>
-        <p>Producto escaneados</p>
-        <br>
-        <p>Organizaciones que valorizan</p>
-        <br>
-        <p>Partners</p>
-        <br>
-        
-        
+    <div id="welcome_user">
+        <h2>
+            <strong>Bienvenue <span>{{ user.first_name if user else '' }}</span>!</strong>
+        </h2>
+    </div>
 
-    </section>
+    <div id="container_point_resser" > 
+        <p class="number_point">0</p>
+        <p class="text_point">Pts</p>
+    </div>
+
+    <div class="shopping" > 
+        <div class="img_shopping">
+            <img src="{{ url_for('static', path='img/start_to_scanner.png') }}">
+        </div>
+        <div class="text_shopping">
+            <h3>Produits scannés</h3>
+            <p>Vous n'en avez pas encore. Commencez dès maintenant!</p>
+        </div>
+        <div class="buttom_shopping" onclick="startBarcodeScanner()">
+            <a class="adelante">&#10095;</a>
+        </div>
+    </div>
+
+    <div class="shopping" > 
+        <div class="img_shopping">
+            <img src="{{ url_for('static', path='img/porcentaje_descuento.jpg') }}">
+        </div>
+        <div class="text_shopping">
+            <p>Découvrez tous les avantages que Resser a pour vous!</p>
+        </div>
+        <div class="buttom_shopping">
+            <a class="adelante">&#10095;</a>
+        </div>
+    </div>
+    
+    <div id="organizations_recycle">
+        <p><strong>Organisations qui valorisent</strong></p>
+
+        <div class="slideshow">
+            <ul class="slider_enterprise">
+                <li>
+                    <img src="{{ url_for('static', path='img/partners/enterprise/green_fablab.png') }}">
+                </li>
+                <li>
+                    <img src="{{ url_for('static', path='img/partners/enterprise/saju.png') }}">
+                </li>
+                <li>
+                    <img src="{{ url_for('static', path='img/partners/enterprise/reciclapp.png') }}">
+                </li>
+            </ul>
+        </div>
+        <div class="direcciones_enterprise">
+            <a class="atras">&#10094;</a>
+            <a class="adelante">&#10095;</a>
+        </div>
+    </div>
+
+    <div id="partners">
+        <p><strong>Partenaires</strong></p>
+
+        <div class="slideshow">
+            <ul class="slider_partners">
+                <li>
+                    <img src="{{ url_for('static', path='img/partners/img_lorraine.png') }}">
+                </li>
+                <li>
+                    <img src="{{ url_for('static', path='img/partners/img_erpi.png') }}">
+                </li>
+                <li>
+                    <img src="{{ url_for('static', path='img/partners/foire.jpg') }}">
+                </li>
+                <li>
+                    <img src="{{ url_for('static', path='img/partners/img_ensgsi.png') }}">
+                </li>
+                <li>
+                    <img src="{{ url_for('static', path='img/partners/img_usach.jpg') }}">
+                </li>
+            </ul>
+        </div>
+        <div class="direcciones_partners">
+            <a class="atras">&#10094;</a>
+            <a class="adelante">&#10095;</a>
+        </div>
+    </div>
+
+    <div class="contact-container">
+        <h2>Contáctanos</h2>
+        <p>Cuentanos que te parece el proyecto y/o que podríamos incorporar para que sea más atractivo para tí.</p>
+
+        <form id="contactForm">
+            <label for="name">Nombre</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Correo Electrónico</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="message">Mensaje</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+
+            <button type="submit">Enviar Mensaje</button>
+        </form>
+
+        <p id="responseMessage" class="hidden"></p>
+    </div>
+
+    
+        
+</div>
 
 
 {% endblock %}

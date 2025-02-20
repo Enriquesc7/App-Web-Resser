@@ -4,17 +4,30 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<<<<<<< HEAD
     {% block title %} 
     {% endblock %}
     
+=======
+    <title>Gestion des déchets plastiques</title>
+>>>>>>> refactor_desing
 
+    <!-- Nav Mobile -->
     <link rel="stylesheet" href="{{ url_for('static', path='/css/user/style_base_user.css') }}">
+    
+    <!-- Home/Profile -->
     <link rel="stylesheet" href="{{ url_for('static', path='/css/user/style_user.css') }}">
+<<<<<<< HEAD
     <link rel="stylesheet" href="{{ url_for('static', path='/css/user/product/style_user_product.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', path='/css/user/product/style_user_info_product.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', path='/css/user/setting/style_user_setting.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', path='/scripts/jquery.datepicker/jquery-ui.css') }}">
+=======
+>>>>>>> refactor_desing
 
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/user/product/style_user_product.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/user/product/style_user_info_product.css') }}">
+  
     <!-- Iconos -->
     <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script> 
     <!-- JQuery -->
@@ -26,6 +39,7 @@
     <!-- Horus -->
     <script src="{{ url_for('static', path='/scripts/scripts_base.js') }}"></script>
     <script src="{{ url_for('static', path='/scripts/scripts_ajax.js') }}"></script>
+<<<<<<< HEAD
 
 <script>
 $(document).ready(function() {
@@ -36,23 +50,184 @@ $(document).ready(function() {
         $(this).toggleClass("abierto")
     }); 
     // FIN BOTÓN DE LOGIN EN INDEX ========================================================
+=======
+    <script src="{{ url_for('static', path='/scripts/scripts_slider_mobile.js') }}"></script>
+    <script src="{{ url_for('static', path='/scripts/contact.js') }}"></script>
+>>>>>>> refactor_desing
 
+    <script src="{{ url_for('static', path='js/contact.js') }}"></script>
 
-    $(".nav_admin").hover(function(){   // Se agrega un tercer parametro a la funcion animate(), que 
-		$(this).stop().animate({  // correspondera a un efecto de movimiento obtenido de los
-			left:"0"             // plugins descargados de JQuery (easing)... 
-		},300,"easeInSine");//Luego para no tener una sucesion de eventos al jugar con el evento
-	},                      //se agrega la funcion "stop()" que impide la acumulacion de eventos.
-	function(){
-		$(this).stop().animate({
-			left:"-65px"
-		},300, "easeInSine"); //easeOutBounce
-	});
-        
-})
-</script>
+    <!-- Quagga2 para el escaneo de código de barras -->
+    <script src="https://cdn.jsdelivr.net/npm/@ericblade/quagga2/dist/quagga.min.js"></script>
 
+    <!-- html5-qrcode para el escaneo de código QR -->
+    <script src="https://unpkg.com/html5-qrcode/minified/html5-qrcode.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $("#container_icon_menu").click(function(){
+                if ($("#header").hasClass("active")) {
+                    $("#header").stop().animate({
+                        top: "-280px"
+                    }, 600, "easeInSine").removeClass("active");
+                    $("#element_nav_burger").slideUp(400, "easeInSine");
+                    $("#icon_menu").attr("src", "{{ url_for('static', path='img/front/icon_menu.png') }}");
+                } else {
+                    $("#header").stop().animate({
+                        top: "-150px"
+                    }, 400, "easeInSine").addClass("active");
+                    $("#element_nav_burger").slideDown(600, "easeInSine");
+                    $("#icon_menu").attr("src", "{{ url_for('static', path='img/front/icon_close.png') }}");
+                }
+            });
+        });
+
+        function resetAllScanners() {
+            if (typeof Quagga !== 'undefined' && Quagga.initialized) {
+                Quagga.stop();
+            }
+            if (typeof html5QrCode !== 'undefined' && html5QrCode._isScanning) {
+                html5QrCode.stop().catch(err => console.error(err));
+            }
+        }
+
+        function startQRScanner() {
+            resetAllScanners();
+            document.getElementById('qr-reader').classList.remove('hidden');
+            const html5QrCode = new Html5Qrcode("qr-reader");
+            const qrCodeSuccessCallback = (decodedText, decodedResult) => {
+                if (decodedText === "Resser") {
+                    window.location.href = "/win_resser_point";
+                } else {
+                    alert("QR Code not recognized. Please try again.");
+                }
+            };
+
+            const config = { fps: 10, qrbox: 250 };
+
+            html5QrCode.start(
+                { facingMode: "environment" },
+                config,
+                qrCodeSuccessCallback
+            ).catch(err => {
+                console.error(`Unable to start scanning, error: ${err}`);
+            });
+        }
+
+        function startBarcodeScanner() {
+            resetAllScanners();
+            const cameraContainer = document.getElementById('camera-container');
+            cameraContainer.classList.remove('hidden');
+            cameraContainer.classList.add('fullscreen');
+            const quaggaConf = {
+                inputStream: {
+                    target: document.querySelector("#camera"),
+                    type: "LiveStream",
+                    constraints: {
+                        width: { min: 640, ideal: 1280, max: 1920 },
+                        height: { min: 480, ideal: 720, max: 1080 },
+                        facingMode: "environment",
+                        aspectRatio: { min: 1, max: 2 }
+                    }
+                },
+                locator: {
+                    patchSize: "large",
+                    halfSample: false
+                },
+                numOfWorkers: navigator.hardwareConcurrency || 4,
+                decoder: {
+                    readers: ['ean_reader'],
+                    multiple: false
+                },
+                locate: true,
+                frequency: 5
+            };
+
+            Quagga.init(quaggaConf, function (err) {
+                if (err) {
+                    console.log(err);
+                    alert('Error starting Quagga: ' + err.message);
+                    return;
+                }
+                Quagga.start();
+            });
+
+            Quagga.onProcessed(function(result) {
+                var drawingCtx = Quagga.canvas.ctx.overlay,
+                    drawingCanvas = Quagga.canvas.dom.overlay;
+
+                if (result) {
+                    if (result.boxes) {
+                        drawingCtx.clearRect(0, 0, drawingCanvas.width, drawingCanvas.height);
+                        result.boxes.filter(function (box) {
+                            return box !== result.box;
+                        }).forEach(function (box) {
+                            Quagga.ImageDebug.drawPath(box, {x: 0, y: 1}, drawingCtx, {color: 'green', lineWidth: 2});
+                        });
+                    }
+
+                    if (result.box) {
+                        Quagga.ImageDebug.drawPath(result.box, {x: 0, y: 1}, drawingCtx, {color: '#00F', lineWidth: 2});
+                    }
+
+                    if (result.codeResult && result.codeResult.code) {
+                        Quagga.ImageDebug.drawPath(result.line, {x: 'x', y: 'y'}, drawingCtx, {color: 'red', lineWidth: 3});
+                    }
+                }
+            });
+
+            Quagga.onDetected(function (result) {
+                if (result.codeResult && result.codeResult.code) {
+                    console.log("Código escaneado: " + result.codeResult.code);
+                    Quagga.stop();
+                    processBarcode(result.codeResult.code);
+                } else {
+                    console.error("Código no detectado correctamente.");
+                    alert('Error detecting barcode');
+                }
+            });
+        }
+
+        function processBarcode(code) {
+            console.log('Enviando código al servidor:', code);
+            fetch('/get_barcode', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ barcode: code })
+            }).then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Something went wrong on server!');
+                }
+            }).then(data => {
+                console.log('Respuesta del servidor:', data);
+                if (data.redirect) {
+                    window.location.href = data.redirect;
+                } else if (data.message) {
+                    resetCamera();
+                    document.getElementById('message').innerText = data.message;
+                } else {
+                    alert('Unexpected response from server.');
+                }
+            }).catch(err => {
+                console.error('Error processing barcode:', err);
+                alert('Error processing barcode: ' + err.message);
+                resetCamera();
+            });
+        }
+
+        function resetCamera() {
+            const cameraContainer = document.getElementById('camera-container');
+            cameraContainer.classList.remove('fullscreen');
+            cameraContainer.classList.add('hidden');
+            document.getElementById('message').innerText = '';
+        }
+    </script>
 </head>
+<<<<<<< HEAD
 <!--  style="width: 500px; height: 700px; background-color: aqua; margin: auto;"     -->
 <body>
 <div id="container_global">
@@ -103,23 +278,77 @@ $(document).ready(function() {
                             data-height="32"></span>
                     </div>
                     <div class="title">Configuración</div>
+=======
+<body>
+<div id="container">
+    <header id="header">
+        <div class="container_header">
+            <div class="logo">
+                <a href="/home">
+                    <img src="{{ url_for('static', path='img/base/resser-logo.png') }}" alt="Logo app">
                 </a>
             </div>
-            <div id = container_logout>
-                <a href="/{{user['first_name']}}-{{user['last_name']}}/logout">
-                    <div class="icon">
-                        <img src="{{ url_for('static', path='img/base_admin/logout.png') }}" width="32px" alt="">
-                    </div>
-                    <div class="title">Cerrar sesión</div>
+            <section class="section_barra_nav"> 
+                <div id="container_icon_menu">
+                    <img id="icon_menu" src="{{ url_for('static', path='img/front/icon_menu.png') }}" alt="menu">
+                </div>
+            </section>
+        </div>
+        <ul id="element_nav_burger">
+            <li><a href="#"><p style="font-size: 1.4rem;">Configuration</p></a></li>
+            <li><a href="#"><p style="font-size: 1.4rem;">Déconnexion</p></a></li>
+        </ul>
+    </header>
+    
+    <section id="section">
+        {% block content %}
+        {% endblock %}
+    </section>
+
+    <!-- Contenido para que aparezca la cámara -->
+    <section id="section_scanner" style="margin: auto; width: 80%;">
+        <div id="camera-container" class="hidden">
+            <div id="camera" style="width: 100%; height: 100%;"></div>
+            <button class="close-button" onclick="resetCamera()">Fermer</button>
+        </div>
+        <div id="container_message">
+            <p id="message"></p>
+        </div>
+    </section>
+
+    <!-- Contenedor para el lector de QR -->
+    <div id="qr-reader" style="width: 100%; max-width: 400px; margin: auto;" class="hidden"></div>
+
+    <section id="section_nav_mobile">
+        <div id="container_nav_mobile">
+            <div>
+                <a href="/home" class="{% if request['path'] == '/home' %}active{% endif %}">
+                    <img class="img_nav" src="{{ url_for('static', path='img/nav_mobile/house.png') }}" alt="home">
+>>>>>>> refactor_desing
                 </a>
             </div>
-        </nav>
-
-            {% block content %}
-
-            {% endblock %}
-
-    </div>
+            <div>
+                <a href="#" class="{% if request['path'] == '/escanear' %}active{% endif %}">
+                    <img class="img_nav button_scan" onclick="startBarcodeScanner()" src="{{ url_for('static', path='img/nav_mobile/barcode.png') }}" alt="barcode">
+                </a>
+            </div>
+            <div>
+                <a href="/recycling_point">
+                    <img class="img_nav" src="{{ url_for('static', path='img/nav_mobile/gps.png') }}" alt="location">
+                </a>
+            </div>
+            <div>
+                <a href="/shopping">
+                    <img class="img_nav" src="{{ url_for('static', path='img/nav_mobile/shopping.png') }}" alt="shopping">
+                </a>
+            </div>
+            <div>
+                <a href="/library">
+                    <img class="img_nav" src="{{ url_for('static', path='img/nav_mobile/book.png') }}" alt="library">
+                </a>
+            </div>
+        </div>
+    </section>
 </div>
-</body> 
+</body>
 </html>
