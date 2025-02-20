@@ -4,26 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<<<<<<< HEAD
-    {% block title %} 
-    {% endblock %}
-    
-=======
     <title>Gestion des déchets plastiques</title>
->>>>>>> refactor_desing
 
     <!-- Nav Mobile -->
     <link rel="stylesheet" href="{{ url_for('static', path='/css/user/style_base_user.css') }}">
     
     <!-- Home/Profile -->
     <link rel="stylesheet" href="{{ url_for('static', path='/css/user/style_user.css') }}">
-<<<<<<< HEAD
-    <link rel="stylesheet" href="{{ url_for('static', path='/css/user/product/style_user_product.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', path='/css/user/product/style_user_info_product.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', path='/css/user/setting/style_user_setting.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', path='/scripts/jquery.datepicker/jquery-ui.css') }}">
-=======
->>>>>>> refactor_desing
 
     <link rel="stylesheet" href="{{ url_for('static', path='/css/user/product/style_user_product.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', path='/css/user/product/style_user_info_product.css') }}">
@@ -39,21 +26,8 @@
     <!-- Horus -->
     <script src="{{ url_for('static', path='/scripts/scripts_base.js') }}"></script>
     <script src="{{ url_for('static', path='/scripts/scripts_ajax.js') }}"></script>
-<<<<<<< HEAD
-
-<script>
-$(document).ready(function() {
-            
-    // BOTÓN DE LOGIN EN INDEX ============================================================
-    $("#img_user").click(function(){
-        $("#option_user").slideToggle();
-        $(this).toggleClass("abierto")
-    }); 
-    // FIN BOTÓN DE LOGIN EN INDEX ========================================================
-=======
     <script src="{{ url_for('static', path='/scripts/scripts_slider_mobile.js') }}"></script>
     <script src="{{ url_for('static', path='/scripts/contact.js') }}"></script>
->>>>>>> refactor_desing
 
     <script src="{{ url_for('static', path='js/contact.js') }}"></script>
 
@@ -227,58 +201,6 @@ $(document).ready(function() {
         }
     </script>
 </head>
-<<<<<<< HEAD
-<!--  style="width: 500px; height: 700px; background-color: aqua; margin: auto;"     -->
-<body>
-<div id="container_global">
-
-    <div id="container">
-        <nav>
-            <header>
-                <div class="logo"><img src="{{ url_for('static', path='img/base/ojo_horus.png') }}" alt="img_perfil"></div>
-                <div class="user">
-                    {% if user['path_img_profile'] != None %}
-                    <img src="{{ url_for('static', path=user['path_img_profile']) }}" alt="img_perfil">
-                    {% else %} 
-                    <img src="{{ url_for('static', path='img/base/logo_usuario.png') }}" alt="img_perfil">
-                    {% endif %}
-                    <div class="name">{{user['first_name']}} {{user['last_name']}}</div>
-                    <a href="/{{user['first_name']}}-{{user['last_name']}}" class="button_edit">
-                        <button>Editar</button>
-                    </a>
-                </div>
-            </header>
-            <div class="links">
-                <a href="/home">
-                    <div class="icon">
-                        <span 
-                            class="iconify-inline" 
-                            data-icon="flat-color-icons:home"
-                            data-width="32"
-                            data-height="32"></span>
-                    </div>
-                    <div class="title">Home</div>
-                </a>
-                <a href="/products">
-                    <div class="icon">
-                        <span 
-                            class="iconify-inline" 
-                            data-icon="flat-color-icons:services"
-                            data-width="32"
-                            data-height="32"></span>
-                    </div>
-                    <div class="title">Productos</div>
-                </a>
-                <a href="/setting">
-                    <div class="icon">
-                        <span 
-                            class="iconify-inline" 
-                            data-icon="flat-color-icons:settings"
-                            data-width="32"
-                            data-height="32"></span>
-                    </div>
-                    <div class="title">Configuración</div>
-=======
 <body>
 <div id="container">
     <header id="header">
@@ -324,7 +246,6 @@ $(document).ready(function() {
             <div>
                 <a href="/home" class="{% if request['path'] == '/home' %}active{% endif %}">
                     <img class="img_nav" src="{{ url_for('static', path='img/nav_mobile/house.png') }}" alt="home">
->>>>>>> refactor_desing
                 </a>
             </div>
             <div>

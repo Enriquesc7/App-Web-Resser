@@ -1,20 +1,13 @@
 # FastAPI 
 from fastapi import APIRouter
-<<<<<<< HEAD
-from fastapi import status, Request, Depends, Path
-=======
 from fastapi import status, Request, Depends, Path, HTTPException
->>>>>>> refactor_desing
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import RedirectResponse, JSONResponse
 
 # Python
 from typing import List
 import json
-<<<<<<< HEAD
-=======
 import httpx
->>>>>>> refactor_desing
 
 # Schemas
 from schemas import user
@@ -43,13 +36,10 @@ router = APIRouter(
 )
 
 
-<<<<<<< HEAD
-=======
 
 API_OPENFOODFACTS = "https://world.openfoodfacts.org/api/v3/product"
 
 
->>>>>>> refactor_desing
 #===============================================================================================================
 #============================ Products User ======================================================================
 
@@ -64,18 +54,6 @@ API_OPENFOODFACTS = "https://world.openfoodfacts.org/api/v3/product"
 async def products_user(
     request: Request,
     db: Session = Depends(get_db),
-<<<<<<< HEAD
-    current_user: user.User = Depends(get_current_active_user)
-):
-    with open('data/open_food.json', 'r', encoding='utf-8') as f:
-        products = json.load(f)
-    
-    return templates.TemplateResponse(
-        "users/products.html",
-        {"request":request,
-        "user": await AdminManager.get_user_by_email(db, current_user.email),
-        "products": products})
-=======
     current_user: user.User = Depends(get_current_active_user),
     page: int = 1,
     limit: int = 50
@@ -101,7 +79,6 @@ async def products_user(
         "pagination": pagination,})
 
 
->>>>>>> refactor_desing
 
 
 
@@ -116,32 +93,18 @@ async def products_user(
 async def info_product(
     request: Request,
     db: Session = Depends(get_db),
-<<<<<<< HEAD
-    current_user: user.User = Depends(get_current_active_user),
-    bar_code: str = Path()
-):
-    # Cargamos la información del archivo
-    with open('data/open_food.json', 'r', encoding='utf-8') as f:
-=======
     bar_code: str = Path()
 ):
     # Cargamos la información del archivo
     with open('data/total_unique_products.json', 'r', encoding='utf-8') as f:
->>>>>>> refactor_desing
         products = json.load(f)
 
     # Identificamos el producto que queremos mostrar dado el código de barras
     product = next((product for product in products if product['basic_data']['bar_code'] == bar_code) , None)
     
     return templates.TemplateResponse(
-<<<<<<< HEAD
-        "users/info_product.html",
-        {"request":request,
-        "user": await AdminManager.get_user_by_email(db, current_user.email),
-=======
         "users/products/info_product.html",
         {"request":request,
->>>>>>> refactor_desing
         'product': product})
 
 
@@ -157,18 +120,10 @@ async def info_product(
 async def product_lookup(
     request: Request,
     barcode: BarcodeData,
-<<<<<<< HEAD
-    db: Session = Depends(get_db),
-    current_user: user.User = Depends(get_current_active_user)
-):
-    # Cargamos la información del archivo
-    with open('data/open_food-big.json', 'r', encoding='utf-8') as f:
-=======
     db: Session = Depends(get_db)
 ):
     # Cargamos la información del archivo
     with open('data/total_unique_products.json', 'r', encoding='utf-8') as f:
->>>>>>> refactor_desing
         products = json.load(f)
 
     #Mostramos el valor por consola
@@ -179,11 +134,7 @@ async def product_lookup(
     
     print('Vemos si esta el producto:', product)
 
-<<<<<<< HEAD
-    message = "Este producto aún no se encuentra en nuestra base de datos. Lamentamos el inconveniente."
-=======
     message = "Ce produit ne se trouve pas encore dans notre base de données. Nous nous excusons pour le désagrément."
->>>>>>> refactor_desing
 
 
     if product is None:
@@ -204,8 +155,6 @@ async def product_lookup(
     #else:
     #    return RedirectResponse(f"/products/{barcode.barcode}", status_code=status.HTTP_302_FOUND)
     
-<<<<<<< HEAD
-=======
 
 
 # ===== Funciones varias ==========================0
@@ -277,4 +226,3 @@ async def get_product_with_api(
         'producto': producto})
 
 
->>>>>>> refactor_desing
