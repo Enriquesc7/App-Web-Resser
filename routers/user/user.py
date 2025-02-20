@@ -11,9 +11,13 @@ from schemas import user
 from sqlalchemy.orm import Session
 
 # app
-from utils import get_db
+from utils import get_db, send_email
 from managers.admin import AdminManager
-from managers.auth import get_current_active_user
+from managers.auth import get_current_active_user, get_optional_current_user
+
+# Python
+from typing import Optional
+
 
 
 # Templates
@@ -27,26 +31,382 @@ router = APIRouter(
 )
 
 
-#========================= Go to User Profile ===============================
 
-### Show profile - /profile
+#========================= Welcome User ===============================
+
+
 @router.get(
+<<<<<<< HEAD
     path = "/home",
     response_model = user.User,
     response_class= HTMLResponse, 
     status_code = status.HTTP_200_OK,
     summary = "Home",
+=======
+    path = "/started",
+    response_model = user.User,
+    response_class= HTMLResponse, 
+    status_code = status.HTTP_200_OK,
+    summary = "Form Register",
+>>>>>>> refactor_desing
     tags= ["User"]
 )
-async def profile(
+async def started(
+    request: Request    
+):
+    return templates.TemplateResponse(
+        "users/welcome/collect_data.html",{"request":request})
+
+
+
+@router.post(
+    path = "/started",
+    response_model = user.User,
+    response_class= HTMLResponse, 
+    status_code = status.HTTP_200_OK,
+    summary = "Form Register",
+    tags= ["User"]
+)
+async def started(
+    request: Request    
+):
+    return templates.TemplateResponse(
+        "users/welcome/collect_data.html",{"request":request})
+
+
+
+
+@router.get(
+    path = "/welcome_1",
+    response_model = user.User,
+    response_class= HTMLResponse, 
+    status_code = status.HTTP_200_OK,
+    summary = "Welcome 1",
+    tags= ["User"]
+)
+async def welcome_1(
+    request: Request    
+):
+    return templates.TemplateResponse(
+        "users/welcome/welcome_1.html",{"request":request})
+
+
+@router.get(
+    path = "/welcome_2",
+    response_model = user.User,
+    response_class= HTMLResponse, 
+    status_code = status.HTTP_200_OK,
+    summary = "Welcome 2",
+    tags= ["User"]
+)
+async def welcome_2(
+    request: Request    
+):
+    return templates.TemplateResponse(
+        "users/welcome/welcome_2.html",{"request":request})
+
+
+@router.get(
+    path = "/welcome_3",
+    response_model = user.User,
+    response_class= HTMLResponse, 
+    status_code = status.HTTP_200_OK,
+    summary = "Welcome 3",
+    tags= ["User"]
+)
+async def welcome_3(
+    request: Request    
+):
+    return templates.TemplateResponse(
+        "users/welcome/welcome_3.html",{"request":request})
+
+
+
+@router.get(
+    path = "/welcome_4",
+    response_model = user.User,
+    response_class= HTMLResponse, 
+    status_code = status.HTTP_200_OK,
+    summary = "Welcome 4",
+    tags= ["User"]
+)
+async def welcome_4(
+    request: Request    
+):
+    return templates.TemplateResponse(
+        "users/welcome/welcome_4.html",{"request":request})
+
+
+
+
+@router.get(
+    path = "/welcome_5",
+    response_model = user.User,
+    response_class= HTMLResponse, 
+    status_code = status.HTTP_200_OK,
+    summary = "Welcome 5",
+    tags= ["User"]
+)
+async def welcome_5(
+    request: Request    
+):
+    return templates.TemplateResponse(
+        "users/welcome/welcome_5.html",{"request":request})
+
+
+
+
+@router.get(
+    path = "/welcome_6",
+    response_model = user.User,
+    response_class= HTMLResponse, 
+    status_code = status.HTTP_200_OK,
+    summary = "Welcome 6",
+    tags= ["User"]
+)
+async def welcome_6(
+    request: Request    
+):
+    return templates.TemplateResponse(
+        "users/welcome/welcome_6.html",{"request":request})
+
+
+
+#================= Go to Home ==================
+
+@router.get(
+    path="/home",
+    response_class=HTMLResponse, 
+    status_code=status.HTTP_200_OK,
+    summary="Home",
+    tags=["User"]
+)
+async def home(
     request: Request,
     db: Session = Depends(get_db),
+    current_user: Optional[user.User] = Depends(get_optional_current_user)  # Ahora es opcional
+):
+    return templates.TemplateResponse(
+        "users/profile.html", {"request": request, "user": current_user}
+    )
+
+
+
+# ============== Validamos la información enviada por el Form contact ===========
+
+
+
+
+@router.post("/contact")
+async def contact_form(form: user.ContactForm, db: Session = Depends(get_db)):
+    """
+    Procesa el formulario de contacto.
+    """
+    email_sent = await send_email(form.name, form.email, form.message)
+
+    if email_sent:
+        return {"message": "Mensaje enviado correctamente"}
+    else:
+        return {"message": "Error al enviar el mensaje. Inténtalo más tarde"}
+
+
+
+#================= Go to Recycling Point ==================
+
+# Ir a la sección de puntos de reciclaje
+@router.get(
+    path = "/recycling_point",
+    response_model = user.User,
+    response_class= HTMLResponse, 
+    status_code = status.HTTP_200_OK,
+    summary = "Recycling Point",
+    tags= ["User"]
+)
+async def recycling_point(
+    request: Request 
+):
+    return templates.TemplateResponse(
+        "users/recycling_point.html", {"request":request})
+
+
+# Ir al punto de collecta más cercano
+@router.get(
+    path = "/point_collector",
+    response_model = user.User,
+    response_class= HTMLResponse, 
+    status_code = status.HTTP_200_OK,
+    summary = "Find Point Collect",
+    tags= ["User"]
+)
+async def recycling_point(
+    request: Request 
+):
+    return templates.TemplateResponse(
+        "users/point_collector.html", {"request":request})
+
+
+# Primera interacción para reciclar
+@router.get(
+    path = "/action_recycling_1",
+    response_model = user.User,
+    response_class= HTMLResponse, 
+    status_code = status.HTTP_200_OK,
+    summary = "Find Point Collect",
+    tags= ["User"]
+)
+async def recycling_point(
+    request: Request 
+):
+    return templates.TemplateResponse(
+        "users/action_recycling_1.html", {"request":request})
+
+
+
+# Ganando puntos por reciclar
+@router.get(
+    path = "/win_resser_point",
+    response_model = user.User,
+    response_class= HTMLResponse, 
+    status_code = status.HTTP_200_OK,
+    summary = "Win Resser Point",
+    tags= ["User"]
+)
+async def win_resser_point(
+    request: Request 
+):
+    return templates.TemplateResponse(
+        "users/resser_point.html", {"request":request})
+
+
+
+# Ganando puntos por reciclar
+@router.get(
+    path = "/resser",
+    response_model = user.User,
+    response_class= HTMLResponse, 
+    status_code = status.HTTP_200_OK,
+    summary = "Win Resser Point",
+    tags= ["User"]
+)
+async def resser(
+    request: Request 
+):
+    return templates.TemplateResponse(
+        "users/resser.html", {"request":request})
+
+
+#================= Go to Shopping ==================
+
+@router.get(
+    path = "/shopping",
+    response_model = user.User,
+    response_class= HTMLResponse, 
+    status_code = status.HTTP_200_OK,
+    summary = "Section Shopping",
+    tags= ["User"]
+)
+async def shopping(
+    request: Request 
+):
+    return templates.TemplateResponse(
+        "users/shopping.html", {"request":request})
+
+
+
+#================= Go to Libraries ==================
+
+
+# Sección global de como reciclar los diferentes residuos
+@router.get(
+    path = "/library",
+    response_model = user.User,
+    response_class= HTMLResponse, 
+    status_code = status.HTTP_200_OK,
+    summary = "Section Libraries",
+    tags= ["User"]
+)
+async def shopping(
+    request: Request 
+):
+    return templates.TemplateResponse(
+        "users/library/library.html", {"request":request})
+
+
+
+# Sección plastico
+@router.get(
+    path = "/library/plastic",
+    response_model = user.User,
+    response_class= HTMLResponse, 
+    status_code = status.HTTP_200_OK,
+    summary = "Section Libraries",
+    tags= ["User"]
+)
+async def shopping(
+    request: Request,
     current_user: user.User = Depends(get_current_active_user)
 ):
     return templates.TemplateResponse(
-        "users/profile.html",
-        {"request":request, 
-        "user": await AdminManager.get_user_by_email(db, current_user.email)})
+        "users/library/library_plastic.html", {"request":request})
+
+
+# Sección Papel
+@router.get(
+    path = "/library/paper",
+    response_model = user.User,
+    response_class= HTMLResponse, 
+    status_code = status.HTTP_200_OK,
+    summary = "Section Libraries",
+    tags= ["User"]
+)
+async def shopping(
+    request: Request,
+    current_user: user.User = Depends(get_current_active_user)
+):
+    return templates.TemplateResponse(
+        "users/library/library_paper.html", {"request":request})
+
+
+# Sección Vidrio
+@router.get(
+    path = "/library/glass",
+    response_model = user.User,
+    response_class= HTMLResponse, 
+    status_code = status.HTTP_200_OK,
+    summary = "Section Libraries",
+    tags= ["User"]
+)
+async def shopping(
+    request: Request,
+    current_user: user.User = Depends(get_current_active_user)
+):
+    return templates.TemplateResponse(
+        "users/library/library_glass.html", {"request":request})
+
+
+# Sección Compostaje
+@router.get(
+    path = "/library/composting",
+    response_model = user.User,
+    response_class= HTMLResponse, 
+    status_code = status.HTTP_200_OK,
+    summary = "Section Libraries",
+    tags= ["User"]
+)
+async def shopping(
+    request: Request,
+    current_user: user.User = Depends(get_current_active_user)
+):
+    return templates.TemplateResponse(
+        "users/library/library_composting.html", {"request":request})
+
+
+
+
+
+
+
+
 
 
 #=================== Go to Update User ============================
@@ -100,7 +460,7 @@ async def update_profile(
 
 # LogOut
 @router.get(
-    path = "/{first_name}-{last_name}/logout",
+    path = "/logout",
     response_model = user.User,
     response_class= RedirectResponse,
     status_code = status.HTTP_200_OK,
@@ -115,7 +475,7 @@ async def logout(
     # Obtenemos el usuario
     user = await AdminManager.get_user_by_email(db, current_user.email)
     
-    response = RedirectResponse("/", status_code= status.HTTP_302_FOUND)
+    response = RedirectResponse("/home", status_code= status.HTTP_302_FOUND)
     response.delete_cookie(key="access_token")
     user.disabled = True
     db.commit()

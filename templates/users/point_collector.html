@@ -1,0 +1,35 @@
+{% extends "users/base_user.html" %} 
+
+{% block title %} 
+<title>Puntos de Reciclaje</title>
+{% endblock %}
+
+
+{% block content %} 
+
+<div id="container_user">
+                
+    <div id="titulo_users" style="width: 80%;">
+        <h3 class="articulos_ne" style="font-size: 1.7rem;">
+            <strong>Point de collecte le plus proche:</strong>
+        </h3>
+        <br>
+        <br>
+        <div class="shopping" > 
+            <div class="img_shopping">
+                <img src="{{ url_for('static', path='img/mapa_foire.png') }}">
+            </div>
+            <div class="text_shopping">
+                <p>Parc Expo de Nancy • 12 route de Mirecourt
+                    54500 Vandœuvre-lès-Nancy </p>
+            </div>
+            <div class="buttom_shopping">
+                <a href="/action_recycling_1" class="adelante">&#10095;</a>
+            </div>
+        </div>
+    </div>
+        
+</div>
+
+
+{% endblock %}

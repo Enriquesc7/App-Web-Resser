@@ -7,6 +7,7 @@
 #       https://css-tricks.com/snippets/css/complete-guide-grid/
 #       https://css-tricks.com/snippets/css/a-guide-to-flexbox/
 #       https://htmx.org/docs/#ajax
+<<<<<<< HEAD
 
 # Transiciones CSS
 #       https://www.transition.style/
@@ -24,6 +25,29 @@
 # Imágenes
 #       https://fondosmil.com/
 
+=======
+
+# Transiciones CSS
+#       https://www.transition.style/
+
+# Ilustraciones, iconos, colores e inspiración...
+#       https://www.toools.design/
+#       https://freesets.vercel.app/
+#       https://blush.design/es
+#       https://colorhunt.co/
+#       https://webkul.github.io/coolhue/
+#       https://www.pixeltrue.com/packs
+#       https://fontawesome.com/
+
+# Soporte y compatibilidad
+#       https://caniuse.com/
+
+# Imágenes
+#       https://fondosmil.com/
+
+# Python
+#       https://aprendepython.es/
+>>>>>>> refactor_desing
 
 # Comandos que me permiten modificar el puerto y navegar desde otro dispositivo
 # Puerto (desde cmd, escribir ipconfig para encontrar el número de puerto)
@@ -77,7 +101,7 @@ from fastapi.templating import Jinja2Templates
 # Project modules
 from db import engine, Base
 from routers.auth import register, login
-from routers.admin import admin, admin_cloud, admin_user, admin_front, admin_setting, admin_team
+from routers.admin import admin, admin_cloud, admin_user, admin_front, admin_setting
 from routers.front import front
 from routers.user import product, user, setting
 
@@ -102,7 +126,6 @@ app.include_router(setting.router)
 app.include_router(admin.router)
 app.include_router(admin_user.router)
 app.include_router(admin_front.router)
-app.include_router(admin_team.router)
 app.include_router(admin_cloud.router)
 app.include_router(admin_setting.router)
 

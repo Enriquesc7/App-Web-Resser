@@ -7,12 +7,15 @@ h1,h2,h3,h4,h5,p{
 /*============= Barra de busqueda =====================*/
 
 
+<<<<<<< HEAD
 #titulo_users{
     background-color: #FFFFFF;
     padding: 25px 25px;
  }
 
 
+=======
+>>>>>>> refactor_desing
 #form_search_product{
     display: flex;
     width: 90%;
@@ -31,6 +34,7 @@ h1,h2,h3,h4,h5,p{
         display: inline-block;
         font-size: 16px;
     }
+<<<<<<< HEAD
     .button_scan{
         background-color: #4CAF50;
         border: none;
@@ -41,6 +45,8 @@ h1,h2,h3,h4,h5,p{
         display: inline-block;
         font-size: 16px;
     }
+=======
+>>>>>>> refactor_desing
 
     .busqueda {
         position: relative;
@@ -146,7 +152,11 @@ h1,h2,h3,h4,h5,p{
 
 
 
+<<<<<<< HEAD
 /*==== Probando ==================*/
+=======
+/*==== Probando Camara ==================*/
+>>>>>>> refactor_desing
 
 /* Ocultar el contenedor de la cámara por defecto */
 .hidden {
@@ -178,6 +188,56 @@ h1,h2,h3,h4,h5,p{
 
 
 
+<<<<<<< HEAD
+=======
+    #section_scanner{
+        background-color: cadetblue;
+        border-radius: 5px;
+        position: fixed;
+        top: 100px;
+        z-index: 1000;
+    }
+        #message{
+            color: crimson;
+        }
+
+
+
+
+
+
+
+
+
+
+/*============== Paginación ===========================*/
+
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+.pagination a, .pagination span {
+    margin: 0 5px;
+    padding: 10px 15px;
+    text-decoration: none;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+}
+.pagination a.active {
+    background-color: #007bff;
+    color: white;
+}
+.pagination a:hover {
+    background-color: #ddd;
+}
+
+
+
+
+
+>>>>>>> refactor_desing
 /*================ Medias Queries ========================*/
 
 /* Media Queries */

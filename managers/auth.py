@@ -1,6 +1,7 @@
 # FastAPI
-from fastapi import Depends
+from fastapi import Depends, Request
 from fastapi import status, HTTPException
+from fastapi.responses import RedirectResponse
 
 # Python
 from typing import Optional
@@ -55,7 +56,9 @@ class AuthManager:
                 email = email,
                 hashed_password = get_password_hash(password),
                 first_name = results["first_name"],
-                last_name = results["last_name"])   
+                last_name = results["last_name"],
+                postal_code = results["postal_code"]
+                )
         db.add(user)
         db.commit()
         db.refresh(user)
@@ -113,25 +116,34 @@ def create_access_token(data:dict, expires_delta: Optional[timedelta] = None):
     return encode_jwt
 
 
-# Funciones obtenidas de la documentación oficial
+# Funciones obtenidas de la documentación oficial y modificada con gpt
 async def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Could not validate credentials - get_current_user",
         headers={"WWW-Authenticate": "Bearer"},
     )
+    
+    if not token:
+        raise credentials_exception
+
     try: 
+        print(f"Token recibido: {token}")  # Debugging para verificar el token
         payload = jwt.decode(token, config('SECRET_KEY'), algorithms=[config('ALGORITHM')])
         email: str = payload.get("sub")
+        print(f"Obtenemos el email: {email}")
         if email is None:
-            raise credentials_exception # --> Vemos si con RedirectResponse mejoramos la caida de session 
+            raise credentials_exception  # Si no hay email en el token, lanza la excepción
+
         token_data = TokenData(username=email)
     except JWTError:
-        raise credentials_exception
+        raise credentials_exception  # Si el token es inválido, lanza la excepción
+    
     user = get_user_by_email(db, email=token_data.username)
     if user is None:
         raise credentials_exception
-    
+
+    # Asegurar que el usuario esté activo
     user.disabled = False
     db.commit()
     db.refresh(user)
@@ -141,9 +153,61 @@ async def get_current_user(token: str = Depends(oauth2_scheme), db: Session = De
 
 async def get_current_active_user(current_user: user.User = Depends(get_current_user)):
     if current_user.disabled:
-        raise HTTPException(status_code=400, detail="Inactive user")
+        # Enviar una redirección a la vista de login
+        raise HTTPException(
+            status_code=status.HTTP_307_TEMPORARY_REDIRECT,
+            detail="User not active. Redirecting to login...",
+            headers={"Location": "/login"}  # Header de redirección
+        )
+
     return current_user
+
+
+
+
+async def get_optional_current_user(
+    request: Request, 
+    db: Session = Depends(get_db)
+):
+    token = request.cookies.get("access_token")
     
+    if not token:
+        return None  # No hay token, usuario no autenticado
+
+    # 🔹 Remover el prefijo "Bearer " si está presente
+    if token.startswith("Bearer "):
+        token = token[len("Bearer "):]  # Quitar "Bearer "
+
+    try:
+        payload = jwt.decode(token, config('SECRET_KEY'), algorithms=[config('ALGORITHM')])
+        email: str = payload.get("sub")
+        if not email:
+            return None  # Token inválido
+        
+        user = get_user_by_email(db, email=email)
+        if not user:
+            return None  # Usuario no encontrado
+
+        return user  # Usuario autenticado correctamente
+
+    except JWTError:
+        return None  # Token inválido
+    
+
+# FastAPI no tiene una forma directa de "redirigir" como lo harías en Flask o Django
+# con return redirect(), pero se puede usar una excepción con código 307 (Temporary Redirect)
+# y un header Location que indica a dónde debe ir el usuario.
+
+# ¿Por qué 307 y no 303?
+
+# - 307 TEMPORARY REDIRECT mantiene el método HTTP (GET o POST).
+# - 303 SEE OTHER cambia el método a GET, útil si vienes de un POST.
+
+# Si el usuario intenta acceder sin estar autenticado, FastAPI enviará esta excepción 
+# con el header Location: /login, y el navegador hará la redirección automáticamente 
+# a la página de login.
+
+
 
 # Función obtenida del men de youtube
 #def get_user_from_token(db, token):

@@ -90,6 +90,12 @@ $(document).ready(function() {
 	});
     
     
+    
+    
+
+
+
+
     //================= QUESTION SI/NO ==========================
 
     $("#section_question").hide();
@@ -97,30 +103,7 @@ $(document).ready(function() {
     //$("#option_no").on("click", out_question)
 
 
-    //================= SECCIÓN DATOS DE PAGO ==========================
-
-    // Ocultamos el formulario de empresa (service)
-    $("#content_client_company").hide()
-
-    $("#empresa").click(function(){
-        $("#content_client").hide();
-        $("#content_client_company").show();
-    })
-    $("#personal").click(function(){
-        $("#content_client_company").hide();
-        $("#content_client").show();
-    })
-
-    // OPCIÓN DE PAGO
-    // Ocultamos el texto explicativo de transferencia (service)
-    $("#text_transferencia").hide()
-
-    $("#transferencia").click(function(){
-        $("#text_transferencia").show();
-    })
-    $("#tarjeta").click(function(){
-        $("#text_transferencia").hide();
-    })
+   
 
 
     //================================== ADMIN FRONT ====================================
