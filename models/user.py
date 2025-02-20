@@ -19,6 +19,7 @@ class User(Base):
     hashed_password = Column(String(64), nullable=False)
     first_name = Column(String(30), nullable=False)
     last_name = Column(String(30), nullable=False)
+    postal_code = Column(String(30), nullable=False)
     path_img_profile = Column(String(100))
     create = Column(DateTime, default=datetime.now)
     update = Column(DateTime, onupdate=datetime.now)

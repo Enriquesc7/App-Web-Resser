@@ -35,6 +35,9 @@
                     <input type="text" value="{{results['last_name'] if results else ''}}" placeholder="{{'Nom' if not results else ''}}" name="last_name" required="true">
                 </div>
                 <div class="elements_form">
+                    <input type="text" value="{{results['postal_code'] if results else ''}}" placeholder="{{'Code Postal' if not results else ''}}" name="postal_code" required="true">
+                </div>
+                <div class="elements_form">
                     <input type="password" placeholder="Mot de passe" name="password" required="true">
                 </div>
                 <div class="elements_form">
@@ -45,7 +48,7 @@
                     <button type="submit" id="register_button">S'inscrire</button>
                 </div>
                 <div class="elements_form">
-                    <button type="button"><a href="/">Haut de page</a></button>
+                    <button type="button"><a href="/home">Haut de page</a></button>
                 </div>
             </form>
         </div>

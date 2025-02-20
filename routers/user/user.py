@@ -11,9 +11,13 @@ from schemas import user
 from sqlalchemy.orm import Session
 
 # app
-from utils import get_db
+from utils import get_db, send_email
 from managers.admin import AdminManager
-from managers.auth import get_current_active_user
+from managers.auth import get_current_active_user, get_optional_current_user
+
+# Python
+from typing import Optional
+
 
 
 # Templates
@@ -163,18 +167,40 @@ async def welcome_6(
 #================= Go to Home ==================
 
 @router.get(
-    path = "/home",
-    response_model = user.User,
-    response_class= HTMLResponse, 
-    status_code = status.HTTP_200_OK,
-    summary = "Home",
-    tags= ["User"]
+    path="/home",
+    response_class=HTMLResponse, 
+    status_code=status.HTTP_200_OK,
+    summary="Home",
+    tags=["User"]
 )
 async def home(
-    request: Request 
+    request: Request,
+    db: Session = Depends(get_db),
+    current_user: Optional[user.User] = Depends(get_optional_current_user)  # Ahora es opcional
 ):
     return templates.TemplateResponse(
-        "users/profile.html", {"request":request})
+        "users/profile.html", {"request": request, "user": current_user}
+    )
+
+
+
+# ============== Validamos la información enviada por el Form contact ===========
+
+
+
+
+@router.post("/contact")
+async def contact_form(form: user.ContactForm, db: Session = Depends(get_db)):
+    """
+    Procesa el formulario de contacto.
+    """
+    email_sent = await send_email(form.name, form.email, form.message)
+
+    if email_sent:
+        return {"message": "Mensaje enviado correctamente"}
+    else:
+        return {"message": "Error al enviar el mensaje. Inténtalo más tarde"}
+
 
 
 #================= Go to Recycling Point ==================
@@ -281,6 +307,8 @@ async def shopping(
 
 #================= Go to Libraries ==================
 
+
+# Sección global de como reciclar los diferentes residuos
 @router.get(
     path = "/library",
     response_model = user.User,
@@ -293,21 +321,76 @@ async def shopping(
     request: Request 
 ):
     return templates.TemplateResponse(
-        "users/library.html", {"request":request})
+        "users/library/library.html", {"request":request})
 
 
 
+# Sección plastico
+@router.get(
+    path = "/library/plastic",
+    response_model = user.User,
+    response_class= HTMLResponse, 
+    status_code = status.HTTP_200_OK,
+    summary = "Section Libraries",
+    tags= ["User"]
+)
+async def shopping(
+    request: Request,
+    current_user: user.User = Depends(get_current_active_user)
+):
+    return templates.TemplateResponse(
+        "users/library/library_plastic.html", {"request":request})
 
 
+# Sección Papel
+@router.get(
+    path = "/library/paper",
+    response_model = user.User,
+    response_class= HTMLResponse, 
+    status_code = status.HTTP_200_OK,
+    summary = "Section Libraries",
+    tags= ["User"]
+)
+async def shopping(
+    request: Request,
+    current_user: user.User = Depends(get_current_active_user)
+):
+    return templates.TemplateResponse(
+        "users/library/library_paper.html", {"request":request})
 
 
+# Sección Vidrio
+@router.get(
+    path = "/library/glass",
+    response_model = user.User,
+    response_class= HTMLResponse, 
+    status_code = status.HTTP_200_OK,
+    summary = "Section Libraries",
+    tags= ["User"]
+)
+async def shopping(
+    request: Request,
+    current_user: user.User = Depends(get_current_active_user)
+):
+    return templates.TemplateResponse(
+        "users/library/library_glass.html", {"request":request})
 
 
-
-
-
-
-
+# Sección Compostaje
+@router.get(
+    path = "/library/composting",
+    response_model = user.User,
+    response_class= HTMLResponse, 
+    status_code = status.HTTP_200_OK,
+    summary = "Section Libraries",
+    tags= ["User"]
+)
+async def shopping(
+    request: Request,
+    current_user: user.User = Depends(get_current_active_user)
+):
+    return templates.TemplateResponse(
+        "users/library/library_composting.html", {"request":request})
 
 
 
@@ -369,7 +452,7 @@ async def update_profile(
 
 # LogOut
 @router.get(
-    path = "/{first_name}-{last_name}/logout",
+    path = "/logout",
     response_model = user.User,
     response_class= RedirectResponse,
     status_code = status.HTTP_200_OK,
@@ -384,7 +467,7 @@ async def logout(
     # Obtenemos el usuario
     user = await AdminManager.get_user_by_email(db, current_user.email)
     
-    response = RedirectResponse("/", status_code= status.HTTP_302_FOUND)
+    response = RedirectResponse("/home", status_code= status.HTTP_302_FOUND)
     response.delete_cookie(key="access_token")
     user.disabled = True
     db.commit()

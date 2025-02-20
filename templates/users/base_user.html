@@ -27,6 +27,9 @@
     <script src="{{ url_for('static', path='/scripts/scripts_base.js') }}"></script>
     <script src="{{ url_for('static', path='/scripts/scripts_ajax.js') }}"></script>
     <script src="{{ url_for('static', path='/scripts/scripts_slider_mobile.js') }}"></script>
+    <script src="{{ url_for('static', path='/scripts/contact.js') }}"></script>
+
+    <script src="{{ url_for('static', path='js/contact.js') }}"></script>
 
     <!-- Quagga2 para el escaneo de código de barras -->
     <script src="https://cdn.jsdelivr.net/npm/@ericblade/quagga2/dist/quagga.min.js"></script>
@@ -208,22 +211,14 @@
                 </a>
             </div>
             <section class="section_barra_nav"> 
-                <nav>
-                    <div id="barra_nav">
-                        <ul id="element_nav">
-                            <li class="{% if request['path'] == '/' %}active{% endif %}"><a href="/"><p>Configuration</p></a></li>
-                            <li class="{% if request['path'] == '/para-ti' %}active{% endif %}"><a href="#"><p>Déconnexion</p></a></li>
-                        </ul>
-                    </div>
-                </nav>
                 <div id="container_icon_menu">
                     <img id="icon_menu" src="{{ url_for('static', path='img/front/icon_menu.png') }}" alt="menu">
                 </div>
             </section>
         </div>
         <ul id="element_nav_burger">
-            <li class="{% if request['path'] == '/' %}active{% endif %}"><a href="#"><p style="font-size: 1.4rem;">Configuration</p></a></li>
-            <li class="{% if request['path'] == '/para-ti' %}active{% endif %}"><a href="#"><p style="font-size: 1.4rem;">Déconnexion</p></a></li>
+            <li><a href="#"><p style="font-size: 1.4rem;">Configuration</p></a></li>
+            <li><a href="#"><p style="font-size: 1.4rem;">Déconnexion</p></a></li>
         </ul>
     </header>
     

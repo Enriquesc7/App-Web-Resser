@@ -1,12 +1,13 @@
 # FastAPI 
 from fastapi import APIRouter
-from fastapi import status, Request, Depends, Path
+from fastapi import status, Request, Depends, Path, HTTPException
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import RedirectResponse, JSONResponse
 
 # Python
 from typing import List
 import json
+import httpx
 
 # Schemas
 from schemas import user
@@ -33,6 +34,10 @@ router = APIRouter(
     tags = ["User-Products"],
     responses = {404: {"description": "Not found"}}, 
 )
+
+
+
+API_OPENFOODFACTS = "https://world.openfoodfacts.org/api/v3/product"
 
 
 #===============================================================================================================
@@ -65,7 +70,7 @@ async def products_user(
     pagination = get_pagination(page, total_pages)
     
     return templates.TemplateResponse(
-        "users/products.html",
+        "users/products/products.html",
         {"request":request,
         "user": await AdminManager.get_user_by_email(db, current_user.email),
         "products": paginated_products,
@@ -168,3 +173,56 @@ def get_pagination(page: int, total_pages: int, delta: int = 6):
             pages.append('...')
     
     return pages
+
+
+
+
+
+# =========== Probando la obtención de productos con la API de OpenFoosFacts ==============
+
+
+# Botella de agua:  3268840001008
+
+
+@router.get(
+    path = "/producto/{barcode}",
+    response_model = user.User,
+    status_code = status.HTTP_200_OK,
+    summary = "API - Show information about product",
+    tags= ["User-Products"]
+)
+async def get_product_with_api(
+    request: Request,
+    barcode: str = Path()
+):
+    """
+    Obtiene información de un producto desde Open Food Facts usando el código de barras.
+    """
+    url = f"{API_OPENFOODFACTS}/{barcode}.json"
+    
+    async with httpx.AsyncClient() as client:
+        response = await client.get(url)
+
+    if response.status_code != 200:
+        raise HTTPException(status_code=response.status_code, detail="Error al consultar Open Food Facts")
+
+    data = response.json()
+
+    if "product" not in data:
+        raise HTTPException(status_code=404, detail="Producto no encontrado")
+
+    producto = {
+        "nombre": data["product"].get("product_name", "No disponible"),
+        "marca": data["product"].get("brands", "No disponible"),
+        "imagen": data["product"].get("image_url", ""),
+        "cantidad_n": data["product"].get("product_quantity", ""),
+        "cantidad_metrica": data["product"].get("product_quantity_unit", ""),
+        "embalaje": data["product"].get("packaging")
+    }
+
+    return templates.TemplateResponse(
+        "users/products/info_products_api.html",
+        {"request":request,
+        'producto': producto})
+
+

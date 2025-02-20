@@ -1,0 +1,57 @@
+{% extends "users/base_user.html" %} 
+
+{% block title %} 
+<title>Información API</title>
+{% endblock %}
+
+
+{% block content %} 
+<section id="container_product">
+
+    <div id="container_basic_info">
+        
+        <div id="container_img">
+            <div id="img_product">
+                <img src="{{producto['imagen']}}" alt="img_product">
+            </div>
+
+            
+        </div>
+
+
+        <div id="data_product">
+            
+            <h2>Información del producto con la API de Open Food Facts</h2>
+
+            <br>
+            <br>
+
+            Nombre producto: {{producto['nombre']}} <br>
+            Marca: {{producto['marca']}} <br>
+            Cantidad (n°): {{producto['cantidad_n']}} <br>
+            Cantidad (métrica): {{producto['cantidad_metrica']}}
+
+            <br>
+            <br>
+
+            Embalaje: {{producto['embalaje']}}
+
+            <br>
+            <br>
+            
+            Imagen: {{producto['imagen']}}
+
+            </div>
+
+
+
+
+        
+    </div>
+
+
+    
+</section>
+
+
+{% endblock %}
