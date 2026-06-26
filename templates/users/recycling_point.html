@@ -1,34 +1,86 @@
-{% extends "users/base_user.html" %} 
+{% extends "users/base_user.html" %}
+{% from 'partials/icons.html' import icon %}
 
-{% block title %} 
-<title>Puntos de Reciclaje</title>
-{% endblock %}
+{% block title %}<title>Points de recyclage — Resser</title>{% endblock %}
 
+{% block content %}
+<div class="page">
 
-{% block content %} 
+  <div class="page-header">
+    <h1>Points de recyclage</h1>
+  </div>
 
-<div id="container_user">
-                
-    <div id="title_point_recycle">
-        <h2>
-            <strong>Points de recyclage!</strong>
-        </h2>
+  <div class="card-elevated" style="margin-bottom:12px; padding:0; overflow:hidden; border-radius:var(--radius-lg);">
+    <!-- Inline SVG map illustration (replaces restricted /static/img/mapa.png) -->
+    <svg viewBox="0 0 380 160" xmlns="http://www.w3.org/2000/svg" width="100%" height="160" style="display:block; background:#F4F4EF;" aria-hidden="true">
+      <!-- City block grid — neutral-200 streets -->
+      <rect x="0"   y="0"   width="380" height="160" fill="#F4F4EF"/>
+      <!-- Horizontal roads -->
+      <rect x="0"   y="55"  width="380" height="10"  fill="#E7E7E0"/>
+      <rect x="0"   y="105" width="380" height="10"  fill="#E7E7E0"/>
+      <!-- Vertical roads -->
+      <rect x="75"  y="0"   width="10"  height="160" fill="#E7E7E0"/>
+      <rect x="185" y="0"   width="10"  height="160" fill="#E7E7E0"/>
+      <rect x="295" y="0"   width="10"  height="160" fill="#E7E7E0"/>
+      <!-- City blocks — subtle fill -->
+      <rect x="1"   y="1"   width="73"  height="53"  rx="2" fill="#ECFDF5" opacity="0.6"/>
+      <rect x="86"  y="1"   width="98"  height="53"  rx="2" fill="#ECFDF5" opacity="0.4"/>
+      <rect x="196" y="1"   width="98"  height="53"  rx="2" fill="#ECFDF5" opacity="0.6"/>
+      <rect x="1"   y="66"  width="73"  height="38"  rx="2" fill="#ECFDF5" opacity="0.4"/>
+      <rect x="86"  y="66"  width="98"  height="38"  rx="2" fill="#ECFDF5" opacity="0.6"/>
+      <rect x="196" y="66"  width="98"  height="38"  rx="2" fill="#ECFDF5" opacity="0.4"/>
+      <rect x="306" y="66"  width="73"  height="38"  rx="2" fill="#ECFDF5" opacity="0.6"/>
+      <rect x="1"   y="116" width="73"  height="43"  rx="2" fill="#ECFDF5" opacity="0.6"/>
+      <rect x="86"  y="116" width="98"  height="43"  rx="2" fill="#ECFDF5" opacity="0.4"/>
+      <rect x="196" y="116" width="98"  height="43"  rx="2" fill="#ECFDF5" opacity="0.6"/>
+      <!-- Location pin 1 (primary, large) -->
+      <circle cx="135" cy="38" r="13" fill="#10B981"/>
+      <path d="M135 51 L135 62" stroke="#10B981" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="135" cy="38" r="5" fill="white"/>
+      <!-- Location pin 2 (secondary) -->
+      <circle cx="248" cy="86" r="10" fill="#059669" opacity="0.8"/>
+      <path d="M248 96 L248 105" stroke="#059669" stroke-width="2.5" stroke-linecap="round"/>
+      <circle cx="248" cy="86" r="4" fill="white"/>
+      <!-- Location pin 3 (tertiary, small) -->
+      <circle cx="38"  cy="133" r="7"  fill="#10B981" opacity="0.55"/>
+      <path d="M38 140 L38 148"  stroke="#10B981" stroke-width="2" stroke-linecap="round"/>
+      <circle cx="38"  cy="133" r="3" fill="white"/>
+    </svg>
+    <div style="padding:16px;">
+      <p style="font-size:0.9375rem; color:var(--neutral-600); line-height:1.5; margin:0 0 16px;">
+        Trouvez vos points de recyclage rapidement grâce à la géolocalisation de votre appareil&nbsp;!
+      </p>
+      <a href="/point_collector" class="btn-primary" style="width:100%; display:flex; justify-content:center; align-items:center; gap:8px; border-radius:var(--radius-md);">
+        {{ icon('location', 18) }}
+        Points à proximité
+      </a>
     </div>
+  </div>
 
-    <div id="img_point_recycle" > 
-        <img src="{{ url_for('static', path='img/mapa.png') }}">
+  <div class="card">
+    <p class="section-label">Comment ça marche</p>
+    <div class="list-item">
+      <div class="list-item-icon">{{ icon('location', 16) }}</div>
+      <div class="list-item-content">
+        <div class="list-item-title">Localisez un point de collecte</div>
+        <div class="list-item-subtitle">Bennes, colonnes, déchetteries près de chez vous</div>
+      </div>
     </div>
-    <div id="content_point_recycle">
-        <p style="font-size: 1.4rem;">Trouvez vos points de recyclage rapidement grâce à la géolocalisation de votre appareil!</p>
-        <br>
-        <br>
-        <br>
-        <div class="elements_form position_welcome" style="height: 55px;">
-            <button type="button" style="height: 50px;"><a href="/point_collector" style="font-size: 1.4rem;">Points à proximité</a></button>
-        </div>
+    <div class="list-item">
+      <div class="list-item-icon">{{ icon('recycle', 16) }}</div>
+      <div class="list-item-content">
+        <div class="list-item-title">Déposez vos déchets triés</div>
+        <div class="list-item-subtitle">Suivez les consignes de tri du point de collecte</div>
+      </div>
     </div>
-        
+    <div class="list-item">
+      <div class="list-item-icon">{{ icon('leaf', 16) }}</div>
+      <div class="list-item-content">
+        <div class="list-item-title">Gagnez des points Resser</div>
+        <div class="list-item-subtitle">Scannez le QR code du conteneur pour valider</div>
+      </div>
+    </div>
+  </div>
+
 </div>
-
-
 {% endblock %}

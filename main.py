@@ -79,7 +79,8 @@ from db import engine, Base
 from routers.auth import register, login
 from routers.admin import admin, admin_cloud, admin_user, admin_front, admin_setting
 from routers.front import front
-from routers.user import product, user, setting
+from routers.user import product, user, setting, receipt
+import models.receipt  # ensures receipt tables are registered with Base.metadata
 
 
 Base.metadata.create_all(bind=engine)
@@ -98,6 +99,8 @@ app.include_router(front.router)
 app.include_router(user.router)
 app.include_router(product.router)
 app.include_router(setting.router)
+
+app.include_router(receipt.router)
 
 app.include_router(admin.router)
 app.include_router(admin_user.router)

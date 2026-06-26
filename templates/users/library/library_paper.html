@@ -1,20 +1,50 @@
-{% extends "users/base_user.html" %} 
+{% extends "users/base_user.html" %}
+{% from 'partials/icons.html' import icon %}
 
-{% block title %} 
-<title>Libraries</title>
-{% endblock %}
+{% block title %}<title>Papier — Guide Resser</title>{% endblock %}
 
+{% block content %}
+<div class="page">
 
-{% block content %} 
+  <div class="page-header">
+    <a href="/library" class="btn-icon" aria-label="Retour">{{ icon('chevron-left', 22) }}</a>
+    <h1>Papier / Carton</h1>
+    <span class="badge badge-paper">Matière</span>
+  </div>
 
-<div id="container_user">
-                
-    <div id="title_shopping">
-        <h2>
-            <strong>Información Papel</strong>
-        </h2>
+  <div class="card" style="margin-bottom:12px; border-left:4px solid var(--cat-paper);">
+    <p class="section-label" style="color:var(--cat-paper);">Ce qui se recycle</p>
+    <div class="list-item">
+      <div class="list-item-icon" style="background:#FEFCE8; color:var(--cat-paper);">{{ icon('check', 16) }}</div>
+      <div class="list-item-content">
+        <div class="list-item-title">Journaux et magazines</div>
+        <div class="list-item-subtitle">Pliés ou roulés → bac bleu ou jaune</div>
+      </div>
     </div>
+    <div class="list-item">
+      <div class="list-item-icon" style="background:#FEFCE8; color:var(--cat-paper);">{{ icon('check', 16) }}</div>
+      <div class="list-item-content">
+        <div class="list-item-title">Cartons d'emballage</div>
+        <div class="list-item-subtitle">Aplatis → bac jaune ou déchetterie</div>
+      </div>
+    </div>
+    <div class="list-item">
+      <div class="list-item-icon" style="background:#FEF2F2; color:var(--red);">{{ icon('x', 16) }}</div>
+      <div class="list-item-content">
+        <div class="list-item-title">Papier gras ou souillé</div>
+        <div class="list-item-subtitle">Pizza, tissues usagés → poubelle noire</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="background:var(--resser-50); border-color:var(--resser-100);">
+    <div style="display:flex; align-items:flex-start; gap:10px;">
+      <div style="color:var(--resser-600); flex-shrink:0; margin-top:2px;">{{ icon('leaf', 18) }}</div>
+      <p style="font-size:0.875rem; color:var(--neutral-900); line-height:1.5; margin:0;">
+        Recycler une tonne de papier économise 17 arbres, 7 000 litres d'eau et 4 000 kWh d'énergie.
+      </p>
+    </div>
+  </div>
 
 </div>
-
-{% endblock %} 
+{% endblock %}

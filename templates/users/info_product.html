@@ -1,87 +1,98 @@
-{% extends "users/base_user.html" %} 
+{% extends "users/base_user.html" %}
+{% from 'partials/icons.html' import icon %}
 
-{% block title %} 
-<title>Información Producto</title>
-{% endblock %}
+{% block title %}<title>Produit — Resser</title>{% endblock %}
 
+{% block content %}
+<div class="page">
 
-{% block content %} 
-        <section id="container_product">
-            
-            <div id="img_product">
-                <img src="{{product['basic_data']['image']}}" alt="img_product">
-            </div>
-            <div id="data_product">
-                <h2>{{product['basic_data']['title']}}</h2>
-                <br>
-                <div id="container_logos">
-                    <div class="score_logo">
-                        <img src="{{product['environment_data']['ecoscore']['image']}}" alt="img_ecoscore">
-                    </div>
-                    <div class="nova_logo">
-                        <img src="{{product['nutritional_data']['nova']['image']}}" alt="img_nova">
-                    </div>
-                    <div class="score_logo">
-                        <img src="{{product['nutritional_data']['nutriscore']['image']}}" alt="img_nutriscore">
-                    </div>
-                </div>
-                <div id="emballage">
-                    <h3>Emballage</h3>
-                    <div id="content_emballage">
-                        <div id="impact_emballage">
-                            <img src="{{product['environment_data']['packaging']['image']}}" alt="img_packaging">
-                            <p>{{product['environment_data']['packaging']['content']}}</p>
-                        </div>
-                        <div>
-                            <img src="{{product['environment_data']['packaging']['image_label']}}" alt="img_label_packaging">
-                        </div>
-                    </div>
-                </div>
-                <div id="materials">
-                    <h3>Matériaux d'emballage</h3>
-                    <div>
-                        <section class="section_table">
-                            <table class="table" id="table_user">
-                                <thead>
-                                    <tr>
-                                    {% for column in product['environment_data']['packaging']['materials']['columns'] %}
-                                        <th>{{column}}</th>
-                                    {% endfor %}
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% set columns_count = product['environment_data']['packaging']['materials']['columns']|length %}
-                                    {% set row_count = product['environment_data']['packaging']['materials']['rows']|length %}
-                                    {% for i in range(0, row_count, columns_count) %}
-                                        <tr>
-                                            {% for j in range(columns_count) %}
-                                                {% if i+j < row_count %}
-                                                    <td>{{ product['environment_data']['packaging']['materials']['rows'][i+j].strip() }}</td>
-                                                {% else %}
-                                                    <td></td> <!-- Si no hay suficientes elementos, añade celdas vacías -->
-                                                {% endif %}
-                                            {% endfor %}
-                                        </tr>
-                                    {% endfor %}
-                                </tbody> 
-                            </table>
-                        </section>
-                    </div>
-                </div>
-                <div id="transport">
-                    <h3>Transport</h3>
-                    <div>
-                        <img src="{{product['environment_data']['transport']['image']}}" alt="img_packaging">
+  <div class="page-header">
+    <a href="javascript:history.back()" class="btn-icon" aria-label="Retour">
+      {{ icon('chevron-left', 22) }}
+    </a>
+    <h1 style="font-size:1rem;">{{ product['basic_data']['title'] }}</h1>
+  </div>
 
-                        <p>{{product['environment_data']['transport']['content']}}</p>
-                    </div>
-                </div>
+  <div class="card" id="container_product" style="margin-bottom:12px;">
+    <div style="display:flex; gap:16px; align-items:flex-start;">
 
-            </div>
+      <div id="img_product" style="flex-shrink:0; width:100px; height:120px; display:flex; align-items:center; justify-content:center; background:var(--neutral-50); border-radius:var(--radius-sm); overflow:hidden;">
+        <img src="{{ product['basic_data']['image'] }}" alt="{{ product['basic_data']['title'] }}"
+             style="width:100%; height:100%; object-fit:contain;" onerror="this.style.display='none'">
+      </div>
 
+      <div id="data_product" style="flex:1; min-width:0; display:flex; flex-direction:column; gap:10px;">
+        <div id="container_logos" style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+          <div class="score_logo" style="width:40px; height:30px;">
+            <img src="{{ product['environment_data']['ecoscore']['image'] }}" alt="ecoscore"
+                 style="width:100%; height:100%; object-fit:contain;" onerror="this.style.display='none'">
+          </div>
+          <div class="nova_logo" style="width:26px; height:30px;">
+            <img src="{{ product['nutritional_data']['nova']['image'] }}" alt="nova"
+                 style="width:100%; height:100%; object-fit:contain;" onerror="this.style.display='none'">
+          </div>
+          <div class="score_logo" style="width:40px; height:30px;">
+            <img src="{{ product['nutritional_data']['nutriscore']['image'] }}" alt="nutriscore"
+                 style="width:100%; height:100%; object-fit:contain;" onerror="this.style.display='none'">
+          </div>
+        </div>
 
-            
-        </section>
+        <div id="emballage">
+          <p class="section-label" style="margin-bottom:6px;">Emballage</p>
+          <div id="impact_emballage" style="display:flex; align-items:center; gap:10px; background:var(--neutral-50); border-radius:var(--radius-sm); padding:8px;">
+            <img src="{{ product['environment_data']['packaging']['image'] }}" alt="packaging"
+                 style="width:36px; height:36px; object-fit:contain;" onerror="this.style.display='none'">
+            <p style="font-size:0.875rem; color:var(--neutral-600); line-height:1.4; margin:0;">
+              {{ product['environment_data']['packaging']['content'] }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
+  <!-- Materials table -->
+  <div class="card" id="materials" style="margin-bottom:12px;">
+    <h3 style="font-size:0.9375rem; font-weight:600; color:var(--neutral-900); margin-bottom:12px;">Matériaux d'emballage</h3>
+    <div class="section_table">
+      <table class="table" id="table_user" style="width:100%; border-collapse:collapse; font-size:0.875rem;">
+        <thead style="background:var(--resser-500); color:#fff;">
+          <tr>
+            {% for column in product['environment_data']['packaging']['materials']['columns'] %}
+            <th style="padding:8px; text-align:left; font-weight:500;">{{ column }}</th>
+            {% endfor %}
+          </tr>
+        </thead>
+        <tbody>
+          {% set columns_count = product['environment_data']['packaging']['materials']['columns']|length %}
+          {% set row_count = product['environment_data']['packaging']['materials']['rows']|length %}
+          {% for i in range(0, row_count, columns_count) %}
+          <tr style="border-bottom:0.5px solid var(--neutral-200);">
+            {% for j in range(columns_count) %}
+            {% if i+j < row_count %}
+            <td style="padding:8px; color:var(--neutral-600);">{{ product['environment_data']['packaging']['materials']['rows'][i+j].strip() }}</td>
+            {% else %}
+            <td style="padding:8px;"></td>
+            {% endif %}
+            {% endfor %}
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
 
+  <!-- Transport -->
+  <div class="card" id="transport" style="margin-bottom:12px;">
+    <h3 style="font-size:0.9375rem; font-weight:600; color:var(--neutral-900); margin-bottom:12px;">Transport</h3>
+    <div style="display:flex; align-items:center; gap:12px; background:var(--neutral-50); border-radius:var(--radius-sm); padding:10px;">
+      <img src="{{ product['environment_data']['transport']['image'] }}" alt="transport"
+           style="width:44px; height:44px; object-fit:contain; border-radius:50%;" onerror="this.style.display='none'">
+      <p style="font-size:0.875rem; color:var(--neutral-600); line-height:1.4; margin:0;">
+        {{ product['environment_data']['transport']['content'] }}
+      </p>
+    </div>
+  </div>
+
+</div>
 {% endblock %}

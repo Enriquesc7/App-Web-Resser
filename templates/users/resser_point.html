@@ -1,36 +1,39 @@
-{% extends "users/base_user.html" %} 
+{% extends "users/base_user.html" %}
+{% from 'partials/icons.html' import icon %}
 
-{% block title %} 
-<title>Recycling Waste</title>
-{% endblock %}
+{% block title %}<title>Félicitations — Resser</title>{% endblock %}
 
+{% block content %}
+<div class="page">
 
-{% block content %} 
-
-<div id="container_user">
-    <br>
-    <div id="title_point_recycle">
-        <h3 style="text-align: center; font-size: 3rem;">
-            <strong>Félicitations!!</strong>
-        </h3>
+  <div class="card-hero" style="text-align:center; margin-bottom:12px;">
+    <div style="margin-bottom:12px;">
+      {{ icon('recycle', 40) }}
     </div>
+    <h2 style="color:#fff; font-size:1.5rem; font-weight:700; margin-bottom:8px;">Félicitations !</h2>
+    <p style="color:rgba(255,255,255,0.85); font-size:0.9375rem; margin-bottom:16px;">
+      Vous avez recyclé vos déchets et gagné des points Resser.
+    </p>
+    <div style="display:inline-flex; align-items:baseline; gap:4px; background:rgba(255,255,255,0.2); border-radius:var(--radius-pill); padding:8px 20px;">
+      <span style="font-size:2.5rem; font-weight:700; color:#fff; line-height:1;">+200</span>
+      <span style="font-size:1rem; color:rgba(255,255,255,0.8);">pts</span>
+    </div>
+  </div>
 
-    <div id="img_point_recycle" > 
-        <img style="width: 80%;" src="{{ url_for('static', path='img/win_resser_point.png') }}">
-    </div>
-    <div id="content_point_recycle">
-        <p style="padding-bottom: 10px; font-size: 1.6rem;">Vous avez recyclé vos déchets et gagné des points Resser.</p>
-        <p style="padding-bottom: 10px; font-size: 4rem;">+200pts.</p>
-        
-        <br>
-        <br>
-        <div class="elements_form" style="height: 65px;">
-            <button type="button" style="height: 60px; display: flex; flex-direction: column; justify-content: center;"><a href="/shopping" style="font-size: 1.7rem; display: block;">Échanger tes points</a></button>
-        </div>
-        <br>
-    </div>
-        
+  <div class="card" style="margin-bottom:12px;">
+    <img src="{{ url_for('static', path='img/win_resser_point.png') }}" alt="Points gagnés"
+         style="width:100%; max-width:240px; margin:0 auto 16px; display:block; object-fit:contain;"
+         onerror="this.style.display='none'">
+    <a href="/shopping" class="btn-primary" style="width:100%; display:flex; justify-content:center; align-items:center; gap:8px; border-radius:var(--radius-md);">
+      {{ icon('shopping', 18) }}
+      Échanger mes points
+    </a>
+  </div>
+
+  <a href="/home" class="btn-ghost" style="width:100%; display:flex; justify-content:center; align-items:center; gap:6px;">
+    {{ icon('chevron-left', 16) }}
+    Retour à l'accueil
+  </a>
+
 </div>
-
-
 {% endblock %}

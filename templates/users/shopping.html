@@ -1,82 +1,100 @@
-{% extends "users/base_user.html" %} 
+{% extends "users/base_user.html" %}
+{% from 'partials/icons.html' import icon %}
 
-{% block title %} 
-<title>Shopping</title>
-{% endblock %}
+{% block title %}<title>Achats — Resser</title>{% endblock %}
 
+{% block content %}
+<div class="page">
 
-{% block content %} 
+  <div class="page-header">
+    <h1>Magasins associés</h1>
+  </div>
 
-<div id="container_user">
-                
-    <div id="title_shopping">
-        <h2>
-            <strong>Magasins associés!</strong>
-        </h2>
+  <p style="font-size:0.875rem; color:var(--neutral-600); margin-bottom:16px; line-height:1.5;">
+    Découvrez les entreprises engagées dans le recyclage du plastique qui vous offrent des avantages avec vos points Resser.
+  </p>
+
+  <div class="card" style="padding:0;">
+
+    {# Reusable SVG snippet for partner logo placeholder — storefront outline #}
+    {% set shop_svg %}
+    <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" width="28" height="28" aria-hidden="true">
+      <path d="M5 16v14h26V16" stroke="#047857" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M2 16h32" stroke="#047857" stroke-width="1.8" stroke-linecap="round"/>
+      <path d="M12 30V22h6v8" stroke="#047857" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      <rect x="20" y="20" width="7" height="7" rx="1" stroke="#047857" stroke-width="1.8"/>
+      <path d="M5 9 L7 4 h22 l2 5" stroke="#047857" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M5 9 h26" stroke="#047857" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    {% endset %}
+
+    {% set recycle_svg %}
+    <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" width="28" height="28" aria-hidden="true">
+      <path d="M18 6 L22 13 H14 Z" fill="#047857"/>
+      <path d="M14 6 A12 12 0 0 0 6 18" stroke="#047857" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+      <path d="M6 18 L9 22 L3 22 Z" fill="#047857"/>
+      <path d="M9 22 A12 12 0 0 0 27 22" stroke="#047857" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+      <path d="M27 22 L24 18 L30 18 Z" fill="#047857"/>
+      <path d="M30 18 A12 12 0 0 0 22 6" stroke="#047857" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+    </svg>
+    {% endset %}
+
+    <div class="list-item" style="padding:14px 16px;">
+      <div style="width:48px; height:48px; flex-shrink:0; border-radius:var(--radius-sm); background:var(--resser-50); display:flex; align-items:center; justify-content:center;">
+        {{ recycle_svg }}
+      </div>
+      <div class="list-item-content">
+        <div class="list-item-title">Green Fablab</div>
+        <div class="list-item-subtitle">Les meilleurs produits à partir de plastique recyclé</div>
+      </div>
+      <div class="list-item-trail">{{ icon('chevron-right', 18) }}</div>
     </div>
 
-    <div class="shopping" > 
-        <div class="img_shopping">
-            <img src="{{ url_for('static', path='img/partners/enterprise/green_fablab.png') }}">
-        </div>
-        <div class="text_shopping">
-            <p>Obtenez les meilleurs produits à partir de plastique recyclé!</p>
-        </div>
-        <div class="buttom_shopping">
-            <a class="adelante">&#10095;</a>
-        </div>
-    </div>
-    
-    <div class="shopping" > 
-        <div class="img_shopping">
-            <img src="{{ url_for('static', path='img/partners/enterprise/saju.png') }}">
-        </div>
-        <div class="text_shopping">
-            <p>Obtenez les meilleures lunettes et accessoires à partir de plastique recyclé.</p>
-        </div>
-        <div class="buttom_shopping">
-            <a class="adelante">&#10095;</a>
-        </div>
+    <div class="list-item" style="padding:14px 16px;">
+      <div style="width:48px; height:48px; flex-shrink:0; border-radius:var(--radius-sm); background:var(--resser-50); display:flex; align-items:center; justify-content:center;">
+        {{ shop_svg }}
+      </div>
+      <div class="list-item-content">
+        <div class="list-item-title">Saju</div>
+        <div class="list-item-subtitle">Lunettes et accessoires à partir de plastique recyclé</div>
+      </div>
+      <div class="list-item-trail">{{ icon('chevron-right', 18) }}</div>
     </div>
 
-    <div class="shopping" > 
-        <div class="img_shopping">
-            <img src="{{ url_for('static', path='img/partners/enterprise/natura.png') }}">
-        </div>
-        <div class="text_shopping">
-            <p>50% (en poids) du plastique utilisé dans les emballages est recyclé.</p>
-        </div>
-        <div class="buttom_shopping">
-            <a class="adelante">&#10095;</a>
-        </div>
+    <div class="list-item" style="padding:14px 16px;">
+      <div style="width:48px; height:48px; flex-shrink:0; border-radius:var(--radius-sm); background:var(--resser-50); display:flex; align-items:center; justify-content:center;">
+        {{ shop_svg }}
+      </div>
+      <div class="list-item-content">
+        <div class="list-item-title">Natura</div>
+        <div class="list-item-subtitle">50 % du plastique dans les emballages est recyclé</div>
+      </div>
+      <div class="list-item-trail">{{ icon('chevron-right', 18) }}</div>
     </div>
 
-    <div class="shopping" > 
-        <div class="img_shopping">
-            <img src="{{ url_for('static', path='img/partners/enterprise/postobon.png') }}">
-        </div>
-        <div class="text_shopping">
-            <p>Première entreprise colombienne à obtenir la certification de neutralité plastique.</p>
-        </div>
-        <div class="buttom_shopping">
-            <a class="adelante">&#10095;</a>
-        </div>
+    <div class="list-item" style="padding:14px 16px;">
+      <div style="width:48px; height:48px; flex-shrink:0; border-radius:var(--radius-sm); background:var(--resser-50); display:flex; align-items:center; justify-content:center;">
+        {{ shop_svg }}
+      </div>
+      <div class="list-item-content">
+        <div class="list-item-title">Postobon</div>
+        <div class="list-item-subtitle">Première entreprise certifiée neutralité plastique</div>
+      </div>
+      <div class="list-item-trail">{{ icon('chevron-right', 18) }}</div>
     </div>
 
-    <div class="shopping" > 
-        <div class="img_shopping">
-            <img src="{{ url_for('static', path='img/partners/enterprise/hp.png') }}">
-        </div>
-        <div class="text_shopping">
-            <p>L'imprimante HP Color LaserJet est construite avec 16 % de plastique recyclé.</p>
-        </div>
-        <div class="buttom_shopping">
-            <a class="adelante">&#10095;</a>
-        </div>
+    <div class="list-item" style="padding:14px 16px;">
+      <div style="width:48px; height:48px; flex-shrink:0; border-radius:var(--radius-sm); background:var(--resser-50); display:flex; align-items:center; justify-content:center;">
+        {{ shop_svg }}
+      </div>
+      <div class="list-item-content">
+        <div class="list-item-title">HP</div>
+        <div class="list-item-subtitle">Imprimantes avec 16 % de plastique recyclé</div>
+      </div>
+      <div class="list-item-trail">{{ icon('chevron-right', 18) }}</div>
     </div>
-    
-        
+
+  </div>
+
 </div>
-
-
 {% endblock %}

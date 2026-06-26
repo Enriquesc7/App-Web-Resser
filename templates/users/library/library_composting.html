@@ -1,20 +1,50 @@
-{% extends "users/base_user.html" %} 
+{% extends "users/base_user.html" %}
+{% from 'partials/icons.html' import icon %}
 
-{% block title %} 
-<title>Libraries</title>
-{% endblock %}
+{% block title %}<title>Compostage — Guide Resser</title>{% endblock %}
 
+{% block content %}
+<div class="page">
 
-{% block content %} 
+  <div class="page-header">
+    <a href="/library" class="btn-icon" aria-label="Retour">{{ icon('chevron-left', 22) }}</a>
+    <h1>Compostage</h1>
+    <span class="badge badge-composting">Matière</span>
+  </div>
 
-<div id="container_user">
-                
-    <div id="title_shopping">
-        <h2>
-            <strong>Información Compostaje</strong>
-        </h2>
+  <div class="card" style="margin-bottom:12px; border-left:4px solid var(--cat-composting);">
+    <p class="section-label" style="color:var(--cat-composting);">Ce qui se composte</p>
+    <div class="list-item">
+      <div class="list-item-icon" style="background:#F7FEE7; color:var(--cat-composting);">{{ icon('check', 16) }}</div>
+      <div class="list-item-content">
+        <div class="list-item-title">Épluchures et restes de légumes</div>
+        <div class="list-item-subtitle">Fruits, légumes, marc de café → bac marron</div>
+      </div>
     </div>
+    <div class="list-item">
+      <div class="list-item-icon" style="background:#F7FEE7; color:var(--cat-composting);">{{ icon('check', 16) }}</div>
+      <div class="list-item-content">
+        <div class="list-item-title">Résidus de jardin</div>
+        <div class="list-item-subtitle">Tontes, feuilles mortes, petites branches</div>
+      </div>
+    </div>
+    <div class="list-item">
+      <div class="list-item-icon" style="background:#FEF2F2; color:var(--red);">{{ icon('x', 16) }}</div>
+      <div class="list-item-content">
+        <div class="list-item-title">Viandes et poissons</div>
+        <div class="list-item-subtitle">Déconseillés en composteur domestique</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="background:var(--resser-50); border-color:var(--resser-100);">
+    <div style="display:flex; align-items:flex-start; gap:10px;">
+      <div style="color:var(--resser-600); flex-shrink:0; margin-top:2px;">{{ icon('leaf', 18) }}</div>
+      <p style="font-size:0.875rem; color:var(--neutral-900); line-height:1.5; margin:0;">
+        Le compostage transforme les déchets organiques en engrais naturel. Un foyer produit en moyenne 80 kg de biodéchets compostables par an.
+      </p>
+    </div>
+  </div>
 
 </div>
-
-{% endblock %} 
+{% endblock %}

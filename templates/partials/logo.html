@@ -1,0 +1,17 @@
+{% macro logo(size='large') %}
+{% if size == 'large' %}
+<svg viewBox="0 0 130 36" xmlns="http://www.w3.org/2000/svg" width="130" height="36" aria-label="Resser">
+  <!-- Leaf accent -->
+  <path d="M7 27C4.5 24 3.5 20 4.5 16C7 11 12 8.5 17 8.5C15 13 13 17 12 21C11 25 9.5 28 7 27Z" fill="#10B981"/>
+  <path d="M7 27C9 23 10.5 19 12 16" stroke="#047857" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+  <!-- Wordmark -->
+  <text x="22" y="26" font-family="Inter, system-ui, sans-serif" font-size="21" font-weight="700" fill="#1A1A18" letter-spacing="-0.3">Resser</text>
+</svg>
+{% else %}
+<svg viewBox="0 0 90 26" xmlns="http://www.w3.org/2000/svg" width="90" height="26" aria-label="Resser">
+  <path d="M5 18C3.5 15.5 3 12.5 3.5 9.5C5.5 6.5 9 5 12.5 5C11 8 9.5 11 9 14C8.5 17 7 19.5 5 18Z" fill="#10B981"/>
+  <path d="M5 18C6.5 15 8 12 9 10" stroke="#047857" stroke-width="0.9" fill="none" stroke-linecap="round"/>
+  <text x="16" y="18" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="700" fill="#1A1A18" letter-spacing="-0.2">Resser</text>
+</svg>
+{% endif %}
+{% endmacro %}

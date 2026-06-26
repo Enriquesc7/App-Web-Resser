@@ -1,20 +1,50 @@
-{% extends "users/base_user.html" %} 
+{% extends "users/base_user.html" %}
+{% from 'partials/icons.html' import icon %}
 
-{% block title %} 
-<title>Libraries</title>
-{% endblock %}
+{% block title %}<title>Verre — Guide Resser</title>{% endblock %}
 
+{% block content %}
+<div class="page">
 
-{% block content %} 
+  <div class="page-header">
+    <a href="/library" class="btn-icon" aria-label="Retour">{{ icon('chevron-left', 22) }}</a>
+    <h1>Verre</h1>
+    <span class="badge badge-glass">Matière</span>
+  </div>
 
-<div id="container_user">
-                
-    <div id="title_shopping">
-        <h2>
-            <strong>Información Vidrio</strong>
-        </h2>
+  <div class="card" style="margin-bottom:12px; border-left:4px solid var(--cat-glass);">
+    <p class="section-label" style="color:var(--cat-glass);">Ce qui se recycle</p>
+    <div class="list-item">
+      <div class="list-item-icon" style="background:#F0FDFA; color:var(--cat-glass);">{{ icon('check', 16) }}</div>
+      <div class="list-item-content">
+        <div class="list-item-title">Bouteilles et bocaux</div>
+        <div class="list-item-subtitle">Verre transparent, vert ou brun → colonne à verre</div>
+      </div>
     </div>
+    <div class="list-item">
+      <div class="list-item-icon" style="background:#F0FDFA; color:var(--cat-glass);">{{ icon('check', 16) }}</div>
+      <div class="list-item-content">
+        <div class="list-item-title">Pots en verre</div>
+        <div class="list-item-subtitle">Confiture, sauce, conserves → à vider et rincer</div>
+      </div>
+    </div>
+    <div class="list-item">
+      <div class="list-item-icon" style="background:#FEF2F2; color:var(--red);">{{ icon('x', 16) }}</div>
+      <div class="list-item-content">
+        <div class="list-item-title">Vitres et miroirs</div>
+        <div class="list-item-subtitle">Composition différente → déchetterie</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="background:var(--resser-50); border-color:var(--resser-100);">
+    <div style="display:flex; align-items:flex-start; gap:10px;">
+      <div style="color:var(--resser-600); flex-shrink:0; margin-top:2px;">{{ icon('info', 18) }}</div>
+      <p style="font-size:0.875rem; color:var(--neutral-900); line-height:1.5; margin:0;">
+        Le verre est recyclable à l'infini sans perte de qualité. Chaque tonne recyclée économise 1,2 tonne de matières premières.
+      </p>
+    </div>
+  </div>
 
 </div>
-
-{% endblock %} 
+{% endblock %}

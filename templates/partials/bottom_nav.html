@@ -1,0 +1,37 @@
+{% from 'partials/icons.html' import icon %}
+<nav id="section_nav_mobile">
+  <div id="container_nav_mobile">
+
+    <a href="/home" class="nav-item {% if request['path'] == '/home' %}active{% endif %}">
+      {{ icon('home', 22) }}
+      <span>Accueil</span>
+    </a>
+
+    <a href="#" onclick="startBarcodeScanner(); return false;" class="nav-item {% if request['path'] == '/escanear' %}active{% endif %}">
+      {{ icon('barcode', 22) }}
+      <span>Code</span>
+    </a>
+
+    <a href="/receipt" class="nav-item {% if request['path'] == '/receipt' %}active{% endif %}">
+      <span class="nav-badge" aria-label="Nouveau"></span>
+      {{ icon('receipt', 22) }}
+      <span>Ticket</span>
+    </a>
+
+    <a href="/recycling_point" class="nav-item {% if request['path'] == '/recycling_point' %}active{% endif %}">
+      {{ icon('location', 22) }}
+      <span>Points</span>
+    </a>
+
+    <a href="/shopping" class="nav-item {% if request['path'] == '/shopping' %}active{% endif %}">
+      {{ icon('shopping', 22) }}
+      <span>Achats</span>
+    </a>
+
+    <a href="/library" class="nav-item {% if request['path'] == '/library' %}active{% endif %}">
+      {{ icon('library', 22) }}
+      <span>Guide</span>
+    </a>
+
+  </div>
+</nav>

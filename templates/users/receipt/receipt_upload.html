@@ -1,0 +1,122 @@
+{% extends "users/base_user.html" %}
+{% from 'partials/icons.html' import icon %}
+
+{% block title %}<title>Resser — Ticket de caisse</title>{% endblock %}
+
+{% block content %}
+<div class="page" style="padding-bottom: 96px;">
+
+  <!-- ── Hidden file inputs ────────────────────────────────── -->
+  <input type="file" id="input-camera"  accept="image/*" capture="environment" class="hidden">
+  <input type="file" id="input-gallery" accept="image/*" class="hidden">
+
+  <!-- ══════════════════════════════════════════════════════
+       View A — Upload
+  ══════════════════════════════════════════════════════ -->
+  <section id="view-upload">
+
+    <div class="page-header">
+      <h1>Ticket de caisse</h1>
+    </div>
+
+    <!-- Upload hero card -->
+    <div class="upload-hero" id="upload-hero">
+      <div class="upload-hero-icon">
+        {{ icon('receipt', 28) }}
+      </div>
+      <p class="upload-hero-title">Scannez votre ticket</p>
+      <p class="upload-hero-subtitle">Estimez les emballages plastique<br>de vos achats en un instant</p>
+      <div class="upload-buttons">
+        <button class="btn-primary" id="btn-camera" type="button">
+          {{ icon('camera', 18) }}
+          Prendre une photo
+        </button>
+        <button class="btn-secondary" id="btn-gallery" type="button">
+          {{ icon('upload', 18) }}
+          Depuis la galerie
+        </button>
+      </div>
+    </div>
+
+    <!-- Preview container (shown after file selection) -->
+    <div id="preview-container" class="hidden">
+      <img id="preview-img" class="image-preview" alt="Aperçu du ticket">
+      <button class="btn-primary" id="btn-analyze" type="button"
+              style="width:100%;margin-top:12px;">
+        {{ icon('search', 18) }}
+        Analyser ce ticket
+      </button>
+      <button class="btn-ghost" id="btn-change" type="button"
+              style="width:100%;margin-top:6px;">
+        Choisir une autre image
+      </button>
+    </div>
+
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       View B — Loading
+  ══════════════════════════════════════════════════════ -->
+  <section id="view-loading" class="hidden">
+    <div class="loading-state">
+      <div class="spinner"></div>
+      <p class="loading-title">Analyse en cours…</p>
+      <ul class="loading-steps">
+        <li class="loading-step">
+          <span class="loading-step-dot"></span>
+          Amélioration de l'image
+        </li>
+        <li class="loading-step">
+          <span class="loading-step-dot"></span>
+          Lecture OCR du ticket
+        </li>
+        <li class="loading-step">
+          <span class="loading-step-dot"></span>
+          Extraction des produits
+        </li>
+        <li class="loading-step">
+          <span class="loading-step-dot"></span>
+          Estimation des emballages
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       View C — Results
+  ══════════════════════════════════════════════════════ -->
+  <section id="view-results" class="hidden">
+
+    <div class="page-header">
+      <h1>Résultats</h1>
+      <button class="btn-ghost" id="btn-new-scan" type="button"
+              style="font-size:0.875rem;padding:8px 12px;">
+        {{ icon('plus', 16) }}
+        Nouveau scan
+      </button>
+    </div>
+
+    <!-- Results are injected here by JS -->
+    <div id="results-content"></div>
+
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       History (always visible)
+  ══════════════════════════════════════════════════════ -->
+  <section id="history-section" style="margin-top:28px;">
+    <p class="section-label">Historique des scans</p>
+    <div class="card" style="padding:0 16px;">
+      <div id="history-list">
+        <!-- Populated by JS on load and after each upload -->
+        <div style="padding:24px 0;text-align:center;">
+          <span class="spinner" style="margin:0 auto;"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script src="{{ url_for('static', path='/scripts/receipt_upload.js') }}"></script>
+{% endblock %}

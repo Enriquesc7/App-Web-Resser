@@ -1,57 +1,61 @@
-{% extends "users/base_user.html" %} 
+{% extends "users/base_user.html" %}
+{% from 'partials/icons.html' import icon %}
 
-{% block title %} 
-<title>Información API</title>
-{% endblock %}
+{% block title %}<title>Produit — Resser</title>{% endblock %}
 
+{% block content %}
+<div class="page">
 
-{% block content %} 
-<section id="container_product">
+  <div class="page-header">
+    <a href="javascript:history.back()" class="btn-icon" aria-label="Retour">
+      {{ icon('chevron-left', 22) }}
+    </a>
+    <h1 style="font-size:1rem;">Informations produit</h1>
+  </div>
 
-    <div id="container_basic_info">
-        
-        <div id="container_img">
-            <div id="img_product">
-                <img src="{{producto['imagen']}}" alt="img_product">
-            </div>
+  <div class="card" id="container_basic_info" style="margin-bottom:12px;">
+    <div style="display:flex; gap:16px; align-items:flex-start;">
 
-            
+      <div id="container_img" style="flex-shrink:0;">
+        <div id="img_product" style="width:100px; height:120px; display:flex; align-items:center; justify-content:center; background:var(--neutral-50); border-radius:var(--radius-sm); overflow:hidden;">
+          <img src="{{ producto['imagen'] }}" alt="{{ producto['nombre'] }}"
+               style="width:100%; height:100%; object-fit:contain;" onerror="this.style.display='none'">
         </div>
+      </div>
 
+      <div id="data_product" style="flex:1; min-width:0; display:flex; flex-direction:column; gap:8px;">
+        <h2 style="font-size:1rem; font-weight:600; color:var(--neutral-900); line-height:1.3; margin:0;">
+          {{ producto['nombre'] }}
+        </h2>
+        <p style="font-size:0.875rem; color:var(--neutral-600); margin:0;">{{ producto['marca'] }}</p>
+      </div>
 
-        <div id="data_product">
-            
-            <h2>Información del producto con la API de Open Food Facts</h2>
-
-            <br>
-            <br>
-
-            Nombre producto: {{producto['nombre']}} <br>
-            Marca: {{producto['marca']}} <br>
-            Cantidad (n°): {{producto['cantidad_n']}} <br>
-            Cantidad (métrica): {{producto['cantidad_metrica']}}
-
-            <br>
-            <br>
-
-            Embalaje: {{producto['embalaje']}}
-
-            <br>
-            <br>
-            
-            Imagen: {{producto['imagen']}}
-
-            </div>
-
-
-
-
-        
     </div>
+  </div>
 
+  <div class="card" style="margin-bottom:12px;">
+    <p class="section-label">Détails</p>
+    <div style="display:flex; flex-direction:column; gap:8px; font-size:0.9rem;">
+      <div class="list-item" style="padding:10px 0;">
+        <div class="list-item-content">
+          <div class="list-item-subtitle">Quantité (n°)</div>
+          <div class="list-item-title">{{ producto['cantidad_n'] }}</div>
+        </div>
+      </div>
+      <div class="list-item" style="padding:10px 0;">
+        <div class="list-item-content">
+          <div class="list-item-subtitle">Quantité (métrique)</div>
+          <div class="list-item-title">{{ producto['cantidad_metrica'] }}</div>
+        </div>
+      </div>
+      <div class="list-item" style="padding:10px 0;">
+        <div class="list-item-content">
+          <div class="list-item-subtitle">Emballage</div>
+          <div class="list-item-title">{{ producto['embalaje'] }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-    
-</section>
-
-
+</div>
 {% endblock %}

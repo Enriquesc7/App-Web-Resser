@@ -1,17 +1,51 @@
-{% extends "users/base_user.html" %} 
+{% extends "users/base_user.html" %}
+{% from 'partials/icons.html' import icon %}
 
-{% block title %} 
-<title>Perfil</title>
-{% endblock %}
+{% block title %}<title>Configuration — Resser</title>{% endblock %}
 
+{% block content %}
+<div class="page">
 
-{% block content %} 
+  <div class="page-header">
+    <h1>Configuration</h1>
+  </div>
 
-    <section id="presentation_users" style="margin-top: 10px;">
-        <h2>Configuraciones</h2>
-        
+  <div class="card" style="padding:0; margin-bottom:12px;">
+    <a href="#" class="list-item" style="padding:14px 16px;">
+      <div class="list-item-icon">{{ icon('user', 16) }}</div>
+      <div class="list-item-content">
+        <div class="list-item-title">Profil</div>
+        <div class="list-item-subtitle">Nom, e-mail, mot de passe</div>
+      </div>
+      <div class="list-item-trail">{{ icon('chevron-right', 18) }}</div>
+    </a>
+    <a href="#" class="list-item" style="padding:14px 16px;">
+      <div class="list-item-icon">{{ icon('alert-triangle', 16) }}</div>
+      <div class="list-item-content">
+        <div class="list-item-title">Notifications</div>
+        <div class="list-item-subtitle">Alertes et rappels de recyclage</div>
+      </div>
+      <div class="list-item-trail">{{ icon('chevron-right', 18) }}</div>
+    </a>
+    <a href="#" class="list-item" style="padding:14px 16px;">
+      <div class="list-item-icon">{{ icon('info', 16) }}</div>
+      <div class="list-item-content">
+        <div class="list-item-title">À propos de Resser</div>
+        <div class="list-item-subtitle">Version, licences, mentions légales</div>
+      </div>
+      <div class="list-item-trail">{{ icon('chevron-right', 18) }}</div>
+    </a>
+  </div>
 
-    </section>
+  <div class="card" style="padding:0;">
+    <a href="/logout" class="list-item" style="padding:14px 16px; color:var(--red);">
+      <div class="list-item-icon" style="background:#FEF2F2; color:var(--red);">{{ icon('x', 16) }}</div>
+      <div class="list-item-content">
+        <div class="list-item-title" style="color:var(--red);">Déconnexion</div>
+      </div>
+      <div class="list-item-trail">{{ icon('chevron-right', 18) }}</div>
+    </a>
+  </div>
 
-
+</div>
 {% endblock %}

@@ -1,37 +1,41 @@
-{% extends "users/base_user.html" %} 
+{% extends "users/base_user.html" %}
+{% from 'partials/icons.html' import icon %}
 
-{% block title %} 
-<title>Recycling Waste</title>
-{% endblock %}
+{% block title %}<title>Recycler — Resser</title>{% endblock %}
 
-{% block content %} 
+{% block content %}
+<div class="page">
 
-<div id="container_user">
-    <div id="title_point_recycle">
-        <h3 style="text-align: center; font-size: 1.7rem;">
-            <strong>Scannez le code QR du conteneur pour continuer</strong>
-        </h3>
+  <div class="page-header">
+    <a href="/point_collector" class="btn-icon" aria-label="Retour">{{ icon('chevron-left', 22) }}</a>
+    <h1>Recycler ici</h1>
+  </div>
+
+  <div class="card" style="margin-bottom:12px; text-align:center;">
+    <div style="margin-bottom:12px;">
+      <img src="{{ url_for('static', path='img/scanner_basurero.png') }}" alt="Scanner le conteneur"
+           style="width:100%; max-width:200px; margin:0 auto; display:block; object-fit:contain;"
+           onerror="this.style.display='none'">
     </div>
-
-    <div id="img_point_recycle"> 
-        <img style="width: 80%;" src="{{ url_for('static', path='img/scanner_basurero.png') }}">
+    <h2 style="font-size:1rem; font-weight:600; color:var(--neutral-900); margin-bottom:8px;">
+      Scannez le code QR du conteneur pour continuer
+    </h2>
+    <div style="display:flex; align-items:center; gap:6px; justify-content:center; color:var(--neutral-600); font-size:0.875rem; margin-bottom:16px;">
+      {{ icon('location', 14) }}
+      <span>Parc Expo de Nancy • 12 route de Mirecourt, 54500 Vandœuvre-lès-Nancy</span>
     </div>
-    <br>
-    <div id="content_point_recycle">
-        <p style="padding-bottom: 10px; font-size: 1.4rem;">Parc Expo de Nancy • 12 route de Mirecourt
-            54500 Vandœuvre-lès-Nancy  <img style="width: 10px; display: inline; color: red;"  src="{{ url_for('static', path='img/gps.png') }}" alt="gps">
-        </p>
-        
-        <br>
-        <div class="elements_form" style="height: 55px;">
-            <button type="button" style="height: 50px;"><a href="/win_resser_point" style="font-size: 1.4rem;">Scanner le QR</a></button>
-        </div>
-        <div class="elements_form" style="height: 55px;">
-            <button type="button" style="height: 50px;"><a href="#" style="font-size: 1.4rem;">Comment y arriver</a></button>
-        </div>
-    </div>
+    <a href="/win_resser_point" class="btn-primary" style="display:flex; width:100%; justify-content:center; align-items:center; gap:8px; border-radius:var(--radius-md); margin-bottom:8px;">
+      {{ icon('camera', 18) }}
+      Scanner le QR code
+    </a>
+    <a href="#" class="btn-secondary" style="display:flex; width:100%; justify-content:center; align-items:center; gap:8px; border-radius:var(--radius-md);">
+      {{ icon('location', 16) }}
+      Comment y arriver
+    </a>
+  </div>
 
-    <div id="qr-reader" style="width: 100%; max-width: 400px; margin: auto;" class="hidden"></div>
+  <!-- QR reader element — kept verbatim for startQRScanner() -->
+  <div id="qr-reader" class="hidden"></div>
+
 </div>
-
 {% endblock %}

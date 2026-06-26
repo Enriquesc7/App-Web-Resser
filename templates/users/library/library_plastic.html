@@ -1,20 +1,72 @@
-{% extends "users/base_user.html" %} 
+{% extends "users/base_user.html" %}
+{% from 'partials/icons.html' import icon %}
 
-{% block title %} 
-<title>Libraries</title>
-{% endblock %}
+{% block title %}<title>Plastique — Guide Resser</title>{% endblock %}
 
+{% block content %}
+<div class="page">
 
-{% block content %} 
+  <div class="page-header">
+    <a href="/library" class="btn-icon" aria-label="Retour">{{ icon('chevron-left', 22) }}</a>
+    <h1>Plastique</h1>
+    <span class="badge badge-plastic">Matière</span>
+  </div>
 
-<div id="container_user">
-                
-    <div id="title_shopping">
-        <h2>
-            <strong>Información Plástico</strong>
-        </h2>
+  <div class="card" style="margin-bottom:12px; border-left:4px solid var(--cat-plastic);">
+    <p class="section-label" style="color:var(--cat-plastic);">Les essentiels</p>
+    <div class="list-item">
+      <div class="list-item-icon" style="background:#EFF6FF; color:var(--cat-plastic);">{{ icon('check', 16) }}</div>
+      <div class="list-item-content">
+        <div class="list-item-title">Bouteilles et flacons</div>
+        <div class="list-item-subtitle">Eau, soda, shampoing, lait… → bac jaune</div>
+      </div>
     </div>
+    <div class="list-item">
+      <div class="list-item-icon" style="background:#EFF6FF; color:var(--cat-plastic);">{{ icon('check', 16) }}</div>
+      <div class="list-item-content">
+        <div class="list-item-title">Films et sacs plastiques</div>
+        <div class="list-item-subtitle">À déposer en point de collecte spécifique</div>
+      </div>
+    </div>
+    <div class="list-item">
+      <div class="list-item-icon" style="background:#FEF2F2; color:var(--red);">{{ icon('x', 16) }}</div>
+      <div class="list-item-content">
+        <div class="list-item-title">Barquettes alimentaires</div>
+        <div class="list-item-subtitle">Non acceptées dans la plupart des communes</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:12px;">
+    <p class="section-label">Codes plastique</p>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; font-size:0.875rem;">
+      <div style="background:var(--neutral-50); border-radius:var(--radius-sm); padding:10px;">
+        <div style="font-weight:600; color:var(--cat-plastic); margin-bottom:2px;">PET (1)</div>
+        <div style="color:var(--neutral-600);">Bouteilles d'eau • recyclable</div>
+      </div>
+      <div style="background:var(--neutral-50); border-radius:var(--radius-sm); padding:10px;">
+        <div style="font-weight:600; color:var(--cat-plastic); margin-bottom:2px;">HDPE (2)</div>
+        <div style="color:var(--neutral-600);">Bidons, flacons • recyclable</div>
+      </div>
+      <div style="background:var(--neutral-50); border-radius:var(--radius-sm); padding:10px;">
+        <div style="font-weight:600; color:var(--cat-plastic); margin-bottom:2px;">PP (5)</div>
+        <div style="color:var(--neutral-600);">Pots, couvercles • souvent recyclable</div>
+      </div>
+      <div style="background:var(--neutral-50); border-radius:var(--radius-sm); padding:10px;">
+        <div style="font-weight:600; color:var(--neutral-400); margin-bottom:2px;">PS (6)</div>
+        <div style="color:var(--neutral-600);">Polystyrène • peu recyclé</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="background:var(--resser-50); border-color:var(--resser-100);">
+    <div style="display:flex; align-items:flex-start; gap:10px;">
+      <div style="color:var(--resser-600); flex-shrink:0; margin-top:2px;">{{ icon('leaf', 18) }}</div>
+      <p style="font-size:0.875rem; color:var(--resser-900, var(--neutral-900)); line-height:1.5; margin:0;">
+        Rincez les emballages avant de les trier. Un emballage souillé peut contaminer toute une benne de recyclage.
+      </p>
+    </div>
+  </div>
 
 </div>
-
-{% endblock %} 
+{% endblock %}

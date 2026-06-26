@@ -1,78 +1,79 @@
-{% extends "users/base_user.html" %} 
+{% extends "users/base_user.html" %}
+{% from 'partials/icons.html' import icon %}
 
-{% block title %} 
-<title>Libraries</title>
-{% endblock %}
+{% block title %}<title>Guide — Resser</title>{% endblock %}
 
+{% block content %}
+<div class="page">
 
-{% block content %} 
+  <div class="page-header">
+    <h1>Guide Resser</h1>
+  </div>
 
-<div id="container_user">
-                
-    <div id="title_shopping">
-        <h2>
-            <strong>Manuel Resser</strong>
-        </h2>
+  <p style="font-size:0.9rem; color:var(--neutral-600); margin-bottom:16px; line-height:1.5;">
+    Apprenez à trier et recycler vos déchets selon leur matière.
+  </p>
+
+  <!-- Plastique -->
+  <a href="/library/plastic" class="card" style="display:block; margin-bottom:10px; text-decoration:none; border-left:4px solid var(--cat-plastic);">
+    <div style="display:flex; align-items:center; gap:14px;">
+      <div style="width:44px; height:44px; border-radius:var(--radius-sm); background:#EFF6FF; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--cat-plastic)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 12a9 9 0 019-9 9.75 9.75 0 016.74 2.74L21 8"/><path d="M21 3v5h-5"/>
+          <path d="M21 12a9 9 0 01-9 9 9.75 9.75 0 01-6.74-2.74L3 16"/><path d="M8 16H3v5"/>
+        </svg>
+      </div>
+      <div style="flex:1; min-width:0;">
+        <div style="font-size:1rem; font-weight:600; color:var(--cat-plastic); margin-bottom:2px;">Plastique</div>
+        <div style="font-size:0.8125rem; color:var(--neutral-600); line-height:1.3;">Comment recycler mes déchets plastiques ?</div>
+      </div>
+      <div style="color:var(--neutral-400); display:flex; align-items:center; flex-shrink:0;">{{ icon('chevron-right', 18) }}</div>
     </div>
- 
-    <div class="img_shopping">
-        <img src="{{ url_for('static', path='img/manual_reciclaje.png') }}">
-    </div>
-    
-    
-    <div class="shopping" > 
-        <div class="img_shopping">
-            <img src="{{ url_for('static', path='img/library/plastico.jpg') }}">
-        </div>
-        <div class="text_shopping">
-            <h4>Plastique</h4>
-            <p>Comment recycler mes déchets plastiques?</p>
-        </div>
-        <div class="buttom_shopping">
-            <a href="/library/plastic" class="adelante">&#10095;</a>
-        </div>
-    </div>
+  </a>
 
-    <div class="shopping" > 
-        <div class="img_shopping">
-            <img src="{{ url_for('static', path='img/library/papel.jpg') }}">
-        </div>
-        <div class="text_shopping">
-            <h4>Papier</h4>
-            <p>Comment recycler mes déchets de papier/carton?</p>
-        </div>
-        <div class="buttom_shopping">
-            <a href="/library/paper" class="adelante" >&#10095;</a>
-        </div>
+  <!-- Papier / Carton -->
+  <a href="/library/paper" class="card" style="display:block; margin-bottom:10px; text-decoration:none; border-left:4px solid var(--cat-paper);">
+    <div style="display:flex; align-items:center; gap:14px;">
+      <div style="width:44px; height:44px; border-radius:var(--radius-sm); background:#FEFCE8; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+        {{ icon('library', 22) }}
+      </div>
+      <div style="flex:1; min-width:0;">
+        <div style="font-size:1rem; font-weight:600; color:var(--cat-paper); margin-bottom:2px;">Papier / Carton</div>
+        <div style="font-size:0.8125rem; color:var(--neutral-600); line-height:1.3;">Comment recycler mes déchets de papier et carton ?</div>
+      </div>
+      <div style="color:var(--neutral-400); display:flex; align-items:center; flex-shrink:0;">{{ icon('chevron-right', 18) }}</div>
     </div>
+  </a>
 
-    <div class="shopping" > 
-        <div class="img_shopping">
-            <img src="{{ url_for('static', path='img/library/vidrio.jpg') }}">
-        </div>
-        <div class="text_shopping">
-            <h4>Verre</h4>
-            <p>Comment recycler mes déchets de verre?</p>
-        </div>
-        <div class="buttom_shopping">
-            <a href="/library/glass" class="adelante">&#10095;</a>
-        </div>
+  <!-- Verre -->
+  <a href="/library/glass" class="card" style="display:block; margin-bottom:10px; text-decoration:none; border-left:4px solid var(--cat-glass);">
+    <div style="display:flex; align-items:center; gap:14px;">
+      <div style="width:44px; height:44px; border-radius:var(--radius-sm); background:#F0FDFA; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--cat-glass)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M8 2h8l1 7H7L8 2z"/><path d="M7 9c0 7 2 11 5 13 3-2 5-6 5-13"/>
+        </svg>
+      </div>
+      <div style="flex:1; min-width:0;">
+        <div style="font-size:1rem; font-weight:600; color:var(--cat-glass); margin-bottom:2px;">Verre</div>
+        <div style="font-size:0.8125rem; color:var(--neutral-600); line-height:1.3;">Comment recycler mes déchets de verre ?</div>
+      </div>
+      <div style="color:var(--neutral-400); display:flex; align-items:center; flex-shrink:0;">{{ icon('chevron-right', 18) }}</div>
     </div>
+  </a>
 
-    <div class="shopping" > 
-        <div class="img_shopping">
-            <img src="{{ url_for('static', path='img/library/compost.jpg') }}">
-        </div>
-        <div class="text_shopping">
-            <h4>Compost</h4>
-            <p>Comment recycler mes déchets organiques?</p>
-        </div>
-        <div class="buttom_shopping">
-            <a href="/library/composting" class="adelante">&#10095;</a>
-        </div>
+  <!-- Compost -->
+  <a href="/library/composting" class="card" style="display:block; margin-bottom:10px; text-decoration:none; border-left:4px solid var(--cat-composting);">
+    <div style="display:flex; align-items:center; gap:14px;">
+      <div style="width:44px; height:44px; border-radius:var(--radius-sm); background:#F7FEE7; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+        {{ icon('leaf', 22) }}
+      </div>
+      <div style="flex:1; min-width:0;">
+        <div style="font-size:1rem; font-weight:600; color:var(--cat-composting); margin-bottom:2px;">Compostage</div>
+        <div style="font-size:0.8125rem; color:var(--neutral-600); line-height:1.3;">Comment recycler mes déchets organiques ?</div>
+      </div>
+      <div style="color:var(--neutral-400); display:flex; align-items:center; flex-shrink:0;">{{ icon('chevron-right', 18) }}</div>
     </div>
-        
+  </a>
+
 </div>
-
-
 {% endblock %}

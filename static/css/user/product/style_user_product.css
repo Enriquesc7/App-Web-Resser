@@ -4,24 +4,19 @@ h1,h2,h3,h4,h5,p{
     color: #003366;
     font-family: 'Segoe UI', 'Open Sans', 'Helvetica Neue', sans-serif;
 }
+
 /*============= Barra de busqueda =====================*/
 
-
-<<<<<<< HEAD
 #titulo_users{
     background-color: #FFFFFF;
     padding: 25px 25px;
- }
+}
 
-
-=======
->>>>>>> refactor_desing
 #form_search_product{
     display: flex;
     width: 90%;
     margin-left: auto;
     margin-right: auto;
-
 }
 
     .button_search{
@@ -34,7 +29,7 @@ h1,h2,h3,h4,h5,p{
         display: inline-block;
         font-size: 16px;
     }
-<<<<<<< HEAD
+
     .button_scan{
         background-color: #4CAF50;
         border: none;
@@ -45,45 +40,40 @@ h1,h2,h3,h4,h5,p{
         display: inline-block;
         font-size: 16px;
     }
-=======
->>>>>>> refactor_desing
 
     .busqueda {
         position: relative;
         width: 100%;
-        /*margin: auto;  Centrar la barra de búsqueda */
         border: 1px solid black;
         border-radius: 3px;
         padding: 1px;
     }
-    
+
     .busqueda input[type="text"] {
         width: 100%;
         padding: 10px;
-        padding-right: 20px; /* Dar espacio para el ícono de la lupa */
+        padding-right: 20px;
         border: none;
         background-color: white;
         color: black;
     }
-    
+
     .busqueda i{
         position: absolute;
         right: 10px;
         top: 50%;
         transform: translateY(-50%);
         color: grey;
-        pointer-events: none; /* Evita que el ícono de la lupa interfiera con el clic en el campo de texto */
+        pointer-events: none;
     }
 
 
- /*==================== Todos los productos ===========================*/   
-
+ /*==================== Todos los productos ===========================*/
 
  #results_search{
     background-color: #FFFFFF;
     padding: 25px 25px;
  }
-
 
  .product-grid {
     display: flex;
@@ -93,7 +83,7 @@ h1,h2,h3,h4,h5,p{
 }
 
 .product-item {
-    flex-basis: calc(100% - 20px); /* Esto hará que haya 4 productos por fila. Ajusta según tus necesidades. */
+    flex-basis: calc(100% - 20px);
     background-color: #FFFFFF;
     padding: 20px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.15);
@@ -104,7 +94,6 @@ h1,h2,h3,h4,h5,p{
 }
     .product-item a{
         text-decoration: none;
-        
     }
 
     .product-item img{
@@ -136,7 +125,7 @@ h1,h2,h3,h4,h5,p{
                 height: inherit;
             }
 
-  
+
   .compare-button {
     position: absolute;
     left: 50%;
@@ -151,30 +140,21 @@ h1,h2,h3,h4,h5,p{
   }
 
 
-
-<<<<<<< HEAD
-/*==== Probando ==================*/
-=======
-/*==== Probando Camara ==================*/
->>>>>>> refactor_desing
-
-/* Ocultar el contenedor de la cámara por defecto */
+/* Camera overlay */
 .hidden {
     display: none;
 }
 
-/* Hacer que el contenedor de la cámara ocupe toda la pantalla */
 .fullscreen {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    z-index: 9999; /* Asegurarse de que esté por encima de otros elementos */
-    background-color: rgba(0, 0, 0, 0.8); /* Fondo semi-transparente */
+    z-index: 9999;
+    background-color: rgba(0, 0, 0, 0.8);
 }
 
-/* Estilo para el botón de cerrar */
 .close-button {
     position: absolute;
     top: 10px;
@@ -183,35 +163,11 @@ h1,h2,h3,h4,h5,p{
     border: none;
     padding: 10px;
     cursor: pointer;
-    z-index: 10000; /* Asegurarse de que esté por encima del contenedor */
+    z-index: 10000;
 }
 
 
-
-<<<<<<< HEAD
-=======
-    #section_scanner{
-        background-color: cadetblue;
-        border-radius: 5px;
-        position: fixed;
-        top: 100px;
-        z-index: 1000;
-    }
-        #message{
-            color: crimson;
-        }
-
-
-
-
-
-
-
-
-
-
 /*============== Paginación ===========================*/
-
 
 .pagination {
     display: flex;
@@ -234,22 +190,17 @@ h1,h2,h3,h4,h5,p{
 }
 
 
-
-
-
->>>>>>> refactor_desing
 /*================ Medias Queries ========================*/
 
-/* Media Queries */
 @media (min-width: 600px) {
     .product-item {
-        flex-basis: calc(50% - 20px);  /* Dos productos por fila en tabletas y pantallas más grandes */
+        flex-basis: calc(50% - 20px);
     }
 }
 
 @media (min-width: 900px) {
     .product-item {
-        flex-basis: calc(25% - 20px);  /* Cuatro productos por fila en pantallas grandes */
+        flex-basis: calc(25% - 20px);
     }
 
     .product-item img{
@@ -257,5 +208,4 @@ h1,h2,h3,h4,h5,p{
         height: 250px;
         object-fit: contain;
     }
-
 }

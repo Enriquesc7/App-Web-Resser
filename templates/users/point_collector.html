@@ -1,35 +1,42 @@
-{% extends "users/base_user.html" %} 
+{% extends "users/base_user.html" %}
+{% from 'partials/icons.html' import icon %}
 
-{% block title %} 
-<title>Puntos de Reciclaje</title>
-{% endblock %}
+{% block title %}<title>Point de collecte — Resser</title>{% endblock %}
 
+{% block content %}
+<div class="page">
 
-{% block content %} 
+  <div class="page-header">
+    <a href="/recycling_point" class="btn-icon" aria-label="Retour">{{ icon('chevron-left', 22) }}</a>
+    <h1>Points à proximité</h1>
+  </div>
 
-<div id="container_user">
-                
-    <div id="titulo_users" style="width: 80%;">
-        <h3 class="articulos_ne" style="font-size: 1.7rem;">
-            <strong>Point de collecte le plus proche:</strong>
-        </h3>
-        <br>
-        <br>
-        <div class="shopping" > 
-            <div class="img_shopping">
-                <img src="{{ url_for('static', path='img/mapa_foire.png') }}">
-            </div>
-            <div class="text_shopping">
-                <p>Parc Expo de Nancy • 12 route de Mirecourt
-                    54500 Vandœuvre-lès-Nancy </p>
-            </div>
-            <div class="buttom_shopping">
-                <a href="/action_recycling_1" class="adelante">&#10095;</a>
-            </div>
+  <p class="section-label" style="margin-bottom:8px;">Point le plus proche</p>
+
+  <a href="/action_recycling_1" class="card-elevated" style="display:block; text-decoration:none; margin-bottom:12px;">
+    <div style="display:flex; gap:12px; align-items:flex-start;">
+      <div style="flex-shrink:0; width:72px; height:72px; border-radius:var(--radius-md); overflow:hidden; background:var(--neutral-100);">
+        <img src="{{ url_for('static', path='img/mapa_foire.png') }}" alt="Parc Expo"
+             style="width:100%; height:100%; object-fit:cover;" onerror="this.style.display='none'">
+      </div>
+      <div style="flex:1; min-width:0;">
+        <div style="font-size:1rem; font-weight:600; color:var(--neutral-900); margin-bottom:4px;">Parc Expo de Nancy</div>
+        <div style="font-size:0.8125rem; color:var(--neutral-600); line-height:1.4;">
+          12 route de Mirecourt<br>54500 Vandœuvre-lès-Nancy
         </div>
+        <div style="display:flex; align-items:center; gap:4px; margin-top:8px;">
+          <span class="badge badge-recyclable">Ouvert</span>
+        </div>
+      </div>
+      <div style="color:var(--neutral-400); display:flex; align-items:center; flex-shrink:0;">{{ icon('chevron-right', 18) }}</div>
     </div>
-        
+  </a>
+
+  <div class="empty-state" style="padding:32px 16px;">
+    <div class="empty-state-icon">{{ icon('location', 28) }}</div>
+    <h2 style="font-size:1rem;">Aucun autre point détecté</h2>
+    <p>Activez la géolocalisation pour trouver plus de points de collecte près de chez vous.</p>
+  </div>
+
 </div>
-
-
 {% endblock %}

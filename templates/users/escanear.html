@@ -1,13 +1,46 @@
-{% extends "users/base_user.html" %} 
+{% extends "users/base_user.html" %}
+{% from 'partials/icons.html' import icon %}
 
-{% block title %} 
-<title>Perfil</title>
-{% endblock %}
+{% block title %}<title>Scanner — Resser</title>{% endblock %}
 
+{% block content %}
+<div class="page">
 
-{% block content %} 
+  <div class="page-header">
+    <h1>Scanner</h1>
+  </div>
 
+  <div class="card" style="margin-bottom:12px;">
+    <div style="display:flex; align-items:center; gap:12px;">
+      <div class="list-item-icon" style="width:48px; height:48px; border-radius:var(--radius-md); background:var(--resser-50); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+        {{ icon('barcode', 28) }}
+      </div>
+      <div>
+        <div style="font-size:1rem; font-weight:500; color:var(--neutral-900); margin-bottom:2px;">Code-barres produit</div>
+        <div style="font-size:0.875rem; color:var(--neutral-600);">Pointez la caméra vers le code-barres d'un produit</div>
+      </div>
+    </div>
+    <button class="btn-primary" onclick="startBarcodeScanner()" style="width:100%; margin-top:16px; border-radius:var(--radius-md);">
+      {{ icon('camera', 18) }}
+      Activer la caméra
+    </button>
+  </div>
 
+  <div class="card">
+    <div style="display:flex; align-items:center; gap:12px;">
+      <div class="list-item-icon" style="width:48px; height:48px; border-radius:var(--radius-md); background:var(--resser-50); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+        {{ icon('search', 24) }}
+      </div>
+      <div>
+        <div style="font-size:1rem; font-weight:500; color:var(--neutral-900); margin-bottom:2px;">Recherche manuelle</div>
+        <div style="font-size:0.875rem; color:var(--neutral-600);">Entrez le nom ou le code du produit</div>
+      </div>
+    </div>
+    <a href="/products" class="btn-secondary" style="display:flex; width:100%; margin-top:16px; border-radius:var(--radius-md); justify-content:center; align-items:center; gap:6px;">
+      {{ icon('search', 16) }}
+      Rechercher un produit
+    </a>
+  </div>
 
-
+</div>
 {% endblock %}

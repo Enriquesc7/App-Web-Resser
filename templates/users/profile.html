@@ -1,123 +1,155 @@
-{% extends "users/base_user.html" %} 
+{% extends "users/base_user.html" %}
+{% from 'partials/icons.html' import icon %}
 
-{% block title %} 
-<title>Perfil</title>
-{% endblock %}
+{% block title %}<title>Accueil — Resser</title>{% endblock %}
 
+{% block content %}
 
-{% block content %} 
+<div class="page">
 
-<div id="container_user">
-                
-    <div id="welcome_user">
-        <h2>
-            <strong>Bienvenue <span>{{ user.first_name if user else '' }}</span>!</strong>
-        </h2>
+  <!-- ── Hero card: greeting + points ─────────────────────── -->
+  <div class="card-hero" style="display:flex; align-items:flex-end; justify-content:space-between; overflow:hidden; position:relative;">
+    <div>
+      <p class="hero-greeting">Bienvenue,</p>
+      <p class="hero-name">{{ user.first_name if user else 'utilisateur' }}&nbsp;!</p>
+      <div class="hero-points">
+        <span class="hero-points-number">0</span>
+        <span class="hero-points-label">points Resser</span>
+      </div>
+    </div>
+    <!-- Inline illustration: stylised bottle with leaf -->
+    <svg viewBox="0 0 70 84" width="66" height="78" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+         style="opacity:0.22; flex-shrink:0; margin-bottom:-4px; margin-right:-4px;">
+      <rect x="27" y="6" width="16" height="12" rx="3" stroke="white" stroke-width="2.5"/>
+      <path d="M27 18 C22 21 20 28 20 28 L18 52 C18 66 25 78 35 78 C45 78 52 66 52 52 L50 28 C50 28 48 21 43 18"
+            stroke="white" stroke-width="2.5" stroke-linejoin="round" fill="none"/>
+      <!-- Leaf -->
+      <path d="M35 34 C26 40 26 58 35 62" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path d="M35 34 C44 40 44 58 35 62" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path d="M35 62 L35 70" stroke="white" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+  </div>
+
+  <!-- ── Quick actions ─────────────────────────────────────── -->
+  <div class="card" style="margin-bottom: 12px;">
+    <p class="section-label">Actions rapides</p>
+
+    <div class="list-item" onclick="startBarcodeScanner()" style="cursor:pointer;">
+      <div class="list-item-icon">{{ icon('barcode', 18) }}</div>
+      <div class="list-item-content">
+        <div class="list-item-title">Scanner un code-barres</div>
+        <div class="list-item-subtitle">Identifiez le plastique d'un produit</div>
+      </div>
+      <div class="list-item-trail">{{ icon('chevron-right', 18) }}</div>
     </div>
 
-    <div id="container_point_resser" > 
-        <p class="number_point">0</p>
-        <p class="text_point">Pts</p>
+    <a href="/receipt" class="list-item">
+      <div class="list-item-icon">{{ icon('receipt', 18) }}</div>
+      <div class="list-item-content">
+        <div class="list-item-title">Scanner un ticket de caisse</div>
+        <div class="list-item-subtitle">Estimez l'impact plastique de vos achats</div>
+      </div>
+      <div class="list-item-trail">{{ icon('chevron-right', 18) }}</div>
+    </a>
+
+    <a href="/recycling_point" class="list-item">
+      <div class="list-item-icon">{{ icon('location', 18) }}</div>
+      <div class="list-item-content">
+        <div class="list-item-title">Points de collecte proches</div>
+        <div class="list-item-subtitle">Trouvez où recycler près de chez vous</div>
+      </div>
+      <div class="list-item-trail">{{ icon('chevron-right', 18) }}</div>
+    </a>
+  </div>
+
+  <!-- ── Organisations partenaires ─────────────────────────── -->
+  <div class="card" id="organizations_recycle" style="margin-bottom: 12px;">
+    <p class="section-label">Organisations qui valorisent</p>
+    <div class="slideshow" style="overflow: hidden;">
+      <ul class="slider_enterprise" style="list-style:none; padding:0; margin:0; display:flex; gap:12px; align-items:center;">
+        <li style="flex-shrink:0; display:flex; align-items:center;">
+          <img src="{{ url_for('static', path='img/partners/enterprise/green_fablab.png') }}" alt="Green Fablab" style="height:48px; object-fit:contain;"
+               onerror="this.replaceWith((function(){var s=document.createElementNS('http://www.w3.org/2000/svg','svg');s.setAttribute('viewBox','0 0 90 40');s.setAttribute('width','90');s.setAttribute('height','40');s.innerHTML='<rect width=&quot;90&quot; height=&quot;40&quot; rx=&quot;6&quot; fill=&quot;#ECFDF5&quot;/><text x=&quot;45&quot; y=&quot;25&quot; text-anchor=&quot;middle&quot; font-size=&quot;11&quot; font-family=&quot;Inter,sans-serif&quot; font-weight=&quot;600&quot; fill=&quot;#047857&quot;>Green Fablab</text>';return s})())">
+        </li>
+        <li style="flex-shrink:0; display:flex; align-items:center;">
+          <img src="{{ url_for('static', path='img/partners/enterprise/saju.png') }}" alt="Saju" style="height:48px; object-fit:contain;"
+               onerror="this.replaceWith((function(){var s=document.createElementNS('http://www.w3.org/2000/svg','svg');s.setAttribute('viewBox','0 0 60 40');s.setAttribute('width','60');s.setAttribute('height','40');s.innerHTML='<rect width=&quot;60&quot; height=&quot;40&quot; rx=&quot;6&quot; fill=&quot;#ECFDF5&quot;/><text x=&quot;30&quot; y=&quot;25&quot; text-anchor=&quot;middle&quot; font-size=&quot;12&quot; font-family=&quot;Inter,sans-serif&quot; font-weight=&quot;600&quot; fill=&quot;#047857&quot;>Saju</text>';return s})())">
+        </li>
+        <li style="flex-shrink:0; display:flex; align-items:center;">
+          <img src="{{ url_for('static', path='img/partners/enterprise/reciclapp.png') }}" alt="Reciclapp" style="height:48px; object-fit:contain;"
+               onerror="this.replaceWith((function(){var s=document.createElementNS('http://www.w3.org/2000/svg','svg');s.setAttribute('viewBox','0 0 90 40');s.setAttribute('width','90');s.setAttribute('height','40');s.innerHTML='<rect width=&quot;90&quot; height=&quot;40&quot; rx=&quot;6&quot; fill=&quot;#ECFDF5&quot;/><text x=&quot;45&quot; y=&quot;25&quot; text-anchor=&quot;middle&quot; font-size=&quot;11&quot; font-family=&quot;Inter,sans-serif&quot; font-weight=&quot;600&quot; fill=&quot;#047857&quot;>Reciclapp</text>';return s})())">
+        </li>
+      </ul>
     </div>
-
-    <div class="shopping" > 
-        <div class="img_shopping">
-            <img src="{{ url_for('static', path='img/start_to_scanner.png') }}">
-        </div>
-        <div class="text_shopping">
-            <h3>Produits scannés</h3>
-            <p>Vous n'en avez pas encore. Commencez dès maintenant!</p>
-        </div>
-        <div class="buttom_shopping" onclick="startBarcodeScanner()">
-            <a class="adelante">&#10095;</a>
-        </div>
+    <div class="direcciones_enterprise" style="display:flex; gap:8px; margin-top:12px;">
+      <a class="atras btn-secondary" style="padding:6px 14px; font-size:0.8125rem;">&#10094;</a>
+      <a class="adelante btn-secondary" style="padding:6px 14px; font-size:0.8125rem;">&#10095;</a>
     </div>
+  </div>
 
-    <div class="shopping" > 
-        <div class="img_shopping">
-            <img src="{{ url_for('static', path='img/porcentaje_descuento.jpg') }}">
-        </div>
-        <div class="text_shopping">
-            <p>Découvrez tous les avantages que Resser a pour vous!</p>
-        </div>
-        <div class="buttom_shopping">
-            <a class="adelante">&#10095;</a>
-        </div>
+  <!-- ── Partenaires ───────────────────────────────────────── -->
+  <div class="card" id="partners" style="margin-bottom: 12px;">
+    <p class="section-label">Partenaires</p>
+    <div class="slideshow" style="overflow: hidden;">
+      <ul class="slider_partners" style="list-style:none; padding:0; margin:0; display:flex; gap:12px; align-items:center;">
+        <li style="flex-shrink:0; display:flex; align-items:center;">
+          <img src="{{ url_for('static', path='img/partners/img_lorraine.png') }}" alt="Lorraine" style="height:40px; object-fit:contain;"
+               onerror="this.outerHTML='<svg viewBox=\'0 0 80 36\' width=\'80\' height=\'36\'><rect width=\'80\' height=\'36\' rx=\'5\' fill=\'#F4F4EF\'/><text x=\'40\' y=\'23\' text-anchor=\'middle\' font-size=\'11\' font-family=\'Inter,sans-serif\' font-weight=\'500\' fill=\'#5F5F58\'>Lorraine</text></svg>'">
+        </li>
+        <li style="flex-shrink:0; display:flex; align-items:center;">
+          <img src="{{ url_for('static', path='img/partners/img_erpi.png') }}" alt="ERPI" style="height:40px; object-fit:contain;"
+               onerror="this.outerHTML='<svg viewBox=\'0 0 60 36\' width=\'60\' height=\'36\'><rect width=\'60\' height=\'36\' rx=\'5\' fill=\'#F4F4EF\'/><text x=\'30\' y=\'23\' text-anchor=\'middle\' font-size=\'11\' font-family=\'Inter,sans-serif\' font-weight=\'500\' fill=\'#5F5F58\'>ERPI</text></svg>'">
+        </li>
+        <li style="flex-shrink:0; display:flex; align-items:center;">
+          <img src="{{ url_for('static', path='img/partners/foire.jpg') }}" alt="Foire" style="height:40px; object-fit:contain;"
+               onerror="this.outerHTML='<svg viewBox=\'0 0 60 36\' width=\'60\' height=\'36\'><rect width=\'60\' height=\'36\' rx=\'5\' fill=\'#F4F4EF\'/><text x=\'30\' y=\'23\' text-anchor=\'middle\' font-size=\'11\' font-family=\'Inter,sans-serif\' font-weight=\'500\' fill=\'#5F5F58\'>Foire</text></svg>'">
+        </li>
+        <li style="flex-shrink:0; display:flex; align-items:center;">
+          <img src="{{ url_for('static', path='img/partners/img_ensgsi.png') }}" alt="ENSGSI" style="height:40px; object-fit:contain;"
+               onerror="this.outerHTML='<svg viewBox=\'0 0 72 36\' width=\'72\' height=\'36\'><rect width=\'72\' height=\'36\' rx=\'5\' fill=\'#F4F4EF\'/><text x=\'36\' y=\'23\' text-anchor=\'middle\' font-size=\'11\' font-family=\'Inter,sans-serif\' font-weight=\'500\' fill=\'#5F5F58\'>ENSGSI</text></svg>'">
+        </li>
+        <li style="flex-shrink:0; display:flex; align-items:center;">
+          <img src="{{ url_for('static', path='img/partners/img_usach.jpg') }}" alt="USach" style="height:40px; object-fit:contain;"
+               onerror="this.outerHTML='<svg viewBox=\'0 0 60 36\' width=\'60\' height=\'36\'><rect width=\'60\' height=\'36\' rx=\'5\' fill=\'#F4F4EF\'/><text x=\'30\' y=\'23\' text-anchor=\'middle\' font-size=\'11\' font-family=\'Inter,sans-serif\' font-weight=\'500\' fill=\'#5F5F58\'>USach</text></svg>'">
+        </li>
+      </ul>
     </div>
-    
-    <div id="organizations_recycle">
-        <p><strong>Organisations qui valorisent</strong></p>
-
-        <div class="slideshow">
-            <ul class="slider_enterprise">
-                <li>
-                    <img src="{{ url_for('static', path='img/partners/enterprise/green_fablab.png') }}">
-                </li>
-                <li>
-                    <img src="{{ url_for('static', path='img/partners/enterprise/saju.png') }}">
-                </li>
-                <li>
-                    <img src="{{ url_for('static', path='img/partners/enterprise/reciclapp.png') }}">
-                </li>
-            </ul>
-        </div>
-        <div class="direcciones_enterprise">
-            <a class="atras">&#10094;</a>
-            <a class="adelante">&#10095;</a>
-        </div>
+    <div class="direcciones_partners" style="display:flex; gap:8px; margin-top:12px;">
+      <a class="atras btn-secondary" style="padding:6px 14px; font-size:0.8125rem;">&#10094;</a>
+      <a class="adelante btn-secondary" style="padding:6px 14px; font-size:0.8125rem;">&#10095;</a>
     </div>
+  </div>
 
-    <div id="partners">
-        <p><strong>Partenaires</strong></p>
+  <!-- ── Contact ────────────────────────────────────────────── -->
+  <div class="card contact-container" style="margin-bottom: 12px;">
+    <p class="section-label">Contact</p>
+    <h2 style="font-size:1rem; font-weight:600; color:var(--neutral-900); margin:0 0 6px;">Contactez-nous</h2>
+    <p style="font-size:0.875rem; color:var(--neutral-600); margin:0 0 16px; line-height:1.5;">
+      Dites-nous ce que vous pensez du projet et ce que nous pourrions améliorer pour vous.
+    </p>
 
-        <div class="slideshow">
-            <ul class="slider_partners">
-                <li>
-                    <img src="{{ url_for('static', path='img/partners/img_lorraine.png') }}">
-                </li>
-                <li>
-                    <img src="{{ url_for('static', path='img/partners/img_erpi.png') }}">
-                </li>
-                <li>
-                    <img src="{{ url_for('static', path='img/partners/foire.jpg') }}">
-                </li>
-                <li>
-                    <img src="{{ url_for('static', path='img/partners/img_ensgsi.png') }}">
-                </li>
-                <li>
-                    <img src="{{ url_for('static', path='img/partners/img_usach.jpg') }}">
-                </li>
-            </ul>
-        </div>
-        <div class="direcciones_partners">
-            <a class="atras">&#10094;</a>
-            <a class="adelante">&#10095;</a>
-        </div>
-    </div>
+    <form id="contactForm" style="display:flex; flex-direction:column; gap:12px;">
+      <div>
+        <label for="name" style="font-size:0.8125rem; font-weight:500; color:var(--neutral-700, var(--neutral-600)); display:block; margin-bottom:4px;">Nom</label>
+        <input type="text" id="name" name="name" required class="input" placeholder="Votre nom">
+      </div>
+      <div>
+        <label for="email" style="font-size:0.8125rem; font-weight:500; color:var(--neutral-700, var(--neutral-600)); display:block; margin-bottom:4px;">Adresse e-mail</label>
+        <input type="email" id="email" name="email" required class="input" placeholder="vous@exemple.com">
+      </div>
+      <div>
+        <label for="contact_message" style="font-size:0.8125rem; font-weight:500; color:var(--neutral-700, var(--neutral-600)); display:block; margin-bottom:4px;">Message</label>
+        <textarea id="contact_message" name="message" rows="4" required class="input" placeholder="Votre message…" style="resize:vertical;"></textarea>
+      </div>
+      <button type="submit" class="btn-primary" style="align-self:flex-start;">
+        {{ icon('check', 16) }}
+        Envoyer
+      </button>
+    </form>
 
-    <div class="contact-container">
-        <h2>Contáctanos</h2>
-        <p>Cuentanos que te parece el proyecto y/o que podríamos incorporar para que sea más atractivo para tí.</p>
+    <p id="responseMessage" class="hidden" style="margin-top:12px; font-size:0.875rem; color:var(--resser-600);"></p>
+  </div>
 
-        <form id="contactForm">
-            <label for="name">Nombre</label>
-            <input type="text" id="name" name="name" required>
-
-            <label for="email">Correo Electrónico</label>
-            <input type="email" id="email" name="email" required>
-
-            <label for="message">Mensaje</label>
-            <textarea id="message" name="message" rows="5" required></textarea>
-
-            <button type="submit">Enviar Mensaje</button>
-        </form>
-
-        <p id="responseMessage" class="hidden"></p>
-    </div>
-
-    
-        
 </div>
-
 
 {% endblock %}
