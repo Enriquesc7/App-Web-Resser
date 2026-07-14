@@ -111,6 +111,17 @@ class UpdateUser(BaseModel):
     class Config:
         orm_mode = True
 
+class UserPublicProfile(BaseModel):
+    id: int
+    email: str
+    first_name: str
+    last_name: str
+    rol: UserRoleEnum
+
+    class Config:
+        orm_mode = True
+
+
 ########## Models Mensaje #############
 class Mensaje(BaseModel):
     mensaje: str = "Registrado con exito"

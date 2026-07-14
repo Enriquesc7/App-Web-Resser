@@ -1049,3 +1049,23 @@ button {
 .loading-step.done .loading-step-dot {
   background: var(--resser-500);
 }
+
+/* ── Header login button (unauthenticated state) ──────────────── */
+.header-login-btn {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  color: var(--neutral-600);
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+  flex-shrink: 0;
+}
+
+.header-login-btn:hover {
+  background: var(--neutral-100);
+  color: var(--resser-600);
+}

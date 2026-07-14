@@ -98,8 +98,12 @@ def normalize(raw_name: str) -> Dict:
             expanded_tokens.append(token)
             continue
 
-        if token_up in _ABBREVS:
-            expansion = _ABBREVS[token_up]
+        # Strip trailing punctuation before abbreviation lookup
+        # Handles OCR tokens like "VERGEO." "BACO." "THON." etc.
+        token_clean = re.sub(r'[.,;:!?*]+$', '', token_up)
+
+        if token_clean in _ABBREVS:
+            expansion = _ABBREVS[token_clean]
             expanded_tokens.append(expansion)
             tokens_expanded_log.append(f"{token}→{expansion}")
         else:

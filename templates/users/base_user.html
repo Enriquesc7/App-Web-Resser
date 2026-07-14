@@ -218,6 +218,11 @@
                 <a href="/home">{{ logo() }}</a>
             </div>
             <section class="section_barra_nav">
+                {% if not request.cookies.get('access_token') %}
+                <a href="/login" class="header-login-btn" aria-label="Se connecter">
+                    {{ icon('user', 22) }}
+                </a>
+                {% endif %}
                 <div id="container_icon_menu">
                     {{ icon('settings', 22) }}
                 </div>

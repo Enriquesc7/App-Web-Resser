@@ -1,46 +1,137 @@
+{% from 'partials/logo.html' import logo %}
 <!DOCTYPE html>
-<html lang="es">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    
-    <link rel="stylesheet" href="{{ url_for('static', path='/css/auth/style_auth.css') }}">
+    <title>Connexion — Resser</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/design_system.css') }}">
+    <style>
+      /* Login-specific layout — scoped overrides, not in design_system.css */
+      .login-wrapper {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 32px 20px 28px;
+      }
 
+      .login-logo {
+        margin-bottom: 20px;
+      }
+
+      .login-title {
+        font-size: 1.375rem;
+        font-weight: 700;
+        color: var(--neutral-900);
+        margin: 0 0 24px;
+        text-align: center;
+      }
+
+      .login-card {
+        width: 100%;
+      }
+
+      .login-error {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: #FEF2F2;
+        color: var(--red);
+        border-radius: var(--radius-sm);
+        padding: 10px 12px;
+        font-size: 0.875rem;
+        line-height: 1.4;
+        margin-bottom: 16px;
+      }
+
+      .login-fields {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 20px;
+      }
+
+      .login-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .login-home-link {
+        display: block;
+        text-align: center;
+        font-size: 0.8125rem;
+        color: var(--neutral-400);
+        margin-top: 20px;
+        text-decoration: none;
+        font-family: var(--font-sans);
+        transition: color 0.15s;
+      }
+
+      .login-home-link:hover {
+        color: var(--resser-600);
+      }
+    </style>
 </head>
-
 <body>
+    <div id="container">
+        <div class="login-wrapper">
 
-    <section class="section_form">
-        <div id="container_img_form_login">
-            <img src="{{ url_for('static', path='/img/base/resser-logo.png') }}" alt="logo_user">
+            <div class="login-logo">{{ logo() }}</div>
+            <h1 class="login-title">Bienvenue</h1>
+
+            <div class="card-elevated login-card">
+                <form method="POST" action="/login" id="form_login">
+
+                    {% if message %}
+                    <div class="login-error">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2"
+                             stroke-linecap="round" stroke-linejoin="round"
+                             aria-hidden="true" style="flex-shrink:0;">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="12" y1="8" x2="12" y2="12"/>
+                            <line x1="12" y1="16" x2="12.01" y2="16"/>
+                        </svg>
+                        {{ message }}
+                    </div>
+                    {% endif %}
+
+                    <div class="login-fields">
+                        <input
+                            class="input"
+                            type="email"
+                            placeholder="Adresse électronique"
+                            name="username"
+                            required
+                        >
+                        <input
+                            class="input"
+                            type="password"
+                            placeholder="Mot de passe"
+                            name="password"
+                            required
+                        >
+                    </div>
+
+                    <div class="login-actions">
+                        <button type="submit" class="btn-primary" style="width:100%;">
+                            Se connecter
+                        </button>
+                        <a href="/register" class="btn-ghost" style="width:100%; justify-content:center;">
+                            S'inscrire
+                        </a>
+                    </div>
+
+                </form>
+            </div>
+
+            <a href="/home" class="login-home-link">Retour à l'accueil</a>
+
         </div>
-        <div class="container_form">
-            <form method="POST" action="/login" id="form_login">
-                <div class="elements_form alert_form" id="error_login">
-                {% if message %}
-                    <p style="color: red; text-align: bottom;">{{message}}</p>
-                {% endif %}
-                </div>
-                <div class="elements_form">
-                    <input type="email" placeholder="Adresse électronique" name="username" required="true">
-                </div>
-                <div class="elements_form">
-                    <input type="password" placeholder="Mot de passe" name="password" required="true">
-                </div>
-                <div class="elements_form">
-                    <button type="submit">Se connecter</button>
-                </div>
-                <div class="elements_form" id='buttom_register_login'>
-                    <button type="button"><a href="/register">S'inscrire</a></button>
-                </div>
-                <div class="elements_form" id='buttom_come_back'>
-                    <button type="button"><a href="/home">Haut de page</a></button>
-                </div>
-            </form>
-            
-        </div>
-    </section>
+    </div>
 </body>
 </html>

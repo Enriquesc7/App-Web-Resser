@@ -79,7 +79,7 @@ from db import engine, Base
 from routers.auth import register, login
 from routers.admin import admin, admin_cloud, admin_user, admin_front, admin_setting
 from routers.front import front
-from routers.user import product, user, setting, receipt
+from routers.user import product, user, setting, receipt, me
 import models.receipt  # ensures receipt tables are registered with Base.metadata
 
 
@@ -87,7 +87,7 @@ Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 app.title = "App"
-app.version = "0.0.1"
+app.version = "1.0.0"
 
 # Secciones de la app
 
@@ -101,6 +101,7 @@ app.include_router(product.router)
 app.include_router(setting.router)
 
 app.include_router(receipt.router)
+app.include_router(me.router)
 
 app.include_router(admin.router)
 app.include_router(admin_user.router)
