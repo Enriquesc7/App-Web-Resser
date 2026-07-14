@@ -1,8 +1,40 @@
-test.db
-data
-test.sqlite
+# Entornos y secretos
 .env
-venv
-# Byte-compiled / optimized / DLL files
-__pycache__
-static/img
+.env.*
+venv/
+.venv/
+
+# Claude Code
+.claude/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Bases de datos locales
+test.db
+test.sqlite
+*.sqlite3
+
+# Uploads e imágenes locales de usuario (no las de assets)
+static/img/
+data/uploads/
+data/test_receipts/raw_ocr/
+
+# Editores
+.vscode/
+.idea/
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Logs y dumps
+*.log
+*.stackdump
+
+# Claves privadas (por si acaso)
+*.pem
+*.key
