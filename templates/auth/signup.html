@@ -1,65 +1,172 @@
+{% from 'partials/logo.html' import logo %}
+{% from 'partials/icons.html' import icon %}
 <!DOCTYPE html>
-<html lang="es">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro</title>
-    
-    <link rel="stylesheet" href="{{ url_for('static', path='/css/auth/style_auth.css') }}">
-    
-    <script src="{{ url_for('static', path='/scripts/jquery/jquery-3.5.1.min.js') }}"></script>
-    <script src="{{ url_for('static', path='/scripts/jquery.easing/jquery.easing.1.3.js') }}"></script>
-    <script src="{{ url_for('static', path='/scripts/scripts_ajax.js') }}"></script>
+    <title>Créer un compte — Resser</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/design_system.css') }}">
+    <style>
+      .signup-wrapper {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+      }
 
+      .signup-page-header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 0 16px;
+        height: 56px;
+        border-bottom: 0.5px solid var(--neutral-200);
+        flex-shrink: 0;
+        background: var(--neutral-0);
+      }
+
+      .signup-back-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border-radius: var(--radius-sm);
+        color: var(--neutral-600);
+        text-decoration: none;
+        transition: background 0.15s;
+      }
+
+      .signup-back-btn:hover { background: var(--neutral-100); }
+
+      .signup-page-title {
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--neutral-900);
+        font-family: var(--font-sans);
+        margin: 0;
+      }
+
+      .signup-body {
+        padding: 24px 20px 32px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .signup-logo {
+        display: flex;
+        justify-content: center;
+      }
+
+      .signup-fields {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 4px;
+      }
+
+      /* Error banner — hidden when empty, shown by scripts_ajax.js or JS */
+      #error_register:empty { display: none; }
+      #error_register {
+        background: #FEF2F2;
+        border-radius: var(--radius-sm);
+        padding: 10px 12px;
+        margin-bottom: 4px;
+      }
+      #error_register p {
+        margin: 0;
+        color: var(--red) !important;
+        font-size: 0.875rem;
+        text-align: center;
+        line-height: 1.4;
+      }
+
+      .signup-login-link {
+        text-align: center;
+        font-size: 0.8125rem;
+        color: var(--neutral-500);
+        font-family: var(--font-sans);
+      }
+
+      .signup-login-link a {
+        color: var(--resser-600);
+        text-decoration: none;
+        font-weight: 500;
+      }
+
+      .signup-login-link a:hover { text-decoration: underline; }
+    </style>
 </head>
+<body>
+<div id="container">
+    <div class="signup-wrapper">
 
-<body style="height: 100%; background-color: #FFFF;">
-
-    <section class="section_form">
-        <div id="container_img_form_signup">
-            <img src="{{ url_for('static', path='/img/auth/registrate.gif')}}" alt="logo_user">
+        <div class="signup-page-header">
+            <a href="/login" class="signup-back-btn" aria-label="Retour à la connexion">
+                {{ icon('chevron-left', 20) }}
+            </a>
+            <h1 class="signup-page-title">Créer un compte</h1>
         </div>
-        <div class="container_form">
-            <form method="POST" action="/register" id="register_user">
-                <div class="elements_form" id="error_register">
 
-                </div>             
-                <div class="elements_form">
-                    <input type="email" value="{{email if email else ''}}" placeholder="{{'Adresse électronique' if not email else ''}}"  name="email" required="true">
-                </div>
-                <div class="elements_form">
-                    <input type="text" value="{{results['first_name'] if results else ''}}" placeholder="{{'Prénom' if not results else ''}}" name="first_name" required="true">
-                </div>
-                <div class="elements_form">
-                    <input type="text" value="{{results['last_name'] if results else ''}}" placeholder="{{'Nom' if not results else ''}}" name="last_name" required="true">
-<<<<<<< HEAD
-=======
-                </div>
-                <div class="elements_form">
-                    <input type="text" value="{{results['postal_code'] if results else ''}}" placeholder="{{'Code Postal' if not results else ''}}" name="postal_code" required="true">
->>>>>>> refactor_desing
-                </div>
-                <div class="elements_form">
-                    <input type="password" placeholder="Mot de passe" name="password" required="true">
-                </div>
-                <div class="elements_form">
-                    <input type="password" placeholder="Confirmer le mot de passe" name="password_confirmation" required="true">
-                </div>
-                
-                <div class="elements_form">
-                    <button type="submit" id="register_button">S'inscrire</button>
-                </div>
-                <div class="elements_form">
-                    <button type="button"><a href="/home">Haut de page</a></button>
-                </div>
-            </form>
+        <div class="signup-body">
+
+            <div class="signup-logo">{{ logo() }}</div>
+
+            <div class="card-elevated">
+                <form id="register_user" method="POST" action="/register/" novalidate>
+
+                    <div id="error_register"></div>
+
+                    <div class="signup-fields">
+                        <input class="input" type="email"    name="email"                 placeholder="Adresse électronique" required autocomplete="email">
+                        <input class="input" type="text"     name="first_name"            placeholder="Prénom"               required autocomplete="given-name">
+                        <input class="input" type="text"     name="last_name"             placeholder="Nom"                  required autocomplete="family-name">
+                        <input class="input" type="text"     name="postal_code"           placeholder="Code postal"          required inputmode="numeric" maxlength="10">
+                        <input class="input" type="password" name="password"              placeholder="Mot de passe"         required autocomplete="new-password" id="field_pw">
+                        <input class="input" type="password" name="password_confirmation" placeholder="Confirmer le mot de passe" required autocomplete="new-password" id="field_pw2">
+                    </div>
+
+                    <button type="submit" class="btn-primary" style="width:100%; margin-top:20px;">
+                        S'inscrire
+                    </button>
+
+                </form>
+            </div>
+
+            <p class="signup-login-link">
+                Déjà inscrit ? <a href="/login">Se connecter</a>
+            </p>
+
         </div>
-    </section>
+    </div>
+</div>
 
+<script src="{{ url_for('static', path='/scripts/jquery/jquery-3.5.1.min.js') }}"></script>
+<script src="{{ url_for('static', path='/scripts/jquery.easing/jquery.easing.1.3.js') }}"></script>
+<script src="{{ url_for('static', path='/scripts/scripts_ajax.js') }}"></script>
+<script>
+// showError: mimics what scripts_ajax.js does so CSS :empty logic is consistent
+function showError(msg) {
+    var el = document.getElementById('error_register');
+    el.innerHTML = '';
+    var p = document.createElement('p');
+    p.style.cssText = 'color:red;text-align:center;';
+    p.textContent = msg;
+    el.appendChild(p);
+}
+
+// Registered outside $(document).ready so it fires BEFORE scripts_ajax.js handler,
+// which is registered inside ready. This ensures stopImmediatePropagation works.
+document.getElementById('register_user').addEventListener('submit', function (e) {
+    if (document.getElementById('field_pw').value !== document.getElementById('field_pw2').value) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        showError('Les mots de passe ne correspondent pas.');
+    }
+});
+</script>
 </body>
 </html>
-
-
-
-

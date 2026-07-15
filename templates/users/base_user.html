@@ -44,19 +44,32 @@
 
     <script>
         $(document).ready(function() {
-            $("#container_icon_menu").click(function(){
+            $("#container_icon_menu").click(function(e){
+                e.stopPropagation();
                 if ($("#header").hasClass("active")) {
-                    $("#header").stop().animate({
-                        top: "-280px"
-                    }, 600, "easeInSine").removeClass("active");
-                    $("#element_nav_burger").slideUp(400, "easeInSine");
-                    $("#icon_menu").attr("src", "{{ url_for('static', path='img/front/icon_menu.png') }}");
+                    $("#header").removeClass("active");
+                    $("#element_nav_burger").slideUp(200, "easeInSine");
                 } else {
-                    $("#header").stop().animate({
-                        top: "-150px"
-                    }, 400, "easeInSine").addClass("active");
-                    $("#element_nav_burger").slideDown(600, "easeInSine");
-                    $("#icon_menu").attr("src", "{{ url_for('static', path='img/front/icon_close.png') }}");
+                    $("#header").addClass("active");
+                    $("#element_nav_burger").slideDown(250, "easeInSine");
+                }
+            });
+
+            // Close on outside click
+            $(document).on("click.burgermenu", function(e) {
+                if (!$(e.target).closest("#container_icon_menu, #element_nav_burger").length) {
+                    if ($("#header").hasClass("active")) {
+                        $("#header").removeClass("active");
+                        $("#element_nav_burger").slideUp(200, "easeInSine");
+                    }
+                }
+            });
+
+            // Close on Escape
+            $(document).on("keydown.burgermenu", function(e) {
+                if (e.key === "Escape" && $("#header").hasClass("active")) {
+                    $("#header").removeClass("active");
+                    $("#element_nav_burger").slideUp(200, "easeInSine");
                 }
             });
         });
@@ -224,15 +237,19 @@
                 </a>
                 {% endif %}
                 <div id="container_icon_menu">
-                    {{ icon('settings', 22) }}
+                    {{ icon('hamburger', 22) }}
                 </div>
             </section>
         </div>
-        <ul id="element_nav_burger">
-            <li><a href="/setting">Configuration</a></li>
-            <li><a href="/logout">Déconnexion</a></li>
-        </ul>
     </header>
+
+    <ul id="element_nav_burger">
+        <li><a href="/home">{{ icon('user', 18) }}<span>Mon compte</span></a></li>
+        <li><a href="/receipt">{{ icon('receipt', 18) }}<span>Historique</span></a></li>
+        <li><a href="/help">{{ icon('info', 18) }}<span>Aide</span></a></li>
+        <li class="nav-burger-separator"></li>
+        <li><a href="/logout">{{ icon('log-out', 18) }}<span>Déconnexion</span></a></li>
+    </ul>
 
     <section id="section">
         {% block content %}

@@ -269,6 +269,19 @@ async def shopping(
 
 
 
+#=================== Help ==========================================
+
+@router.get(
+    path="/help",
+    response_class=HTMLResponse,
+    status_code=status.HTTP_200_OK,
+    summary="Help",
+    tags=["User"]
+)
+async def help_page(request: Request):
+    return templates.TemplateResponse("users/help.html", {"request": request})
+
+
 #=================== Go to Update User ============================
 
 @router.get(
