@@ -8,28 +8,8 @@
 
 'use strict';
 
-// ── Waste type colours (mirrors design_system.css tokens) ──────────────────
-const WASTE_COLORS = {
-  plastique: '#2563EB',
-  verre:     '#14B8A6',
-  carton:    '#A16207',
-  papier:    '#A16207',
-  mixte:     '#D97706',
-  aucun:     '#65A30D',
-  metal:     '#F59E0B',
-  inconnu:   '#A1A19A',
-};
-
-const WASTE_LABELS = {
-  plastique: 'Plastique',
-  verre:     'Verre',
-  carton:    'Carton',
-  papier:    'Papier',
-  mixte:     'Mixte',
-  aucun:     'Sans emballage',
-  metal:     'Métal',
-  inconnu:   'Inconnu',
-};
+// WASTE_COLORS / WASTE_LABELS now live in waste_taxonomy.js (loaded before
+// this file) so the scan-detail view and the home summary panel can't drift.
 
 // ── Module-level state ─────────────────────────────────────────────────────
 const state = {

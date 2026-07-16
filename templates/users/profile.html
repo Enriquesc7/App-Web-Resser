@@ -30,6 +30,16 @@
     </svg>
   </div>
 
+  <!-- ── Cumulative waste / CO2 summary ─────────────────────── -->
+  <div class="card" id="waste-summary-card" style="margin-bottom: 12px;">
+    <p class="section-label">Vos déchets cumulés</p>
+    <div id="waste-summary-content">
+      <div style="padding:16px 0;text-align:center;">
+        <span class="spinner" style="margin:0 auto;"></span>
+      </div>
+    </div>
+  </div>
+
   <!-- ── Quick actions ─────────────────────────────────────── -->
   <div class="card" style="margin-bottom: 12px;">
     <p class="section-label">Actions rapides</p>
@@ -152,4 +162,6 @@
 
 </div>
 
+<script src="{{ url_for('static', path='/scripts/waste_taxonomy.js') }}"></script>
+<script src="{{ url_for('static', path='/scripts/home_waste_summary.js') }}"></script>
 {% endblock %}
