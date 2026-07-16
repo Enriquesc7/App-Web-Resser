@@ -16,6 +16,7 @@ import uuid
 from datetime import datetime
 from typing import Optional
 
+from sqlalchemy import func
 from sqlalchemy.orm import Session
 
 # Models
@@ -27,6 +28,7 @@ from services.receipt import ocr_service
 from services.receipt.receipt_parser import parse_receipt
 from services.receipt.name_normalizer import normalize
 from services.receipt.packaging_estimator import estimate_packaging
+from services.receipt.co2_estimator import get_co2_factor, get_waste_label
 
 # Upload directory (created at startup if missing)
 UPLOAD_DIR = os.path.join("static", "uploads", "receipts")
@@ -159,3 +161,83 @@ class ReceiptManager:
             except Exception:
                 pass
             raise exc
+
+    @staticmethod
+    def get_waste_summary(db: Session, user_id: Optional[int]) -> dict:
+        """
+        Aggregates cumulative waste grams and estimated CO2 impact, grouped by
+        waste_type, over the full scan history (no pagination) for one owner.
+
+        Ownership: user_id=None means the shared guest bucket
+        (ReceiptScan.user_id IS NULL) — the same partitioning used by
+        /receipt/scans and /receipt/{scan_id}. Note: that guest bucket is
+        shared across all anonymous devices/sessions; this is an inherited
+        limitation, not introduced here.
+        """
+        ownership_filter = (
+            ReceiptScan.user_id.is_(None) if user_id is None
+            else ReceiptScan.user_id == user_id
+        )
+
+        total_scans = (
+            db.query(func.count(ReceiptScan.id))
+            .filter(ReceiptScan.status == "processed", ownership_filter)
+            .scalar()
+        ) or 0
+
+        total_items = (
+            db.query(func.count(ReceiptItem.id))
+            .join(ReceiptScan, ReceiptItem.scan_id == ReceiptScan.id)
+            .filter(ReceiptScan.status == "processed", ownership_filter)
+            .scalar()
+        ) or 0
+
+        rows = (
+            db.query(
+                PackagingEstimate.waste_type,
+                func.sum(func.coalesce(PackagingEstimate.weight_grams, 0)),
+            )
+            .join(ReceiptItem, PackagingEstimate.item_id == ReceiptItem.id)
+            .join(ReceiptScan, ReceiptItem.scan_id == ReceiptScan.id)
+            .filter(ReceiptScan.status == "processed", ownership_filter)
+            .group_by(PackagingEstimate.waste_type)
+            .all()
+        )
+
+        # Merge here (not in SQL) since NULL and "inconnu" both must land in
+        # the same bucket, and the estimator always writes "inconnu" while
+        # the column itself still allows NULL.
+        grams_by_type: dict = {}
+        for waste_type, grams in rows:
+            key = waste_type or "inconnu"
+            grams_by_type[key] = grams_by_type.get(key, 0.0) + float(grams or 0)
+
+        total_grams = sum(grams_by_type.values())
+        unclassified_grams = grams_by_type.get("inconnu", 0.0)
+        total_co2_kg = 0.0
+        breakdown = []
+
+        for waste_type, grams in grams_by_type.items():
+            factor = get_co2_factor(waste_type)
+            co2_kg = round(grams / 1000 * factor, 3) if factor is not None else None
+            if co2_kg is not None:
+                total_co2_kg += co2_kg
+            pct = round(grams / total_grams * 100, 1) if total_grams else 0.0
+            breakdown.append({
+                "waste_type": waste_type,
+                "label": get_waste_label(waste_type),
+                "grams": round(grams, 1),
+                "pct": pct,
+                "co2_kg": co2_kg,
+            })
+
+        breakdown.sort(key=lambda b: b["grams"], reverse=True)
+
+        return {
+            "total_scans": total_scans,
+            "total_items": total_items,
+            "total_grams": round(total_grams, 1),
+            "total_co2_kg": round(total_co2_kg, 3),
+            "unclassified_grams": round(unclassified_grams, 1),
+            "breakdown": breakdown,
+        }

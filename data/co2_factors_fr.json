@@ -1,0 +1,12 @@
+{
+  "waste_types": {
+    "plastique": {"co2_kg_per_kg": 2.4, "label": "Plastique", "note": "PET/PE production vierge — tableau de référence fourni"},
+    "verre": {"co2_kg_per_kg": 0.845, "label": "Verre", "note": "Moyenne 0.83-0.86 kgCO2e/kg du tableau de référence"},
+    "carton": {"co2_kg_per_kg": 0.96, "label": "Carton", "note": "Valeur 'carton plat'. La majorité des items carton du ticket (boîtes d'œufs, briques Tetra Pak, boîtes de céréales) sont du carton plat, pas ondulé (~0.49). À AJUSTER si le mix réel diffère."},
+    "papier": {"co2_kg_per_kg": 0.9, "label": "Papier", "note": "Hors tableau de référence — proxy proche du carton plat, à valider."},
+    "mixte": {"co2_kg_per_kg": 1.7, "label": "Emballage mixte", "note": "Estimation grossière = moyenne pondérée plastique+carton, composition réelle variable. À affiner."},
+    "metal": {"co2_kg_per_kg": 2.0, "label": "Métal", "note": "Les items 'metal' du ticket sont des boîtes de conserve en acier, PAS de l'aluminium. Le tableau de référence (8-16 kgCO2e/kg) ne couvre que l'alu et surestimerait fortement l'acier. Valeur proxy à valider."},
+    "aucun": {"co2_kg_per_kg": 0, "label": "Sans emballage", "note": "Vente en vrac, pas d'empreinte d'emballage."},
+    "inconnu": {"co2_kg_per_kg": null, "label": "Non classifié", "note": "Confiance insuffisante. Exclu du total CO2 mais ses grammes doivent rester visibles séparément dans le panneau."}
+  }
+}

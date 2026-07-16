@@ -10,7 +10,7 @@ from sqlalchemy.orm import Session
 from utils import get_db
 from managers.receipt import ReceiptManager
 from managers.auth import get_optional_current_user
-from schemas.receipt import ReceiptScanResponse
+from schemas.receipt import ReceiptScanResponse, ReceiptWasteSummary
 from schemas import user as user_schema
 
 # Python
@@ -98,6 +98,24 @@ async def list_receipt_scans(
         })
 
     return JSONResponse(status_code=200, content=result)
+
+
+@router.get(
+    "/summary",
+    response_model=ReceiptWasteSummary,
+    status_code=status.HTTP_200_OK,
+    summary="Aggregate cumulative waste breakdown and estimated CO2 impact for the current visitor",
+)
+async def get_receipt_summary(
+    db: Session = Depends(get_db),
+    current_user: Optional[user_schema.User] = Depends(get_optional_current_user),
+):
+    # Ownership follows the same rule as /receipt/scans and /receipt/{scan_id}:
+    # guests share one bucket (user_id IS NULL) across all anonymous devices.
+    # That sharing is an inherited limitation, not a new bug in this endpoint.
+    user_id = current_user.id if current_user else None
+    summary = ReceiptManager.get_waste_summary(db, user_id)
+    return JSONResponse(status_code=200, content=summary)
 
 
 @router.post(

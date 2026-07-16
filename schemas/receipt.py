@@ -59,3 +59,26 @@ class ReceiptScanSummary(BaseModel):
 
     class Config:
         from_attributes = True
+
+
+class ReceiptWasteBreakdownItem(BaseModel):
+    waste_type: str
+    label: str
+    grams: float
+    pct: float
+    co2_kg: Optional[float] = None   # None when the waste_type has no CO2 factor (inconnu)
+
+    class Config:
+        from_attributes = True
+
+
+class ReceiptWasteSummary(BaseModel):
+    total_scans: int = 0
+    total_items: int = 0
+    total_grams: float = 0.0
+    total_co2_kg: float = 0.0
+    unclassified_grams: float = 0.0    # grams with waste_type="inconnu", excluded from total_co2_kg
+    breakdown: List[ReceiptWasteBreakdownItem] = []
+
+    class Config:
+        from_attributes = True
