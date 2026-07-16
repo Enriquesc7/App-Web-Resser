@@ -64,11 +64,18 @@ ALLOWED_CONTENT_TYPES = {"image/jpeg", "image/png", "image/webp", "image/tiff"}
 )
 async def list_receipt_scans(
     db: Session = Depends(get_db),
+    current_user: Optional[user_schema.User] = Depends(get_optional_current_user),
 ):
     from models.receipt import ReceiptScan
 
+    query = db.query(ReceiptScan)
+    if current_user is None:
+        query = query.filter(ReceiptScan.user_id.is_(None))
+    else:
+        query = query.filter(ReceiptScan.user_id == current_user.id)
+
     scans = (
-        db.query(ReceiptScan)
+        query
         .order_by(ReceiptScan.created_at.desc())
         .limit(20)
         .all()
@@ -110,6 +117,7 @@ async def upload_receipt(
     request: Request,
     file: UploadFile = File(..., description="Receipt image file (JPEG, PNG, WEBP or TIFF)"),
     db: Session = Depends(get_db),
+    current_user: Optional[user_schema.User] = Depends(get_optional_current_user),
 ):
     # --- Validate content type ---
     if file.content_type not in ALLOWED_CONTENT_TYPES:
@@ -140,7 +148,7 @@ async def upload_receipt(
             db=db,
             image_bytes=image_bytes,
             original_filename=file.filename or "receipt.jpg",
-            user_id=None,
+            user_id=current_user.id if current_user else None,
         )
     except Exception as exc:
         raise HTTPException(
@@ -165,12 +173,21 @@ async def upload_receipt(
 async def get_receipt_scan(
     scan_id: int,
     db: Session = Depends(get_db),
+    current_user: Optional[user_schema.User] = Depends(get_optional_current_user),
 ):
     from models.receipt import ReceiptScan
 
     scan = db.query(ReceiptScan).filter(ReceiptScan.id == scan_id).first()
     if not scan:
         raise HTTPException(status_code=404, detail=f"Scan {scan_id} not found.")
+
+    # Ownership check — return 404 (not 403) to avoid leaking existence
+    if current_user is None:
+        if scan.user_id is not None:
+            raise HTTPException(status_code=404, detail=f"Scan {scan_id} not found.")
+    else:
+        if scan.user_id != current_user.id:
+            raise HTTPException(status_code=404, detail=f"Scan {scan_id} not found.")
 
     items = []
     for item in scan.items:
